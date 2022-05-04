@@ -1,46 +1,56 @@
-# Getting Started with Create React App
+# **코인사이트 만들기** 8-)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 구현기능
 
-## Available Scripts
+1. 로그인 / 로그아웃
 
-In the project directory, you can run:
+   - 로그인
 
-### `npm start`
+     - 아이디,비밀번호,비밀번호 확인, 닉네임 이용해 로그인 구현
+     - 비밀번호와 비밀번호 확인 일치하지 않으면 erorr 화면에 출력
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+     \*로그인 화면이 넘어가면 로그아웃이 우측 상단에 표시
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+   - 로그아웃
+     - 로그아웃 버튼 클릭시 로그인 화면으로 이동
 
-### `npm test`
+2. My page
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   - 즐겨찾기 코인목록 만들기
+   - 구매한 코인 목록 리스트 추가
+   - 평균 매입값 구하기
 
-### `npm run build`
+3. Home(Coin List화면)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   - 화면 중앙 상단에 오늘 날짜출력
+   - 화면 우측 상단 구성요소
+     - 로그아웃, MY PAGE, Search
+   - 화면 좌측 상단 구성요소
+     - 해당 계정의 즐겨찾기 코인 목록
+   - 시총순위로 코인 출력(1-20개씩) 10페이지
+   - 코인리스트 구성요소
+     - 마크 , 시총순위, 이름 , 심볼, 즐겨찾기BTN , 구매여부 BTN
+     - 즐겨찾기 BTN or 구매여부 BTN 클릭시 정보 이동
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Coin(코인리스트중 코인하나 클릭시)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 시총순위, 이름, 가격, 설명을 화면 중앙에 나열
+- 차트
+  - 1주/1달/1년 시세 그래프
+- 관련정보,뉴스
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+    * Youtube와 google의 search api 이용해 구현
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Tool
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. React
+2. Typescript
+3. React-Router-Dom
+4. Express
+5. MongoDB
+6. Heroku (배포)
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
