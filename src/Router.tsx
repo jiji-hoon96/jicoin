@@ -10,12 +10,12 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/coin" element={<Coin />}></Route>
-        <Route path="/info" element={<Info />}></Route>
+        <Route path="/" element={<Login />}></Route>
+        <Route path="/:coinId" element={<Coin />}></Route>
+        <Route path="/:coinId/info" element={<Info />}></Route>
         <Route path="/mypage" element={<Mypage />}></Route>
-        <Route path="/chart" element={<Chart />}></Route>
-        <Route path="/" element={<Home />}></Route>
+        <Route path="/:coinId/chart" element={<Chart />}></Route>
+        <Route path="/home" element={<Home />}></Route>
       </Routes>
     </BrowserRouter>
   );

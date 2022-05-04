@@ -2,7 +2,9 @@
 
 ### 구현기능
 
-1. 로그인 / 로그아웃
+- 기본적 CSS는 styled-components 이용
+
+1. 로그인 / 로그아웃 (react-hook-form 사용)
 
    - 로그인
 
@@ -39,8 +41,7 @@
   - 1주/1달/1년 시세 그래프
 - 관련정보,뉴스
 
-
-    * Youtube와 google의 search api 이용해 구현
+  - Youtube와 google의 search api 이용해 구현
 
 ---
 
@@ -49,8 +50,10 @@
 1. React
 2. Typescript
 3. React-Router-Dom
-4. Express
-5. MongoDB
+4. React-hook-form (로그인 Form 구현)
+5. styled-components (CSS구현)
 6. Heroku (배포)
+7. Express
+8. MongoDB
 
 ---
