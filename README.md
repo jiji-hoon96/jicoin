@@ -3,6 +3,8 @@
 ### 구현기능
 
 - 기본적 CSS는 styled-components 이용
+- font : Google font 의 Sans font import
+- reset css : app.tsx에 import해 기본 css 초기화
 
 1. 로그인 / 로그아웃 (react-hook-form 사용)
 
