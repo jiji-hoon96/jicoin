@@ -4,8 +4,10 @@ import styled from "styled-components";
 import { FetchCoinList } from "../api";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 
-const COINCOUNT = 5;
+const COINCOUNT = 10;
 
 const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
@@ -22,47 +24,10 @@ const SubTitle = styled.h2`
 const Container = styled.div`
   padding: 0px 20px;
   width: 600px;
+  height: 100vh;
   max-width: 600px;
-  margin: 0 auto;
+  margin: auto;
 `;
-
-const Header = styled.header`
-  height: 15vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Pagearray = styled.div``;
-
-const CoinarrayBtn = styled.button``;
-
-const CoinsList = styled(motion.div)``;
-
-const Coin = styled(motion.div)`
-  background-color: ${(props) => props.theme.liColor};
-  color: black;
-  border-radius: 15px;
-  margin-bottom: 10px;
-  a {
-    display: flex;
-    align-items: center;
-    padding: 20px;
-    transition: color 0.2s ease-in;
-    justify-content: center;
-    font-size: 25px;
-    font-weight: bolder;
-  }
-  &:hover {
-    a {
-      background-color: ${(props) => props.theme.hoverColor};
-      border-radius: 10px;
-      transform: scale(1.03);
-    }
-  }
-`;
-
 const Loader = styled.div`
   text-align: center;
   display: flex;
@@ -84,35 +49,59 @@ const Img = styled.img`
   margin-right: 10px;
 `;
 
+const BtnDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Button = styled.button`
-  width: 50px;
-  height: 20px;
+  width: 120px;
+  height: 40px;
   cursor: pointer;
   border-radius: 10px;
   border: none;
+  font-size: 15px;
+  font-weight: bolder;
   :hover {
     transform: scale(1.1);
     background-color: ${(props) => props.theme.hoverColor};
   }
 `;
 
-const coinVariants = {
-  invisible: {
-    x: 500,
-    opacity: 0,
-    scale: 0,
-  },
-  visible: {
-    x: 0,
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 1,
-    },
-  },
-  exit: { x: -500, opacity: 0, scale: 0, transition: { duration: 1 } },
-};
+const Header = styled.header`
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
+const CoinsList = styled.div`
+  margin-top: 30px;
+`;
+
+const Coin = styled.div`
+  background-color: ${(props) => props.theme.liColor};
+  color: black;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  a {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    transition: color 0.2s ease-in;
+    justify-content: center;
+    font-size: 25px;
+    font-weight: bolder;
+  }
+  &:hover {
+    a {
+      background-color: ${(props) => props.theme.hoverColor};
+      border-radius: 10px;
+      transform: scale(1.03);
+    }
+  }
+`;
 interface CoinListData {
   id: string;
   name: string;
@@ -139,8 +128,9 @@ function Home() {
     }
   );
   const [index, setIndex] = useState(0);
+
   const increaseList = () => {
-    setIndex((prev) => (prev > 200 ? prev : prev + COINCOUNT));
+    setIndex((prev) => (prev > 190 ? prev : prev + COINCOUNT));
   };
   const decreaseList = () => {
     setIndex((prev) => (prev === 0 ? 0 : prev - COINCOUNT));
@@ -154,38 +144,31 @@ function Home() {
       {isLoading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (
-        <Pagearray>
-          <AnimatePresence initial={false}>
-            <CoinsList
-              variants={coinVariants}
-              initial="invisible"
-              animate="visible"
-              exit="exit"
-              key={index}
-            >
-              {data?.slice(index, index + COINCOUNT).map((coin) => (
-                <Coin key={coin.id}>
-                  <Link to={{ pathname: `/${coin.id}` }}>
-                    {coin.rank}. &nbsp;
-                    <Img
-                      src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
-                    />
-                    {coin.name}({coin.symbol})
-                  </Link>
-                </Coin>
-              ))}
-            </CoinsList>
-          </AnimatePresence>
-          <button onClick={decreaseList}>
-            {index === 0
-              ? "이전페이지없음"
-              : `${index + 1 - COINCOUNT}~${index + COINCOUNT - 1}`}
-            감소
-          </button>
-          <button onClick={increaseList}>
-            {`${index + COINCOUNT * 2}~${index + COINCOUNT * 3}`}증가
-          </button>
-        </Pagearray>
+        <>
+          <CoinsList>
+            {data?.slice(index, index + COINCOUNT).map((coin) => (
+              <Coin key={coin.id}>
+                <Link to={{ pathname: `/${coin.id}` }}>
+                  {coin.rank}. &nbsp;
+                  <Img
+                    src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
+                  />
+                  {coin.name}({coin.symbol})
+                </Link>
+              </Coin>
+            ))}
+          </CoinsList>
+          <BtnDiv>
+            <Button onClick={decreaseList}>
+              {index === 0 ? "첫페이지" : `${index - COINCOUNT + 1}~${index}`}
+            </Button>
+            <Button onClick={increaseList}>
+              {index === 195
+                ? "마지막페이지"
+                : `${index + COINCOUNT + 1}~${index + COINCOUNT * 2}`}
+            </Button>
+          </BtnDiv>
+        </>
       )}
     </Container>
   );
