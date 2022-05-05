@@ -1,4 +1,9 @@
+import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { FetchCoinList } from "../api";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
@@ -27,11 +32,11 @@ const Header = styled.header`
   align-items: center;
 `;
 
-const CoinsList = styled.ul`
+const CoinsList = styled(motion.div)`
   margin: 20px 0px;
 `;
 
-const Coin = styled.li`
+const Coin = styled(motion.div)`
   background-color: ${(props) => props.theme.liColor};
   color: black;
   border-radius: 15px;
@@ -54,15 +59,31 @@ const Coin = styled.li`
   }
 `;
 
-const Loader = styled.span`
+const Loader = styled.div`
   text-align: center;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 100px;
+  width: 500px;
+  height: 200px;
+  font-size: 30px;
+  border-radius: 10px;
+  font-weight: bolder;
+  background-color: whitesmoke;
+  color: ${(props) => props.theme.bgColor};
 `;
 
 const Img = styled.img`
   width: 25px;
   height: 25px;
   margin-right: 10px;
+`;
+
+const Pagearray = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Button = styled.button`
@@ -77,6 +98,17 @@ const Button = styled.button`
   }
 `;
 
+interface CoinListData {
+  id: string;
+  name: string;
+  symbol: string;
+  rank: number;
+  is_new: boolean;
+  is_active: boolean;
+  type: string;
+}
+
+const coinarray = 20;
 function Home() {
   function getToday() {
     let date = new Date();
@@ -85,12 +117,40 @@ function Home() {
     let day = ("0" + date.getDate()).slice(-2);
     return `(${year}-${month}-${day}) 기준`;
   }
+  const { isLoading, data } = useQuery<CoinListData[]>(
+    "CoinList",
+    FetchCoinList,
+    {
+      refetchInterval: 10000,
+    }
+  );
   return (
     <Container>
       <Header>
         <Title>가상화폐 시총 순위</Title>
         <SubTitle>{getToday()}</SubTitle>
       </Header>
+      {isLoading ? (
+        <Loader>코인 정보를 불러오는 중입니다</Loader>
+      ) : (
+        <Pagearray>
+          <button>이전</button>
+          <CoinsList initial="invisible" animate="visible" exit="exit">
+            {data?.slice(0, 5).map((coin) => (
+              <Coin key={coin.id}>
+                <Link to={{ pathname: `/${coin.id}` }}>
+                  {coin.rank}. &nbsp;
+                  <Img
+                    src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
+                  />
+                  {coin.name}({coin.symbol})
+                </Link>
+              </Coin>
+            ))}
+          </CoinsList>
+          <button>다음</button>
+        </Pagearray>
+      )}
     </Container>
   );
 }

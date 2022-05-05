@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "react-query";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
 import { darkTheme } from "./theme";
@@ -65,13 +66,17 @@ a {
 }
 `;
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <>
-      <ThemeProvider theme={darkTheme}>
-        <GlobalStyle />
-        <Router />
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={darkTheme}>
+          <GlobalStyle />
+          <Router />
+        </ThemeProvider>
+      </QueryClientProvider>
     </>
   );
 }

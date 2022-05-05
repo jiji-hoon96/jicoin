@@ -5,6 +5,8 @@
 - 기본적 CSS는 styled-components 이용
 - font : Google font 의 Sans font import
 - reset css : app.tsx에 import해 기본 css 초기화
+- React-Query를 이용해 로딩중 화면 구현 & api 정보 활용
+- framer-motion 을 이용해 코인목록 20개씩 출력
 
 1. 로그인 / 로그아웃 (react-hook-form 사용)
 
@@ -26,12 +28,12 @@
 
 3. Home(Coin List화면)
 
-   - 화면 중앙 상단에 오늘 날짜출력
+   - 화면 중앙 상단에 오늘 날짜출력 (getToday()을 만들어서 활용)
    - 화면 우측 상단 구성요소
      - 로그아웃, MY PAGE, Search
    - 화면 좌측 상단 구성요소
      - 해당 계정의 즐겨찾기 코인 목록
-   - 시총순위로 코인 출력(1-20개씩) 10페이지
+   - 시총순위로 코인 출력(1-20개씩) 10페이지 (React-Query와 framer-motion 이용)
    - 코인리스트 구성요소
      - 마크 , 시총순위, 이름 , 심볼, 즐겨찾기BTN , 구매여부 BTN
      - 즐겨찾기 BTN or 구매여부 BTN 클릭시 정보 이동
@@ -53,9 +55,11 @@
 2. Typescript
 3. React-Router-Dom
 4. React-hook-form (로그인 Form 구현)
-5. styled-components (CSS구현)
-6. Heroku (배포)
-7. Express
-8. MongoDB
+5. React-Query (fetch를 통한 api 사용)
+6. framer-motion (Coin list를 Netflix 영화리스트 넘기는 것처럼 구현)
+7. styled-components (CSS구현)
+8. Heroku (배포)
+9. Express
+10. MongoDB
 
 ---
