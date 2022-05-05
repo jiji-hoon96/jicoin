@@ -4,8 +4,6 @@ import styled from "styled-components";
 import { FetchCoinList } from "../api";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 
 const COINCOUNT = 10;
 
@@ -198,12 +196,14 @@ function Home() {
           )
           <BtnDiv>
             <Button onClick={decreaseList}>
-              {index === 0 ? "첫페이지" : `${index - COINCOUNT + 1}~${index}`}
+              {index === 0
+                ? "첫페이지"
+                : `${index - COINCOUNT + 1}위 ~ ${index}위`}
             </Button>
             <Button onClick={increaseList}>
               {index > 180
                 ? "마지막페이지"
-                : `${index + COINCOUNT + 1}~${index + COINCOUNT * 2}`}
+                : `${index + COINCOUNT + 1}위 ~ ${index + COINCOUNT * 2}위`}
             </Button>
           </BtnDiv>
         </AnimatePresence>
