@@ -5,21 +5,23 @@ import { FetchCoinList } from "../api";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
+const COINCOUNT = 5;
+
 const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
   font-size: 48px;
-  margin: 30px 0px 10px 0px;
+  margin: 30px 0px 30px 0px;
 `;
 
 const SubTitle = styled.h2`
   color: ${(props) => props.theme.accentColor};
   font-size: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 `;
 
 const Container = styled.div`
   padding: 0px 20px;
-  width: 500px;
+  width: 600px;
   max-width: 600px;
   margin: 0 auto;
 `;
@@ -32,9 +34,11 @@ const Header = styled.header`
   align-items: center;
 `;
 
-const CoinsList = styled(motion.div)`
-  margin: 20px 0px;
-`;
+const Pagearray = styled.div``;
+
+const CoinarrayBtn = styled.button``;
+
+const CoinsList = styled(motion.div)``;
 
 const Coin = styled(motion.div)`
   background-color: ${(props) => props.theme.liColor};
@@ -80,12 +84,6 @@ const Img = styled.img`
   margin-right: 10px;
 `;
 
-const Pagearray = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
 const Button = styled.button`
   width: 50px;
   height: 20px;
@@ -98,6 +96,23 @@ const Button = styled.button`
   }
 `;
 
+const coinVariants = {
+  invisible: {
+    x: 500,
+    opacity: 0,
+    scale: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+  exit: { x: -500, opacity: 0, scale: 0, transition: { duration: 1 } },
+};
+
 interface CoinListData {
   id: string;
   name: string;
@@ -108,7 +123,6 @@ interface CoinListData {
   type: string;
 }
 
-const coinarray = 20;
 function Home() {
   function getToday() {
     let date = new Date();
@@ -124,6 +138,13 @@ function Home() {
       refetchInterval: 10000,
     }
   );
+  const [index, setIndex] = useState(0);
+  const increaseList = () => {
+    setIndex((prev) => (prev > 200 ? prev : prev + COINCOUNT));
+  };
+  const decreaseList = () => {
+    setIndex((prev) => (prev === 0 ? 0 : prev - COINCOUNT));
+  };
   return (
     <Container>
       <Header>
@@ -134,21 +155,36 @@ function Home() {
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (
         <Pagearray>
-          <button>이전</button>
-          <CoinsList initial="invisible" animate="visible" exit="exit">
-            {data?.slice(0, 5).map((coin) => (
-              <Coin key={coin.id}>
-                <Link to={{ pathname: `/${coin.id}` }}>
-                  {coin.rank}. &nbsp;
-                  <Img
-                    src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
-                  />
-                  {coin.name}({coin.symbol})
-                </Link>
-              </Coin>
-            ))}
-          </CoinsList>
-          <button>다음</button>
+          <AnimatePresence initial={false}>
+            <CoinsList
+              variants={coinVariants}
+              initial="invisible"
+              animate="visible"
+              exit="exit"
+              key={index}
+            >
+              {data?.slice(index, index + COINCOUNT).map((coin) => (
+                <Coin key={coin.id}>
+                  <Link to={{ pathname: `/${coin.id}` }}>
+                    {coin.rank}. &nbsp;
+                    <Img
+                      src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
+                    />
+                    {coin.name}({coin.symbol})
+                  </Link>
+                </Coin>
+              ))}
+            </CoinsList>
+          </AnimatePresence>
+          <button onClick={decreaseList}>
+            {index === 0
+              ? "이전페이지없음"
+              : `${index + 1 - COINCOUNT}~${index + COINCOUNT - 1}`}
+            감소
+          </button>
+          <button onClick={increaseList}>
+            {`${index + COINCOUNT * 2}~${index + COINCOUNT * 3}`}증가
+          </button>
         </Pagearray>
       )}
     </Container>
