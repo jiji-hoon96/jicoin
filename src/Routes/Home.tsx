@@ -18,15 +18,15 @@ const Title = styled.h1`
 const SubTitle = styled.h2`
   color: ${(props) => props.theme.accentColor};
   font-size: 24px;
-  margin-bottom: 30px;
 `;
 
 const Container = styled.div`
   padding: 0px 20px;
   width: 600px;
-  height: 100vh;
+  height: 100%;
   max-width: 600px;
   margin: auto;
+  margin-bottom: 50px;
 `;
 const Loader = styled.div`
   text-align: center;
@@ -76,32 +76,58 @@ const Header = styled.header`
   align-items: center;
 `;
 
-const CoinsList = styled.div`
-  margin-top: 30px;
+const CoinsList = styled(motion.div)`
+  margin: 30px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 const Coin = styled.div`
   background-color: ${(props) => props.theme.liColor};
+  text-align: center;
+  width: 400px;
+  height: 60px;
   color: black;
   border-radius: 15px;
   margin-bottom: 10px;
   a {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 18px;
     transition: color 0.2s ease-in;
     justify-content: center;
-    font-size: 25px;
+    font-size: 15px;
     font-weight: bolder;
   }
   &:hover {
     a {
       background-color: ${(props) => props.theme.hoverColor};
       border-radius: 10px;
-      transform: scale(1.03);
+      transform: scale(1.01);
     }
   }
 `;
+
+const coinVariants = {
+  start: (direction: boolean) => ({
+    x: direction ? -300 : 300,
+
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    y: 0,
+    opacity: 1,
+  },
+  exit: (direction: boolean) => ({
+    x: direction ? 300 : -300,
+
+    opacity: 0,
+  }),
+};
+
 interface CoinListData {
   id: string;
   name: string;
@@ -128,11 +154,14 @@ function Home() {
     }
   );
   const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState(false);
 
   const increaseList = () => {
-    setIndex((prev) => (prev > 190 ? prev : prev + COINCOUNT));
+    setDirection(false);
+    setIndex((prev) => (prev > 180 ? prev : prev + COINCOUNT));
   };
   const decreaseList = () => {
+    setDirection(true);
     setIndex((prev) => (prev === 0 ? 0 : prev - COINCOUNT));
   };
   return (
@@ -144,8 +173,16 @@ function Home() {
       {isLoading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (
-        <>
-          <CoinsList>
+        <AnimatePresence initial={false} exitBeforeEnter>
+          <CoinsList
+            custom={direction}
+            variants={coinVariants}
+            initial="start"
+            animate="center"
+            exit="exit"
+            transition={{ type: "tween", duration: 1 }}
+            key={index}
+          >
             {data?.slice(index, index + COINCOUNT).map((coin) => (
               <Coin key={coin.id}>
                 <Link to={{ pathname: `/${coin.id}` }}>
@@ -158,17 +195,18 @@ function Home() {
               </Coin>
             ))}
           </CoinsList>
+          )
           <BtnDiv>
             <Button onClick={decreaseList}>
               {index === 0 ? "첫페이지" : `${index - COINCOUNT + 1}~${index}`}
             </Button>
             <Button onClick={increaseList}>
-              {index === 195
+              {index > 180
                 ? "마지막페이지"
                 : `${index + COINCOUNT + 1}~${index + COINCOUNT * 2}`}
             </Button>
           </BtnDiv>
-        </>
+        </AnimatePresence>
       )}
     </Container>
   );
