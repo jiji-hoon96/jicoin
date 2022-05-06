@@ -15,3 +15,9 @@ export function fetchCoinPrice(coinId: string) {
     response.json()
   );
 }
+
+export function fetchCoinMarket(coinId: string) {
+  return fetch(`${BASE_URL}/coins/${coinId}/markets`).then((response) =>
+    response.json()
+  );
+}

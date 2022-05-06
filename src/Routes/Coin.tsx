@@ -1,8 +1,9 @@
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
+
 const Title = styled.h1`
   font-size: 48px;
   color: ${(props) => props.theme.accentColor};
@@ -74,6 +75,32 @@ const Description = styled.p`
   color: ${(props) => props.theme.accentColor};
   border-radius: 10px;
 `;
+const Tabs = styled.div`
+  display: flex;
+  justify-content: space-between;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 25px 0px;
+  gap: 10px;
+`;
+
+const Tab = styled.span<{ isActive: boolean }>`
+  text-align: center;
+  width: 200px;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bolder;
+  background-color: ${(props) => props.theme.viewColor};
+  border-radius: 10px;
+  color: ${(props) => props.theme.accentColor};
+  a {
+    padding: 7px 0px;
+    display: block;
+    :hover {
+      color: ${(props) => props.theme.hoverColor};
+      transform: scale(1.2);
+    }
+  }
+`;
 
 interface InfoData {
   id: string;
@@ -132,6 +159,8 @@ interface PriceData {
 function Coin() {
   const { pathname } = useLocation();
   const coinId = pathname.slice(1);
+  const marketMatch = useMatch("/:coinId/market");
+  const chartMatch = useMatch("/:coinId/chart");
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ["info", coinId],
     () => fetchCoinInfo(coinId),
@@ -189,6 +218,14 @@ function Coin() {
               <span>{priceData?.max_supply}</span>
             </OverviewItem>
           </Overview>
+          <Tabs>
+            <Tab isActive={chartMatch !== null}>
+              <Link to={`/${coinId}/chart`}>Chart</Link>
+            </Tab>
+            <Tab isActive={marketMatch !== null}>
+              <Link to={`/${coinId}/market`}>Market</Link>
+            </Tab>
+          </Tabs>
         </>
       )}
     </Container>
