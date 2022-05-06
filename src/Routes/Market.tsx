@@ -1,3 +1,4 @@
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { useLocation, useParams } from "react-router-dom";
@@ -106,6 +107,11 @@ function Market() {
   );
   return (
     <Container>
+      <HelmetProvider>
+        <Helmet>
+          <title>{pathname.slice(1)}</title>
+        </Helmet>
+      </HelmetProvider>
       <Header>
         <Title>
           <Link to={{ pathname: `/${coinId}` }}>

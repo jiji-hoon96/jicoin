@@ -1,3 +1,4 @@
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useQuery } from "react-query";
 import { Link, useMatch } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -178,6 +179,11 @@ function Coin() {
   const loading = infoLoading || priceLoading;
   return (
     <Container>
+      <HelmetProvider>
+        <Helmet>
+          <title>{coinId}</title>
+        </Helmet>
+      </HelmetProvider>
       <Header>
         <Title>
           <Link to={{ pathname: "/home" }}>

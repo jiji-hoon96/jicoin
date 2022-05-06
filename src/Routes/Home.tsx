@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { FetchCoinList } from "../api";
 import { motion, AnimatePresence } from "framer-motion";
 import React, { useState } from "react";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const COINCOUNT = 10;
 
@@ -165,6 +166,11 @@ function Home() {
   return (
     <Container>
       <Header>
+        <HelmetProvider>
+          <Helmet>
+            <title>JiCoin(시총순위)</title>
+          </Helmet>
+        </HelmetProvider>
         <Title>가상화폐 시총 순위</Title>
         <SubTitle>{getToday()}</SubTitle>
       </Header>

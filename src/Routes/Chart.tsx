@@ -6,6 +6,7 @@ import ApexChart from "react-apexcharts";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { AnimatePresence } from "framer-motion";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 interface IHistorical {
   time_open: string;
@@ -138,6 +139,11 @@ function Chart() {
   const loading = MonthLoading || YearLoading;
   return (
     <Container>
+      <HelmetProvider>
+        <Helmet>
+          <title>{pathname.slice(1)}</title>
+        </Helmet>
+      </HelmetProvider>
       <Header>
         <Title>
           <Link to={{ pathname: `/${coinId}` }}>{coinId}</Link>
