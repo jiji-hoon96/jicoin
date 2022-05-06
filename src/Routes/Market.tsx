@@ -115,7 +115,7 @@ function Market() {
       <Header>
         <Title>
           <Link to={{ pathname: `/${coinId}` }}>
-            {`${coinId.split("-")[0].toUpperCase()} 상장 거래소`}
+            {`${coinId.split("-")[0].toUpperCase()} 코인 상장 거래소`}
           </Link>
         </Title>
       </Header>

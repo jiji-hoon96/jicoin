@@ -11,11 +11,13 @@ const Form = styled.form`
 
 const Container = styled.div`
   padding: 0px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 600px;
-  height: 100%;
+  height: 100vh;
   max-width: 600px;
   margin: auto;
-  margin-bottom: 50px;
 `;
 
 const Title = styled.h1`
@@ -31,7 +33,6 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
 `;
-
 interface LoginForm {
   id: string;
   nickname: string;
