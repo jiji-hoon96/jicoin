@@ -1,8 +1,4 @@
-interface ChartProps {
-  coinId: string;
-}
-
-function Chart({ coinId }: ChartProps) {
+function Chart() {
   return <h1>This is Chart Page</h1>;
 }
 

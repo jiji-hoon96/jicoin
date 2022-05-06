@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FetchCoinList } from "../api";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const COINCOUNT = 10;
 
@@ -32,7 +32,7 @@ const Loader = styled.div`
   align-items: center;
   justify-content: center;
   margin-top: 100px;
-  width: 500px;
+  width: 600px;
   height: 200px;
   font-size: 30px;
   border-radius: 10px;
@@ -212,4 +212,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default React.memo(Home);

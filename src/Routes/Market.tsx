@@ -1,8 +1,4 @@
-interface MarketProps {
-  coinId: string;
-}
-
-function Market({ coinId }: MarketProps) {
+function Market() {
   return <h1>This is Market Page</h1>;
 }
 
