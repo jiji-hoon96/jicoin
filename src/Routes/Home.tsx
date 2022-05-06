@@ -178,7 +178,7 @@ function Home() {
             initial="start"
             animate="center"
             exit="exit"
-            transition={{ type: "tween", duration: 1 }}
+            transition={{ type: "tween", duration: 0.5 }}
             key={index}
           >
             {data?.slice(index, index + COINCOUNT).map((coin) => (

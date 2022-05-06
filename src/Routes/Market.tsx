@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  height: 15vh;
+  height: 13vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -54,23 +54,29 @@ const MarketList = styled.ul`
 `;
 
 const MarketSolo = styled.li`
-  height: 55px;
+  height: 70px;
   text-align: center;
   display: flex;
   flex-direction: column;
   font-size: 12px;
-  font-weight: bolder;
   background-color: ${(props) => props.theme.bgColor};
   color: ${(props) => props.theme.accentColor};
   border-radius: 5px;
-  margin-bottom: 10px;
+  margin-top: 10px;
   :hover {
     transform: scale(1.03) translate(1s);
     background-color: ${(props) => props.theme.hoverColor};
     cursor: pointer;
   }
   p {
+    margin-top: 4px;
     color: ${(props) => props.theme.nullColor};
+  }
+  h2 {
+    font-size: 18px;
+  }
+  a {
+    margin: 7px 0px;
   }
 `;
 interface IMarket {
@@ -83,12 +89,9 @@ interface IMarket {
   quotes: {
     USD: {
       volume_24h: string;
+      price: number;
     };
   };
-}
-
-interface CoinID {
-  coinId: string;
 }
 
 function Market() {
@@ -105,9 +108,9 @@ function Market() {
     <Container>
       <Header>
         <Title>
-          <Link to={{ pathname: `/${coinId}` }}>{`${coinId
-            .split("-")[0]
-            .toUpperCase()} 상장 거래소`}</Link>
+          <Link to={{ pathname: `/${coinId}` }}>
+            {`${coinId.split("-")[0].toUpperCase()} 상장 거래소`}
+          </Link>
         </Title>
       </Header>
       <div>
@@ -124,11 +127,15 @@ function Market() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      Market: {x.exchange_name} <hr /> MarketURL:
+                      <h2>
+                        Market : {x.exchange_name} / Market Price : $
+                        {x.quotes.USD.price.toFixed(3)}
+                      </h2>
+                      <hr /> MarketURL :&nbsp;
                       {x.market_url !== null ? (
                         x.market_url
                       ) : (
-                        <p>The market URL does not exist</p>
+                        <p>해당 거래소의 URL을 찾을 수 없습니다</p>
                       )}
                     </a>
                   </MarketSolo>
