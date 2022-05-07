@@ -109,10 +109,37 @@ const Coin = styled.div`
   }
 `;
 
+const Search = styled.span`
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  position: relative;
+  cursor: pointer;
+  svg {
+    height: 25px;
+    :hover {
+      color: #d8bf2e;
+    }
+  }
+`;
+
+const Input = styled(motion.input)`
+  transform-origin: right center;
+  width: 300px;
+  height: 30px;
+  font-size: 20px;
+  text-align: center;
+  position: absolute;
+  right: 100px;
+  border-radius: 10px;
+  border: none;
+`;
+
 const coinVariants = {
   start: (direction: boolean) => ({
     x: direction ? -300 : 300,
-
     opacity: 0,
   }),
   center: {
@@ -154,7 +181,7 @@ function Home() {
   );
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(false);
-
+  const [searchOpen, setSearchOpen] = useState(false);
   const increaseList = () => {
     setDirection(false);
     setIndex((prev) => (prev > 180 ? prev : prev + COINCOUNT));
@@ -163,6 +190,7 @@ function Home() {
     setDirection(true);
     setIndex((prev) => (prev === 0 ? 0 : prev - COINCOUNT));
   };
+  const toggleSearch = () => setSearchOpen((prev) => !prev);
   return (
     <Container>
       <Header>
@@ -174,6 +202,27 @@ function Home() {
         <Title>가상화폐 시총 순위</Title>
         <SubTitle>{getToday()}</SubTitle>
       </Header>
+      <Search>
+        <motion.svg
+          onClick={toggleSearch}
+          animate={{ x: searchOpen ? -180 : 0 }}
+          transition={{ type: "linear" }}
+          fill="currentColor"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fillRule="evenodd"
+            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+            clipRule="evenodd"
+          ></path>
+        </motion.svg>
+        <Input
+          transition={{ type: "linear" }}
+          animate={{ scaleX: searchOpen ? 1 : 0 }}
+          placeholder="코인의 이름을 입력해주세요"
+        />
+      </Search>
       {isLoading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (

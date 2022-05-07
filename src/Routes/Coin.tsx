@@ -24,7 +24,7 @@ const Loader = styled.span`
   align-items: center;
   justify-content: center;
   margin-top: 100px;
-  width: 500px;
+  width: 600px;
   height: 200px;
   font-size: 30px;
   border-radius: 10px;

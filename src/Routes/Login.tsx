@@ -46,12 +46,13 @@ const Container = styled.div`
 
 const Button = styled.button`
   color: ${(props) => props.theme.accentColor};
+  letter-spacing: 5px;
   background-color: transparent;
   border: none;
   font-size: 80px;
   cursor: pointer;
   :hover {
-    transform: scale(1.2) rotate(360deg);
+    transform: scale(1.2) rotate3d(2, 2, 2, 10deg);
     transition: width 2s, height 2s, background-color 2s, transform 2s;
     font-weight: bolder;
     color: #f7f7f7e8;
@@ -133,7 +134,9 @@ function Login() {
         </Helmet>
       </HelmetProvider>
       <Header>
-        <Button onClick={onModalEvent}>JiCoin</Button>
+        <Button onClick={onModalEvent}>
+          WelCome <br /> JiCoin
+        </Button>
       </Header>
       <Modal
         isOpen={modalOpen}
@@ -150,7 +153,6 @@ function Login() {
             height: "70%",
             background: "#F3F3F3",
             overflow: "hidden",
-
             borderRadius: 30,
           },
         }}
