@@ -9,7 +9,7 @@
 - framer-motion 을 이용해 코인목록 20개씩 출력
 - ApexCharts 를 이용해 코인의 1주/1달/1년 시세 그래프 출력
 
-1. 로그인 / 로그아웃 (react-hook-form 사용)
+1. 로그인 / 로그아웃 (react-hook-form , react-modal사용) : react-modal을 이용해 JiCoin 클릭시 Modal창이 나와서 login or 회원가입 form 출력
 
    - 로그인
 
