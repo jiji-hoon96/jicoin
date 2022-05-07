@@ -1,10 +1,11 @@
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { FetchCoinList } from "../api";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import React, { useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { useForm } from "react-hook-form";
 
 const COINCOUNT = 10;
 
@@ -109,7 +110,7 @@ const Coin = styled.div`
   }
 `;
 
-const Search = styled.span`
+const Search = styled.form`
   color: white;
   display: flex;
   align-items: center;
@@ -164,6 +165,10 @@ interface CoinListData {
   type: string;
 }
 
+interface SerachInfo {
+  keyword: "string";
+}
+
 function Home() {
   function getToday() {
     let date = new Date();
@@ -179,9 +184,12 @@ function Home() {
       refetchInterval: 10000,
     }
   );
+  const navigate = useNavigate();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const { register, handleSubmit } = useForm<SerachInfo>();
+  const inputAnimation = useAnimation();
   const increaseList = () => {
     setDirection(false);
     setIndex((prev) => (prev > 180 ? prev : prev + COINCOUNT));
@@ -190,7 +198,19 @@ function Home() {
     setDirection(true);
     setIndex((prev) => (prev === 0 ? 0 : prev - COINCOUNT));
   };
-  const toggleSearch = () => setSearchOpen((prev) => !prev);
+  const toggleSearch = () => {
+    if (searchOpen) {
+      inputAnimation.start({
+        scaleX: 0,
+      });
+    } else {
+      inputAnimation.start({ scaleX: 1 });
+    }
+    setSearchOpen((prev) => !prev);
+  };
+  const onValid = (data: SerachInfo) => {
+    navigate(`/search?keyword=${data.keyword}`);
+  };
   return (
     <Container>
       <Header>
@@ -202,7 +222,7 @@ function Home() {
         <Title>가상화폐 시총 순위</Title>
         <SubTitle>{getToday()}</SubTitle>
       </Header>
-      <Search>
+      <Search onSubmit={handleSubmit(onValid)}>
         <motion.svg
           onClick={toggleSearch}
           animate={{ x: searchOpen ? -180 : 0 }}
@@ -218,8 +238,10 @@ function Home() {
           ></path>
         </motion.svg>
         <Input
+          {...register("keyword", { required: true })}
           transition={{ type: "linear" }}
-          animate={{ scaleX: searchOpen ? 1 : 0 }}
+          initial={{ scaleX: 0 }}
+          animate={inputAnimation}
           placeholder="코인의 이름을 입력해주세요"
         />
       </Search>
