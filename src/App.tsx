@@ -36,8 +36,7 @@ footer, header, hgroup, main, menu, nav, section {
 body {
   line-height: 1;
   font-family: 'Source Sans Pro', sans-serif;
-  background-image: url("img/back.jpg");
-  background-position: center;
+  background-color: #343a2b;
   color:${(props) => props.theme.accentColor};
 }
 menu, ol, ul {

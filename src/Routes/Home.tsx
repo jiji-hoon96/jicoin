@@ -63,7 +63,7 @@ const Button = styled.button`
   font-weight: bolder;
   :hover {
     transform: scale(1.1);
-    background-color: ${(props) => props.theme.hoverColor};
+    background-color: #d8bf2e;
   }
 `;
 
@@ -102,7 +102,7 @@ const Coin = styled.div`
   }
   &:hover {
     a {
-      background-color: ${(props) => props.theme.hoverColor};
+      background-color: #d8bf2e;
       border-radius: 10px;
       transform: scale(1.01);
     }

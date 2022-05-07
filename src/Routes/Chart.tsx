@@ -65,7 +65,7 @@ const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
   :hover {
     a {
-      color: ${(props) => props.theme.hoverColor};
+      color: #d8bf2e;
       font-weight: bolder;
       border-radius: 10px;
     }
@@ -89,7 +89,7 @@ const ChartBtn = styled.button`
   margin-right: 10px;
   &:hover {
     transform: scale(1.04);
-    background-color: #c49191;
+    background-color: #d8bf2e;
   }
 `;
 

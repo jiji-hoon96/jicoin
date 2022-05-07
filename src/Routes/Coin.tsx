@@ -10,7 +10,7 @@ const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
   :hover {
     a {
-      color: ${(props) => props.theme.hoverColor};
+      color: #d8bf2e;
       font-weight: bolder;
       border-radius: 10px;
     }
@@ -38,6 +38,7 @@ const Container = styled.div`
   width: 600px;
   max-width: 600px;
   margin: 0 auto;
+  height: 100vh;
 `;
 
 const Header = styled.header`
@@ -62,7 +63,7 @@ const OverviewItem = styled.div`
   color: ${(props) => props.theme.accentColor};
   width: 33%;
   span:first-child {
-    font-size: 10px;
+    font-size: 15px;
     font-weight: 400;
     text-transform: uppercase;
     margin-bottom: 5px;
@@ -88,7 +89,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   text-align: center;
   width: 200px;
   text-transform: uppercase;
-  font-size: 12px;
+  font-size: 15px;
   font-weight: bolder;
   background-color: ${(props) => props.theme.viewColor};
   border-radius: 10px;
@@ -97,7 +98,7 @@ const Tab = styled.span<{ isActive: boolean }>`
     padding: 7px 0px;
     display: block;
     :hover {
-      color: ${(props) => props.theme.hoverColor};
+      color: #d8bf2e;
       transform: scale(1.2);
     }
   }

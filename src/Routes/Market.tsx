@@ -22,7 +22,7 @@ const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
   :hover {
     a {
-      color: ${(props) => props.theme.hoverColor};
+      color: #d8bf2e;
       font-weight: bolder;
       border-radius: 10px;
     }
@@ -60,13 +60,13 @@ const MarketSolo = styled.li`
   display: flex;
   flex-direction: column;
   font-size: 12px;
-  background-color: ${(props) => props.theme.bgColor};
-  color: ${(props) => props.theme.accentColor};
+  background-color: whitesmoke;
+  color: black;
   border-radius: 5px;
   margin-top: 10px;
   :hover {
     transform: scale(1.03) translate(1s);
-    background-color: ${(props) => props.theme.hoverColor};
+    background-color: #d8bf2e;
     cursor: pointer;
   }
   p {
