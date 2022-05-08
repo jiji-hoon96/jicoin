@@ -6,13 +6,45 @@ import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import React, { useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useForm } from "react-hook-form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FaStar } from "react-icons/fa";
+import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 
 const COINCOUNT = 10;
 
 const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
   font-size: 48px;
-  margin: 30px 0px 30px 0px;
+  margin: 30px 0px 20px 0px;
+`;
+
+const Nav = styled.div`
+  width: 100%;
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+const ListDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const FavBtn = styled.button`
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  :hover {
+    background-color: #d8bf2e;
+    transform: scale(1.2);
+  }
 `;
 
 const SubTitle = styled.h2`
@@ -64,12 +96,28 @@ const Button = styled.button`
   font-weight: bolder;
   :hover {
     transform: scale(1.1);
+    transition: 0.4;
+    background-color: #d8bf2e;
+  }
+`;
+
+const MyPageButton = styled.button`
+  width: 60px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  font-weight: bolder;
+  :hover {
+    transform: scale(1.2);
+    transition: 0.5s;
     background-color: #d8bf2e;
   }
 `;
 
 const Header = styled.header`
-  height: 15vh;
+  height: 25vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -77,7 +125,7 @@ const Header = styled.header`
 `;
 
 const CoinsList = styled(motion.div)`
-  margin: 30px 0px;
+  margin: 5px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,7 +139,7 @@ const Coin = styled.div`
   height: 60px;
   color: black;
   border-radius: 15px;
-  margin-bottom: 10px;
+  margin: 0px 10px 10px 0px;
   a {
     display: flex;
     align-items: center;
@@ -105,7 +153,8 @@ const Coin = styled.div`
     a {
       background-color: #d8bf2e;
       border-radius: 10px;
-      transform: scale(1.01);
+      transform: scale(1.02);
+      transition: 0.3;
     }
   }
 `;
@@ -115,7 +164,7 @@ const Search = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px;
+  margin: 20px;
   position: relative;
   cursor: pointer;
   svg {
@@ -127,13 +176,13 @@ const Search = styled.form`
 `;
 
 const Input = styled(motion.input)`
-  transform-origin: right center;
-  width: 370px;
+  transform-origin: center right center;
+  width: 400px;
   height: 30px;
   font-size: 16px;
   text-align: center;
   position: absolute;
-  right: 60px;
+  right: 40px;
   border-radius: 10px;
   border: none;
 `;
@@ -219,32 +268,39 @@ function Home() {
             <title>JiCoin(시총순위)</title>
           </Helmet>
         </HelmetProvider>
+        <Nav>
+          <Search onSubmit={handleSubmit(onValid)}>
+            <motion.svg
+              onClick={toggleSearch}
+              whileHover={{ scale: 1.3 }}
+              transition={{ type: "tween" }}
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clipRule="evenodd"
+              />
+            </motion.svg>
+            <Input
+              {...register("keyword", { required: true })}
+              transition={{ type: "linear" }}
+              initial={{ scaleX: 0 }}
+              animate={inputAnimation}
+              placeholder="Please enter the word you want to find in English"
+            />
+          </Search>
+          <Link to={{ pathname: "/mypage" }}>
+            <MyPageButton>
+              <FontAwesomeIcon icon={faUserAlt} size="lg" />
+            </MyPageButton>
+          </Link>
+        </Nav>
         <Title>가상화폐 시총 순위</Title>
         <SubTitle>{getToday()}</SubTitle>
       </Header>
-      <Search onSubmit={handleSubmit(onValid)}>
-        <motion.svg
-          onClick={toggleSearch}
-          animate={{ x: searchOpen ? -180 : 0 }}
-          transition={{ type: "linear" }}
-          fill="currentColor"
-          viewBox="0 0 20 20"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fillRule="evenodd"
-            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-            clipRule="evenodd"
-          ></path>
-        </motion.svg>
-        <Input
-          {...register("keyword", { required: true })}
-          transition={{ type: "linear" }}
-          initial={{ scaleX: 0 }}
-          animate={inputAnimation}
-          placeholder="Please enter the word you want to find in English"
-        />
-      </Search>
       {isLoading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (
@@ -259,15 +315,20 @@ function Home() {
             key={index}
           >
             {data?.slice(index, index + COINCOUNT).map((coin) => (
-              <Coin key={coin.id}>
-                <Link to={{ pathname: `/${coin.id}` }}>
-                  {coin.rank}. &nbsp;
-                  <Img
-                    src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
-                  />
-                  {coin.name}({coin.symbol})
-                </Link>
-              </Coin>
+              <ListDiv key={coin.id}>
+                <Coin key={coin.id}>
+                  <Link to={{ pathname: `/${coin.id}` }}>
+                    {coin.rank}. &nbsp;
+                    <Img
+                      src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
+                    />
+                    {coin.name} ({coin.symbol}){" "}
+                  </Link>
+                </Coin>
+                <FavBtn>
+                  <FaStar size="1.5em" />
+                </FavBtn>
+              </ListDiv>
             ))}
           </CoinsList>
           )

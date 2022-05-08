@@ -89,6 +89,14 @@ const Title = styled.h1`
   color: ${(props) => props.theme.accentColor};
   font-size: 48px;
   margin: 30px 0px 30px 0px;
+  :hover {
+    a {
+      color: #d8bf2e;
+      font-weight: bolder;
+      border-radius: 10px;
+    }
+    transform: scale(1.03);
+  }
 `;
 
 function Search() {
@@ -110,7 +118,9 @@ function Search() {
             <title>JiCoin(Search)</title>
           </Helmet>
         </HelmetProvider>
-        <Title>검색 단어 : {keyword}</Title>
+        <Title>
+          <Link to={{ pathname: "/home" }}>검색 단어 : {keyword}</Link>
+        </Title>
       </Header>
       {isLoading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>
