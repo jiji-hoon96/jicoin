@@ -1,3 +1,4 @@
+import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
@@ -38,6 +39,14 @@ const Loader = styled.div`
   color: ${(props) => props.theme.bgColor};
 `;
 
+const Header = styled.header`
+  height: 15vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 const CoinsList = styled.div`
   margin: 30px 0px;
   display: flex;
@@ -76,6 +85,11 @@ const Img = styled.img`
   height: 25px;
   margin-right: 10px;
 `;
+const Title = styled.h1`
+  color: ${(props) => props.theme.accentColor};
+  font-size: 48px;
+  margin: 30px 0px 30px 0px;
+`;
 
 function Search() {
   const [searchParams, _] = useSearchParams();
@@ -90,10 +104,35 @@ function Search() {
 
   return (
     <Container>
+      <Header>
+        <HelmetProvider>
+          <Helmet>
+            <title>JiCoin(Search)</title>
+          </Helmet>
+        </HelmetProvider>
+        <Title>검색 단어 : {keyword}</Title>
+      </Header>
       {isLoading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (
-        <CoinsList></CoinsList>
+        <CoinsList>
+          {data?.slice(0, 200).map(
+            (coin) =>
+              (coin.name.toLowerCase().includes(keyword) ||
+                coin.symbol.toLowerCase().includes(keyword) ||
+                coin.id.toLowerCase().includes(keyword)) && (
+                <Coin key={coin.id}>
+                  <Link to={{ pathname: `/${coin.id}` }}>
+                    {coin.rank}. &nbsp;
+                    <Img
+                      src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
+                    />
+                    {coin.name}({coin.symbol})
+                  </Link>
+                </Coin>
+              )
+          )}
+        </CoinsList>
       )}
     </Container>
   );

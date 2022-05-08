@@ -115,7 +115,7 @@ const Search = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px;
+  margin: 10px;
   position: relative;
   cursor: pointer;
   svg {
@@ -128,12 +128,12 @@ const Search = styled.form`
 
 const Input = styled(motion.input)`
   transform-origin: right center;
-  width: 300px;
+  width: 370px;
   height: 30px;
-  font-size: 20px;
+  font-size: 16px;
   text-align: center;
   position: absolute;
-  right: 100px;
+  right: 60px;
   border-radius: 10px;
   border: none;
 `;
@@ -242,7 +242,7 @@ function Home() {
           transition={{ type: "linear" }}
           initial={{ scaleX: 0 }}
           animate={inputAnimation}
-          placeholder="코인의 이름을 입력해주세요"
+          placeholder="Please enter the word you want to find in English"
         />
       </Search>
       {isLoading ? (
