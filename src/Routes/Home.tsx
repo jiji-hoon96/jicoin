@@ -33,6 +33,8 @@ const ListDiv = styled.div`
 `;
 
 const FavBtn = styled.button`
+  position: relative;
+  top: -5px;
   cursor: pointer;
   width: 40px;
   height: 40px;

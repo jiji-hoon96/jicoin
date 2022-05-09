@@ -64,5 +64,7 @@
 10. Express
 11. MongoDB
 12. React-modal (로그인 Modal 구현)
+13. nodemon (서버 재시작을 자동으로 해줌)
+14. ts-node: node에서 typescript를 compiler 하지않고, 직접 실행
 
 ---
