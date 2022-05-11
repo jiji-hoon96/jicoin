@@ -1,5 +1,16 @@
 const BASE_URL = `https://api.coinpaprika.com/v1`;
 
+export function FetchYoutubeApi() {
+  const requestOptions: RequestInit = {
+    method: "GET",
+    redirect: "follow",
+  };
+  return fetch(
+    `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=bts&key=${process.env.GOOGLE_API_KEY}`,
+    requestOptions
+  ).then((response) => response.json());
+}
+
 export function FetchCoinList() {
   return fetch(`${BASE_URL}/coins`).then((response) => response.json());
 }
