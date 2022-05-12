@@ -109,7 +109,7 @@ function Market() {
     <Container>
       <HelmetProvider>
         <Helmet>
-          <title>{pathname.slice(1)}</title>
+          <title>{coinId.split("-")[0].toUpperCase()} Markets</title>
         </Helmet>
       </HelmetProvider>
       <Header>

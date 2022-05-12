@@ -141,12 +141,16 @@ function Chart() {
     <Container>
       <HelmetProvider>
         <Helmet>
-          <title>{pathname.slice(1)}</title>
+          <title>{coinId.split("-")[0].toUpperCase()} Chart</title>
         </Helmet>
       </HelmetProvider>
       <Header>
         <Title>
-          <Link to={{ pathname: `/${coinId}` }}>{coinId}</Link>
+          <Link to={{ pathname: `/${coinId}` }}>
+            {index === 0
+              ? `${coinId.split("-")[0].toUpperCase()} 1달 차트`
+              : `${coinId.split("-")[0].toUpperCase()} 1년 차트`}
+          </Link>
         </Title>
       </Header>
       <ChartBox>
@@ -170,7 +174,7 @@ function Chart() {
                   },
                   title: {
                     text: `${coinId
-                      .split("-")[1]
+                      .split("-")[0]
                       .toUpperCase()} Coin  (${chartStart} ~ ${chartEnd})`,
                     align: "center",
                   },
@@ -230,7 +234,7 @@ function Chart() {
                   },
                   title: {
                     text: `${coinId
-                      .split("-")[1]
+                      .split("-")[0]
                       .toUpperCase()} Coin (${chartStartYear} ~ ${chartEnd})`,
                     align: "center",
                   },

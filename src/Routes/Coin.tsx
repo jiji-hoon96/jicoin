@@ -163,6 +163,7 @@ function Coin() {
   const coinId = pathname.slice(1);
   const marketMatch = useMatch("/:coinId/market");
   const chartMatch = useMatch("/:coinId/chart");
+  const youtubeMatch = useMatch("/:coinId/youtube");
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ["info", coinId],
     () => fetchCoinInfo(coinId),
@@ -182,7 +183,7 @@ function Coin() {
     <Container>
       <HelmetProvider>
         <Helmet>
-          <title>{coinId}</title>
+          <title>{coinId.split("-")[0].toUpperCase()} Coin</title>
         </Helmet>
       </HelmetProvider>
       <Header>
@@ -228,6 +229,9 @@ function Coin() {
           <Tabs>
             <Tab isActive={chartMatch !== null}>
               <Link to={`/${coinId}/chart`}>Chart</Link>
+            </Tab>
+            <Tab isActive={youtubeMatch !== null}>
+              <Link to={`/${coinId}/youtube`}>Youtube</Link>
             </Tab>
             <Tab isActive={marketMatch !== null}>
               <Link to={`/${coinId}/market`}>Market</Link>

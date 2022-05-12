@@ -6,7 +6,7 @@ export function FetchYoutubeApi() {
     redirect: "follow",
   };
   return fetch(
-    `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=bts&key=${process.env.GOOGLE_API_KEY}`,
+    `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=btc&key=${process.env.REACT_APP_GOOGLE_API_KEY}`,
     requestOptions
   ).then((response) => response.json());
 }
