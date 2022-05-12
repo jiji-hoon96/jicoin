@@ -5,7 +5,6 @@ import { fetchCoinHistory, fetchCoinYear } from "../api";
 import ApexChart from "react-apexcharts";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { AnimatePresence } from "framer-motion";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 interface IHistorical {
