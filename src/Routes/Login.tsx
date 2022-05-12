@@ -1,8 +1,31 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import Modal from "react-modal";
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+
+const Box = styled(motion.div)`
+  width: 500px;
+  height: 650px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+`;
+
+const LoginForm = styled(motion.div)`
+  width: 500px;
+  height: 650px;
+  background-color: whitesmoke;
+  border-radius: 30px;
+`;
+
+const ModalForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Form = styled.form`
   display: flex;
@@ -44,29 +67,12 @@ const Container = styled.div`
   margin: auto;
 `;
 
-const Button = styled.button`
+const Button = styled(motion.button)`
   color: ${(props) => props.theme.accentColor};
   letter-spacing: 5px;
   background-color: transparent;
   border: none;
   font-size: 80px;
-  cursor: pointer;
-  :hover {
-    transform: scale(1.2) rotate3d(2, 2, 2, 10deg);
-    transition: width 2s, height 2s, background-color 2s, transform 2s;
-    font-weight: bolder;
-    color: #f7f7f7e8;
-  }
-`;
-
-const ModalBtn = styled.button`
-  background-color: #010101;
-  text-decoration: none;
-  border: none;
-  margin: 10px 0px;
-  padding: 20px;
-  color: white;
-  border-radius: 20px;
   cursor: pointer;
 `;
 
@@ -87,21 +93,31 @@ const BannerImg = styled.img`
   margin-bottom: 20px;
 `;
 
-const SignUp = styled.button`
-  font-size: 5px;
+const NavBtn = styled.button`
+  margin: 5px;
+  font-size: 13px;
+  font-weight: bold;
   cursor: pointer;
-  width: 60px;
-  height: 20px;
+  width: 100px;
+  height: 30px;
   border: 1px solid #020d10;
   border-radius: 10px;
   text-align: center;
-  background-color: #f3f3f3;
+  border: none;
+  background-color: #343a2b;
+  color: white;
   :hover {
     color: white;
     font-weight: bolder;
     transform: scale(1.09);
-    background-color: #525252;
   }
+`;
+
+const SmallNav = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
 `;
 
 interface LoginForm {
@@ -111,6 +127,22 @@ interface LoginForm {
   passwordConfirm: string;
 }
 
+const boxVariants = {
+  initial: {
+    opacity: 0,
+    scale: 0,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+  },
+  leaving: {
+    opacity: 0,
+    scale: 0,
+    y: 50,
+  },
+};
+
 function Login() {
   const {
     register,
@@ -118,13 +150,13 @@ function Login() {
     formState: { errors },
   } = useForm<LoginForm>();
   const onSubmit = (data: any) => console.log(data);
-  const [modalOpen, setModalOpen] = useState(false);
   const [haveid, setHaveid] = useState(true);
-  const onModalEvent = () => {
-    setModalOpen((prev) => !prev);
-  };
   const onSignUp = () => {
     setHaveid((prev) => !prev);
+  };
+  const [isOpen, setIsOpen] = useState(false);
+  const onOpenForm = () => {
+    setIsOpen((prev) => !prev);
   };
   return (
     <Container>
@@ -134,91 +166,109 @@ function Login() {
         </Helmet>
       </HelmetProvider>
       <Header>
-        <Button onClick={onModalEvent}>
-          WelCome <br /> JiCoin
-        </Button>
+        <Box>
+          <AnimatePresence>
+            {isOpen ? (
+              <LoginForm
+                variants={boxVariants}
+                initial="initial"
+                animate="visible"
+                exit="leaving"
+              >
+                {haveid ? (
+                  <ModalForm>
+                    <SmallNav>
+                      <NavBtn onClick={onSignUp}>
+                        {haveid ? "회원가입" : "로그인"}
+                      </NavBtn>{" "}
+                      <NavBtn onClick={onOpenForm}>Exit</NavBtn>
+                    </SmallNav>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
+                      <BannerImg />
+                      <Banner>JiCoin (로그인)</Banner>
+                      <input
+                        {...register("id", {
+                          required: "아이디는 필수입니다",
+                          maxLength: 20,
+                        })}
+                        type="text"
+                        placeholder="아이디를 입력해주세요"
+                      />
+                      <span>{errors.id?.message}</span>
+                      <input
+                        {...register("password", {
+                          required: "비밀번호는 필수입니다",
+                          maxLength: 20,
+                        })}
+                        type="password"
+                        placeholder="비밀번호를 입력해주세요"
+                      />
+                      <span>{errors.password?.message}</span>
+                      <input type="submit" style={{ fontWeight: "bolder" }} />
+                    </Form>
+                  </ModalForm>
+                ) : (
+                  <ModalForm>
+                    <SmallNav>
+                      <NavBtn onClick={onSignUp}>
+                        {haveid ? "회원가입" : "로그인"}
+                      </NavBtn>{" "}
+                      <NavBtn onClick={onOpenForm}>Exit</NavBtn>
+                    </SmallNav>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
+                      <BannerImg />
+                      <Banner>JiCoin (회원가입)</Banner>
+                      <input
+                        {...register("id", {
+                          required: "아이디는 필수입니다",
+                          maxLength: 20,
+                        })}
+                        type="text"
+                        placeholder="아이디를 입력해주세요"
+                      />
+                      <span>{errors.id?.message}</span>
+                      <input
+                        {...register("password", {
+                          required: "비밀번호는 필수입니다",
+                          maxLength: 20,
+                        })}
+                        type="password"
+                        placeholder="비밀번호를 입력해주세요"
+                      />
+                      <span>{errors.password?.message}</span>
+                      <input
+                        {...register("passwordConfirm", {
+                          required: "비밀번호는 확인은 필수입니다",
+                          maxLength: 20,
+                        })}
+                        type="password"
+                        placeholder="비밀번호를 다시 입력해주세요"
+                      />
+                      <span>{errors.passwordConfirm?.message}</span>
+                      <input type="submit" style={{ fontWeight: "bolder" }} />
+                    </Form>
+                  </ModalForm>
+                )}
+              </LoginForm>
+            ) : (
+              <Button
+                whileHover={{
+                  scale: 1.2,
+                  rotateX: 10,
+                  transitionDuration: "0.7s",
+                }}
+                onClick={onOpenForm}
+                variants={boxVariants}
+                initial="initial"
+                animate="visible"
+                exit="leaving"
+              >
+                WelCome <br /> JiCoin
+              </Button>
+            )}
+          </AnimatePresence>
+        </Box>
       </Header>
-      <Modal
-        isOpen={modalOpen}
-        ariaHideApp={false}
-        style={{
-          overlay: {
-            backgroundColor: "transparent",
-          },
-          content: {
-            position: "absolute",
-            top: "15%",
-            left: "20%",
-            width: "60%",
-            height: "70%",
-            background: "#F3F3F3",
-            overflow: "hidden",
-            borderRadius: 30,
-          },
-        }}
-      >
-        <SignUp onClick={onSignUp}>{haveid ? "회원가입" : "로그인"}</SignUp>{" "}
-        {haveid ? (
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <BannerImg />
-            <Banner>JiCoin (로그인)</Banner>
-            <input
-              {...register("id", {
-                required: "아이디는 필수입니다",
-                maxLength: 20,
-              })}
-              type="text"
-              placeholder="아이디를 입력해주세요"
-            />
-            <span>{errors.id?.message}</span>
-            <input
-              {...register("password", {
-                required: "비밀번호는 필수입니다",
-                maxLength: 20,
-              })}
-              type="password"
-              placeholder="비밀번호를 입력해주세요"
-            />
-            <span>{errors.password?.message}</span>
-            <input type="submit" style={{ fontWeight: "bolder" }} />
-            <ModalBtn onClick={onModalEvent}>ESC</ModalBtn>
-          </Form>
-        ) : (
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <BannerImg />
-            <Banner>JiCoin (회원가입)</Banner>
-            <input
-              {...register("id", {
-                required: "아이디는 필수입니다",
-                maxLength: 20,
-              })}
-              type="text"
-              placeholder="아이디를 입력해주세요"
-            />
-            <span>{errors.id?.message}</span>
-            <input
-              {...register("password", {
-                required: "비밀번호는 필수입니다",
-                maxLength: 20,
-              })}
-              type="password"
-              placeholder="비밀번호를 입력해주세요"
-            />
-            <span>{errors.password?.message}</span>
-            <input
-              {...register("passwordConfirm", {
-                required: "비밀번호는 확인은 필수입니다",
-                maxLength: 20,
-              })}
-              type="password"
-              placeholder="비밀번호를 다시 입력해주세요"
-            />
-            <span>{errors.passwordConfirm?.message}</span>
-            <input type="submit" style={{ fontWeight: "bolder" }} />
-            <ModalBtn onClick={onModalEvent}>ESC</ModalBtn>
-          </Form>
-        )}
-      </Modal>
     </Container>
   );
 }
