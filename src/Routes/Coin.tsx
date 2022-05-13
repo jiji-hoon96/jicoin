@@ -230,9 +230,6 @@ function Coin() {
             <Tab isActive={chartMatch !== null}>
               <Link to={`/${coinId}/chart`}>Chart</Link>
             </Tab>
-            <Tab isActive={youtubeMatch !== null}>
-              <Link to={`/${coinId}/youtube`}>Youtube</Link>
-            </Tab>
             <Tab isActive={marketMatch !== null}>
               <Link to={`/${coinId}/market`}>Market</Link>
             </Tab>

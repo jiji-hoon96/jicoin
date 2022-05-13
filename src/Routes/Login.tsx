@@ -254,8 +254,9 @@ function Login() {
               <Button
                 whileHover={{
                   scale: 1.2,
-                  rotateX: 10,
+                  rotateX: 15,
                   transitionDuration: "0.7s",
+                  textShadow: "50px 50px 50px gray",
                 }}
                 onClick={onOpenForm}
                 variants={boxVariants}
