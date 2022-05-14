@@ -9,12 +9,16 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@graphql-tools/load-files": "^6.5.3",
+    "@graphql-tools/merge": "^8.2.11",
+    "@graphql-tools/schema": "^8.3.11",
+    "@prisma/client": "^3.14.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/express": "^4.17.13",
+    "@types/graphql-upload": "^8.0.11",
     "@types/jest": "^27.5.0",
-    "@types/node": "^16.11.33",
+    "@types/node": "^16.11.35",
     "@types/nodemon": "^1.19.1",
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.3",
@@ -23,12 +27,16 @@
     "@types/styled-components": "^5.1.25",
     "@types/styled-react-modal": "^1.2.2",
     "apexcharts": "^3.35.0",
+    "apollo-server": "^3.7.0",
+    "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "framer-motion": "^6.3.3",
     "graphql": "^16.4.0",
+    "graphql-tools": "^8.2.9",
     "http-proxy-middleware": "^2.0.6",
-    "mongoose": "^6.3.2",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
     "react": "^18.1.0",
     "react-apexcharts": "^1.4.0",
     "react-dom": "^18.1.0",
@@ -50,7 +58,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "dev": "nodemon --exec ts-node src/server --ext ts,js",
+    "migrate": "npx prisma migrate dev --preview-feature",
+    "studio": "npx prisma studio"
   },
   "eslintConfig": {
     "extends": [
@@ -71,9 +82,15 @@
     ]
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/morgan": "^1.9.3",
     "@types/react-helmet": "^6.1.5",
     "@types/react-modal": "^3.13.1",
     "nodemon": "^2.0.16",
+    "prisma": "^3.14.0",
     "ts-node": "^10.7.0"
   }
 }
