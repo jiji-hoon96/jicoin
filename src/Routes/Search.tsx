@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { FetchCoinList } from "../api";
+import { FetchCoinList, fetchTrend } from "../api";
 
 interface CoinListData {
   id: string;
@@ -17,12 +17,18 @@ interface CoinListData {
 
 const Container = styled.div`
   padding: 0px 20px;
-  width: 600px;
+  width: 1000px;
   height: 100%;
   max-width: 600px;
   margin: auto;
   margin-bottom: 50px;
 `;
+
+const SmallContainer= styled.div`
+  display: flex;
+  width:1000px;
+
+`
 
 const Loader = styled.div`
   text-align: center;
@@ -48,7 +54,7 @@ const Header = styled.header`
 `;
 
 const CoinsList = styled.div`
-  margin: 30px 0px;
+  margin: 30px 30px 0px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -80,6 +86,7 @@ const Coin = styled.div`
     }
   }
 `;
+
 const Img = styled.img`
   width: 25px;
   height: 25px;
@@ -99,17 +106,75 @@ const Title = styled.h1`
   }
 `;
 
+const TrendBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:250px;
+  height:600px;
+  background-color: transparent;
+`
+
+const TrendCoin = styled.div`
+   background-color: ${(props) => props.theme.liColor};
+   color:black;
+  text-align: center;
+  width: 250px;
+  height: 60px;
+  color: black;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+`
+
+const TrendTitle = styled.h1`
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+  color: white;
+  margin-bottom: 10px;
+  font-size: 24px;
+`
+const SubTitle = styled.h2`
+  color: ${(props) => props.theme.accentColor};
+  font-size: 24px;
+`;
+
+const SmallTitle = styled.h3`
+  font-size:12px;
+`
+
+
 function Search() {
+  function getToday() {
+    let date = new Date();
+    let year = date.getFullYear();
+    let month = ("0" + (1 + date.getMonth())).slice(-2);
+    let day = ("0" + date.getDate()).slice(-2);
+    return `(${year}-${month}-${day}) 기준`;
+  }
   const [searchParams, _] = useSearchParams();
   const keyword: any = searchParams.get("keyword");
-  const { isLoading, data } = useQuery<CoinListData[]>(
+  const {isLoading:isTrendLoading, data: isTrendData} = useQuery(
+    "TrendList",
+    fetchTrend,{
+      refetchInterval: 10000,
+    }
+  )
+  const { isLoading:isListLoading, data: isListData } = useQuery<CoinListData[]>(
     "CoinList",
     FetchCoinList,
     {
       refetchInterval: 10000,
     }
   );
-
+  const isLoading = isTrendLoading || isListLoading
+  console.log()
   return (
     <Container>
       <Header>
@@ -125,8 +190,9 @@ function Search() {
       {isLoading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (
-        <CoinsList>
-          {data?.slice(0, 200).map(
+        <SmallContainer>
+          <CoinsList>
+          {isListData?.slice(0, 200).map(
             (coin) =>
               (coin.name.toLowerCase().includes(keyword) ||
                 coin.symbol.toLowerCase().includes(keyword) ||
@@ -143,7 +209,25 @@ function Search() {
               )
           )}
         </CoinsList>
+        <TrendBox>
+          <TrendTitle>
+            검색량 순위
+            <SubTitle>{getToday()}</SubTitle>
+          </TrendTitle>
+          {isTrendData?.coins?.map((coin:any)=>coin?.item).map((x:any)=>(
+            <TrendCoin key={Math.random()}>
+              {x.score+1}.  
+              <Img src={x.thumb} style={{margin: "0px 10px"}}/>
+              {x.name}
+            </TrendCoin>
+          ))}
+          <SmallTitle>
+            출처(CoinGecko Web Site)
+          </SmallTitle>
+        </TrendBox>
+        </SmallContainer>
       )}
+      
     </Container>
   );
 }

@@ -183,9 +183,17 @@ function Chart() {
                     toolbar: {
                       show: false,
                     },
-                    background: "transparent",
+                    background: "#fbc531",
+                    dropShadow: {
+                      enabled: true,
+                      top: 0,
+                      left: 0,
+                      blur: 3,
+                      opacity: 0.5
+                    },
                   },
                   grid: { show: false },
+              
                   stroke: {
                     curve: "smooth",
                     width: 3,
@@ -209,6 +217,7 @@ function Chart() {
                       stops: [0, 100],
                     },
                   },
+             
                   colors: ["#0fbcf9"],
                   tooltip: {
                     y: {
@@ -243,7 +252,7 @@ function Chart() {
                     toolbar: {
                       show: false,
                     },
-                    background: "transparent",
+                    background: "#0097e6",
                   },
                   grid: { show: false },
                   stroke: {
@@ -252,6 +261,7 @@ function Chart() {
                   },
                   yaxis: {
                     show: true,
+               
                   },
                   xaxis: {
                     axisBorder: { show: false },
@@ -275,6 +285,7 @@ function Chart() {
                       formatter: (value: any) => `$${value.toFixed(2)}`,
                     },
                   },
+                  
                 }}
               />
             )}

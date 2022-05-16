@@ -163,7 +163,6 @@ function Coin() {
   const coinId = pathname.slice(1);
   const marketMatch = useMatch("/:coinId/market");
   const chartMatch = useMatch("/:coinId/chart");
-  const youtubeMatch = useMatch("/:coinId/youtube");
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ["info", coinId],
     () => fetchCoinInfo(coinId),

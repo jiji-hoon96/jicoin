@@ -1,4 +1,9 @@
+
 const BASE_URL = `https://api.coinpaprika.com/v1`;
+
+export function fetchTrend(){
+  return fetch("https://api.coingecko.com/api/v3/search/trending").then((response)=>response.json());
+}
 
 export function FetchCoinList() {
   return fetch(`${BASE_URL}/coins`).then((response) => response.json());

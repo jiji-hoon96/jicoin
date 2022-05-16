@@ -35,6 +35,7 @@ footer, header, hgroup, main, menu, nav, section {
 }
 body {
   line-height: 1;
+  width:100%;
   font-family: 'Source Sans Pro', sans-serif;
   background-color: #343a2b;
   color:${(props) => props.theme.accentColor};
