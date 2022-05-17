@@ -81,15 +81,15 @@ function Chart() {
     <Container>
       <HelmetProvider>
         <Helmet>
-          <title>{coinId.split("-")[0].toUpperCase()} Chart</title>
+          <title>{coinId.split("-")[0].toUpperCase()} Chart | JiCoin</title>
         </Helmet>
       </HelmetProvider>
       <Header>
         <Title>
           <Link to={{ pathname: `/${coinId}` }}>
             {index === 0
-              ? `${coinId.split("-")[0].toUpperCase()} 1달 차트`
-              : `${coinId.split("-")[0].toUpperCase()} 1년 차트`}
+              ? `${coinId.split("-")[0].toUpperCase()} Coin 1달 차트`
+              : `${coinId.split("-")[0].toUpperCase()} Coin 1년 차트`}
           </Link>
         </Title>
       </Header>
@@ -119,12 +119,18 @@ function Chart() {
                     align: "center",
                   },
                   chart: {
-                    height: 500,
-                    width: 800,
+                    animations: {
+                      easing: 'linear',
+                    },
+                    height: 600,
+                    width: 1000,
                     toolbar: {
                       show: false,
                     },
-                    background: "#fbc531",
+                    zoom: {
+                      enabled: false,
+                    },
+                    background: "#20231C",
                     dropShadow: {
                       enabled: true,
                       top: 0,
@@ -188,12 +194,15 @@ function Chart() {
                     align: "center",
                   },
                   chart: {
-                    height: 500,
-                    width: 800,
+                    animations: {
+                      easing: 'linear',
+                    },
+                    height: 600,
+                    width: 1000,
                     toolbar: {
                       show: false,
                     },
-                    background: "#0097e6",
+                    background: "#20231C",
                   },
                   grid: { show: false },
                   stroke: {

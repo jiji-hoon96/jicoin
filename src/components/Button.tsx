@@ -38,8 +38,8 @@ export const TabBtn = styled.button<{ isActive: boolean }>`
 `;
 
 export const HomeMyPageBtn = styled.button`
-  width: 60px;
-  height: 40px;
+  width: 50px;
+  height: 30px;
   cursor: pointer;
   border-radius: 10px;
   border: none;
@@ -53,19 +53,18 @@ export const HomeMyPageBtn = styled.button`
 `;
 
 export const HomeFavBtn = styled.button`
-  position: relative;
-  top: -5px;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border: none;
   border-radius: 10px;
+  margin-left: 10px;
   align-items: center;
   display: flex;
   justify-content: center;
   :hover {
     background-color: #d8bf2e;
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 `;
 

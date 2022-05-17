@@ -35,12 +35,15 @@ const ListDiv = styled.div`
 
 const Img = styled.img`
   width: 25px;
+  position: relative;
+  top: 8px;
   height: 25px;
-  margin-right: 10px;
+  
+  margin-right: 6px;
 `;
 
 const CoinsList = styled(motion.div)`
-  margin: 5px 0px;
+  margin: 10px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,28 +52,22 @@ const CoinsList = styled(motion.div)`
 
 const Coin = styled.div`
   background-color: ${(props) => props.theme.liColor};
-  text-align: center;
-  width: 450px;
-  height: 60px;
+  width: 300px;
+  height: 50px;
   color: black;
   border-radius: 15px;
-  margin: 0px 10px 10px 0px;
-  a {
-    display: flex;
-    align-items: center;
-    padding: 18px;
-    transition: color 0.2s ease-in;
-    justify-content: center;
-    font-size: 15px;
-    font-weight: bolder;
-  }
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s ease-in;
+  font-size: 13px;
+  font-weight: bolder;
+  margin: 5px;
   &:hover {
-    a {
       background-color: #d8bf2e;
       border-radius: 10px;
-      transform: scale(1.02);
       transition: 0.3;
-    }
+      transform: scale(1.01);
   }
 `;
 

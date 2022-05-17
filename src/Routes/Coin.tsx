@@ -54,6 +54,20 @@ const Description = styled.div`
     background-color:  #343A2B;
   }
 `;
+const EmptyDescription = styled.div`
+margin: 20px 0px;
+text-align: center;
+display: flex;
+align-items: center;
+justify-content: center;
+height:100px;
+font-size: 20px;
+background-color: ${(props) => props.theme.viewColor};
+padding: 10px 20px;
+color: ${(props) => props.theme.accentColor};
+border-radius: 10px;
+`;
+
 
 
 interface InfoData {
@@ -175,7 +189,7 @@ function Coin() {
               <MiniTitleValue>{priceData?.max_supply}</MiniTitleValue>
             </OverviewItem>
           </Overview>
-          <Description>{infoData?.description}</Description>
+          {infoData?.description === "" ? <EmptyDescription>{`${infoData.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
           <BtnBorder>
             <TabBtn isActive={chartMatch !== null}>
               <Link to={`/${coinId}/chart`}>Chart</Link>
