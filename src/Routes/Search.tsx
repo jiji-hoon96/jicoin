@@ -21,7 +21,7 @@ interface CoinListData {
 }
 const SmallContainer= styled.div`
   display: flex;
-  width:1000px;
+  width: 100%;
 `
 const CoinsList = styled.div`
   margin: 30px 30px 0px 0px;
@@ -63,21 +63,24 @@ const Img = styled.img`
   margin-right: 10px;
 `;
 const TrendBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width:250px;
-  height:600px;
-  background-color: transparent;
+border: 1px solid gainsboro;
+border-radius: 10px;
+display: flex;
+flex-direction: column;
+margin-top: 40px;
+justify-content: center;
+align-items: center;
+width:250px;
+height:500px;
+background-color: transparent;
 `
 
 const TrendCoin = styled.div`
-   background-color: ${(props) => props.theme.liColor};
-   color:black;
+  background-color: ${(props) => props.theme.liColor};
+  color:black;
   text-align: center;
-  width: 250px;
-  height: 60px;
+  width: 200px;
+  height: 40px;
   color: black;
   border-radius: 15px;
   margin-bottom: 20px;
@@ -85,20 +88,21 @@ const TrendCoin = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+  font-size: 13px;
 `
 
-const TrendTitle = styled.h1`
+const TrendTitle = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-  color: white;
-  margin-bottom: 10px;
-  font-size: 24px;
+color: white;
+margin-bottom: 10px;
+font-size: 15px;
 `
 const SubTitle = styled.h2`
   color: ${(props) => props.theme.accentColor};
-  font-size: 24px;
+  font-size: 12px;
 `;
 
 const SmallTitle = styled.h3`
@@ -123,7 +127,7 @@ function Search() {
     }
   );
   const isLoading = isTrendLoading || isListLoading
-  console.log()
+  
   return (
     <Container>
       <Header>
@@ -141,7 +145,7 @@ function Search() {
       ) : (
         <SmallContainer>
           <CoinsList>
-          {isListData?.slice(0, 200).map(
+          {isListData?.slice(0, 500).map(
             (coin) =>
               (coin.name.toLowerCase().includes(keyword) ||
                 coin.symbol.toLowerCase().includes(keyword) ||
