@@ -8,36 +8,51 @@ import { BtnBorder, TabBtn } from "../components/Button";
 import { Container } from "../components/Container";
 import { Header } from "../components/Header";
 import { Loader } from "../components/Loader";
-import { Title } from "../components/Title";
+import { MiniTitle, MiniTitleValue, SubTitle, Title } from "../components/Title";
+import { getToday } from "../components/useSkill/getDay";
 
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: ${(props) => props.theme.viewColor};
+  
   color: ${(props) => props.theme.accentColor};
   padding: 10px 20px;
+  margin:10px;
   border-radius: 10px;
 `;
 const OverviewItem = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  border-radius: 50%;
+  margin: 20px;
   align-items: center;
+  background-color: ${(props) => props.theme.viewColor};
   color: ${(props) => props.theme.accentColor};
-  width: 33%;
-  span:first-child {
-    font-size: 15px;
-    font-weight: 400;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-  }
+  width:160px;
+  height: 160px;
+
 `;
-const Description = styled.p`
+
+const Description = styled.div`
   margin: 20px 0px;
+  text-align: center;
   line-height: 2em;
+  overflow: auto;
+  height:250px;
   background-color: ${(props) => props.theme.viewColor};
   padding: 10px 20px;
   color: ${(props) => props.theme.accentColor};
   border-radius: 10px;
+  ::-webkit-scrollbar{
+    width: 10px;
+  };
+  ::-webkit-scrollbar-thumb{
+    background-color:  whitesmoke;
+  }
+  ::-webkit-scrollbar-track{
+    background-color:  #343A2B;
+  }
 `;
 
 
@@ -119,7 +134,7 @@ function Coin() {
     <Container>
       <HelmetProvider>
         <Helmet>
-          <title>{coinId.split("-")[0].toUpperCase()} Coin</title>
+          <title>{coinId.split("-")[0].toUpperCase()} Coin | JiCoin</title>
         </Helmet>
       </HelmetProvider>
       <Header>
@@ -132,6 +147,7 @@ function Coin() {
               : infoData?.name}
           </Link>
         </Title>
+        <SubTitle>{getToday()}</SubTitle>
       </Header>
       {loading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>
@@ -139,29 +155,27 @@ function Coin() {
         <>
           <Overview>
             <OverviewItem>
-              <span>Rank</span>
-              <span>{infoData?.rank}</span>
+              <MiniTitle>시총 순위</MiniTitle>
+              <MiniTitleValue>{infoData?.rank}</MiniTitleValue>
             </OverviewItem>
             <OverviewItem>
-              <span>Symbol</span>
-              <span>${infoData?.symbol}</span>
+              <MiniTitle>거래소 마크</MiniTitle>
+              <MiniTitleValue>${infoData?.symbol}</MiniTitleValue>
             </OverviewItem>
             <OverviewItem>
-              <span>Price</span>
-              <span>${priceData?.quotes.USD.price.toFixed(3)}</span>
+              <MiniTitle>가격</MiniTitle>
+              <MiniTitleValue>${priceData?.quotes.USD.price.toFixed(3)}</MiniTitleValue>
+            </OverviewItem>
+            <OverviewItem>
+              <MiniTitle>현재까지 공급량</MiniTitle>
+              <MiniTitleValue>{priceData?.total_supply}</MiniTitleValue>
+            </OverviewItem>
+            <OverviewItem>
+              <MiniTitle>전체 공급량</MiniTitle>
+              <MiniTitleValue>{priceData?.max_supply}</MiniTitleValue>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
-          <Overview>
-            <OverviewItem>
-              <span>Total Suply</span>
-              <span>{priceData?.total_supply}</span>
-            </OverviewItem>
-            <OverviewItem>
-              <span>Max Supply</span>
-              <span>{priceData?.max_supply}</span>
-            </OverviewItem>
-          </Overview>
           <BtnBorder>
             <TabBtn isActive={chartMatch !== null}>
               <Link to={`/${coinId}/chart`}>Chart</Link>

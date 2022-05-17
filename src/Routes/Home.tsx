@@ -50,7 +50,7 @@ const CoinsList = styled(motion.div)`
 const Coin = styled.div`
   background-color: ${(props) => props.theme.liColor};
   text-align: center;
-  width: 400px;
+  width: 450px;
   height: 60px;
   color: black;
   border-radius: 15px;
@@ -146,7 +146,7 @@ function Home() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const { register, handleSubmit,formState: { errors }, } = useForm<SerachInfo>();
+  const { register, handleSubmit} = useForm<SerachInfo>();
   const inputAnimation = useAnimation();
   const increaseList = () => {
     setDirection(false);
