@@ -38,7 +38,6 @@ const Img = styled.img`
   position: relative;
   top: 8px;
   height: 25px;
-  
   margin-right: 6px;
 `;
 

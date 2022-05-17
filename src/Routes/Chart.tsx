@@ -37,7 +37,7 @@ const ChartBox = styled.div`
   margin: 0 auto;
   justify-content: center;
   align-items: center;
-  width: 700px;
+  width: 100%;
   height: 500px;
 `;
 
@@ -123,7 +123,7 @@ function Chart() {
                       easing: 'linear',
                     },
                     height: 600,
-                    width: 1000,
+                    width: 600,
                     toolbar: {
                       show: false,
                     },
@@ -198,7 +198,7 @@ function Chart() {
                       easing: 'linear',
                     },
                     height: 600,
-                    width: 1000,
+                    width: 600,
                     toolbar: {
                       show: false,
                     },

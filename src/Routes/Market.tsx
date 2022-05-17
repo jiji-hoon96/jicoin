@@ -10,14 +10,14 @@ import { Loader } from "../components/Loader";
 import { Title } from "../components/Title";
 
 const Overview = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 20px;
   background-color: ${(props) => props.theme.viewColor};
   padding: 10px 20px;
   border-radius: 10px;
 `;
 const OverviewItem = styled.div`
-  display: flex;
   width: 100%;
   flex-direction: column;
   align-items: center;
@@ -34,11 +34,11 @@ const MarketList = styled.ul`
 `;
 
 const MarketSolo = styled.li`
-  height: 70px;
+  height: 75px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  font-size: 12px;
+  font-size: 10px;
   background-color: whitesmoke;
   color: black;
   border-radius: 5px;
@@ -53,7 +53,7 @@ const MarketSolo = styled.li`
     color: ${(props) => props.theme.nullColor};
   }
   h2 {
-    font-size: 18px;
+    font-size: 14px;
   }
   a {
     margin: 7px 0px;
@@ -81,14 +81,14 @@ function Market() {
     ["market", coinId],
     () => fetchCoinMarket(coinId),
     {
-      refetchInterval: 3000,
+      refetchInterval: 300000,
     }
   );
   return (
     <Container>
       <HelmetProvider>
         <Helmet>
-          <title>{coinId.split("-")[0].toUpperCase()} Markets</title>
+          <title>{coinId.split("-")[0].toUpperCase()} Markets | JiCoin</title>
         </Helmet>
       </HelmetProvider>
       <Header>
@@ -105,7 +105,31 @@ function Market() {
           <Overview>
             <OverviewItem>
               <MarketList>
-                {data?.slice(0, 15).map((x) => (
+                {data?.slice(0, 8).map((x) => (
+                  <MarketSolo key={Math.random()}>
+                    <a
+                      href={x.market_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <h2>
+                        Market : {x.exchange_name} / Market Price : $
+                        {x.quotes.USD.price.toFixed(3)}
+                      </h2>
+                      <hr /> MarketURL :&nbsp;
+                      {x.market_url !== null ? (
+                        x.market_url
+                      ) : (
+                        <p>해당 거래소의 URL을 찾을 수 없습니다</p>
+                      )}
+                    </a>
+                  </MarketSolo>
+                ))}
+              </MarketList>
+            </OverviewItem>
+            <OverviewItem>
+              <MarketList>
+                {data?.slice(8, 16).map((x) => (
                   <MarketSolo key={Math.random()}>
                     <a
                       href={x.market_url}

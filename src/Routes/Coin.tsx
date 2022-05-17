@@ -133,17 +133,18 @@ function Coin() {
     ["info", coinId],
     () => fetchCoinInfo(coinId),
     {
-      refetchInterval: 3000,
+      refetchInterval: 300000,
     }
   );
   const { isLoading: priceLoading, data: priceData } = useQuery<PriceData>(
     ["price", coinId],
     () => fetchCoinPrice(coinId),
     {
-      refetchInterval: 3000,
+      refetchInterval: 300000,
     }
   );
   const loading = infoLoading || priceLoading;
+  console.log(infoData?.description)
   return (
     <Container>
       <HelmetProvider>
@@ -189,7 +190,7 @@ function Coin() {
               <MiniTitleValue>{priceData?.max_supply}</MiniTitleValue>
             </OverviewItem>
           </Overview>
-          {infoData?.description === "" ? <EmptyDescription>{`${infoData.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
+          {infoData?.description === "" ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
           <BtnBorder>
             <TabBtn isActive={chartMatch !== null}>
               <Link to={`/${coinId}/chart`}>Chart</Link>
