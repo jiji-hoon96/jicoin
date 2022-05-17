@@ -24,15 +24,26 @@ const SmallContainer= styled.div`
   width: 100%;
 `
 const CoinsList = styled.div`
+width: 100%;
+height: 600px;
+  overflow: auto;
+  ::-webkit-scrollbar{
+    width: 10px;
+  };
+  ::-webkit-scrollbar-thumb{
+    background-color:  whitesmoke;
+  }
+  ::-webkit-scrollbar-track{
+    background-color:  #343A2B;
+  }
   margin: 30px 30px 0px 0px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
 `;
 
 const Coin = styled.div`
   background-color: ${(props) => props.theme.liColor};
+  
   text-align: center;
   width: 400px;
   height: 60px;
@@ -83,7 +94,7 @@ const TrendCoin = styled.div`
   height: 40px;
   color: black;
   border-radius: 15px;
-  margin-bottom: 20px;
+  margin : 0px 10px 20px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
