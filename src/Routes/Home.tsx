@@ -11,7 +11,7 @@ import { FaStar } from "react-icons/fa";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { Container } from "../components/Container";
 import { Loader } from "../components/Loader";
-import { Title } from "../components/Title";
+import { SubTitle, Title } from "../components/Title";
 import { Header } from "../components/Header";
 import { Btn, BtnBorder, HomeFavBtn, HomeMyPageBtn } from "../components/Button";
 import { getToday } from "../components/useSkill/getDay";
@@ -31,11 +31,6 @@ const ListDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
-
-const SubTitle = styled.h2`
-  color: ${(props) => props.theme.accentColor};
-  font-size: 24px;
 `;
 
 const Img = styled.img`
@@ -97,14 +92,15 @@ const Search = styled.form`
 
 const Input = styled(motion.input)`
   transform-origin: center right center;
-  width: 280px;
+  width: 300px;
   height: 30px;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
   position: absolute;
   right: 40px;
   border-radius: 10px;
   border: none;
+  font-weight: bolder;
 `;
 
 const coinVariants = {
@@ -203,9 +199,8 @@ function Home() {
               transition={{ type: "linear" }}
               initial={{ scaleX: 0 }}
               animate={inputAnimation}
-              placeholder="Enter the word you want to find!"
+              placeholder="Enter the coin you want to find in English!"
             />
-            <h1>{errors.keyword?.message}</h1>
           </Search>
           <Link to={{ pathname: "/mypage" }}>
             <HomeMyPageBtn>
