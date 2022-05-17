@@ -4,31 +4,10 @@ import { Link } from "react-router-dom";
 import { useLocation, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinMarket } from "../api";
-
-const Container = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
-`;
-
-const Header = styled.header`
-  height: 13vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Title = styled.h1`
-  font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
-  :hover {
-    a {
-      color: #d8bf2e;
-      font-weight: bolder;
-      border-radius: 10px;
-    }
-    transform: scale(1.03);
-  }
-`;
+import { Container } from "../components/Container";
+import { Header } from "../components/Header";
+import { Loader } from "../components/Loader";
+import { Title } from "../components/Title";
 
 const Overview = styled.div`
   display: flex;
@@ -121,7 +100,7 @@ function Market() {
       </Header>
       <div>
         {isLoading ? (
-          "마켓을 로딩중입니다"
+          <Loader>마켓 정보를 불러오는 중입니다</Loader>
         ) : (
           <Overview>
             <OverviewItem>

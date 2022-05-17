@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
+import { Container } from "../components/Container";
+import { Header } from "../components/Header";
+import { Btn,  LoginWelcomeBtn } from "../components/Button";
 
 const Box = styled(motion.div)`
   width: 500px;
@@ -55,27 +58,6 @@ const Form = styled.form`
   }
 `;
 
-const Header = styled.header`
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-`;
-
-const Container = styled.div`
-  height: 100vh;
-  margin: auto;
-`;
-
-const Button = styled(motion.button)`
-  color: ${(props) => props.theme.accentColor};
-  letter-spacing: 5px;
-  background-color: transparent;
-  border: none;
-  font-size: 80px;
-  cursor: pointer;
-`;
-
 const Banner = styled.h3`
   color: black;
   font-size: 24px;
@@ -91,26 +73,6 @@ const BannerImg = styled.img`
   background-position: center;
   background-size: cover;
   margin-bottom: 20px;
-`;
-
-const NavBtn = styled.button`
-  margin: 5px;
-  font-size: 13px;
-  font-weight: bold;
-  cursor: pointer;
-  width: 100px;
-  height: 30px;
-  border: 1px solid #020d10;
-  border-radius: 10px;
-  text-align: center;
-  border: none;
-  background-color: #343a2b;
-  color: white;
-  :hover {
-    color: white;
-    font-weight: bolder;
-    transform: scale(1.09);
-  }
 `;
 
 const SmallNav = styled.div`
@@ -178,10 +140,10 @@ function Login() {
                 {haveid ? (
                   <ModalForm>
                     <SmallNav>
-                      <NavBtn onClick={onSignUp}>
+                      <Btn onClick={onSignUp}>
                         {haveid ? "회원가입" : "로그인"}
-                      </NavBtn>{" "}
-                      <NavBtn onClick={onOpenForm}>Exit</NavBtn>
+                      </Btn>{" "}
+                      <Btn onClick={onOpenForm}>Exit</Btn>
                     </SmallNav>
                     <Form onSubmit={handleSubmit(onSubmit)}>
                       <BannerImg />
@@ -210,10 +172,10 @@ function Login() {
                 ) : (
                   <ModalForm>
                     <SmallNav>
-                      <NavBtn onClick={onSignUp}>
+                      <Btn onClick={onSignUp}>
                         {haveid ? "회원가입" : "로그인"}
-                      </NavBtn>{" "}
-                      <NavBtn onClick={onOpenForm}>Exit</NavBtn>
+                      </Btn>{" "}
+                      <Btn onClick={onOpenForm}>Exit</Btn>
                     </SmallNav>
                     <Form onSubmit={handleSubmit(onSubmit)}>
                       <BannerImg />
@@ -251,7 +213,7 @@ function Login() {
                 )}
               </LoginForm>
             ) : (
-              <Button
+              <LoginWelcomeBtn
                 whileHover={{
                   scale: 1.2,
                   rotateX: 15,
@@ -265,7 +227,7 @@ function Login() {
                 exit="leaving"
               >
                 WelCome <br /> JiCoin
-              </Button>
+              </LoginWelcomeBtn>
             )}
           </AnimatePresence>
         </Box>

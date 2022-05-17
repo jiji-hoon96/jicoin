@@ -34,7 +34,11 @@ footer, header, hgroup, main, menu, nav, section {
     display: none;
 }
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   line-height: 1;
+  flex-direction: column;
   width:100%;
   font-family: 'Source Sans Pro', sans-serif;
   background-color: #343a2b;

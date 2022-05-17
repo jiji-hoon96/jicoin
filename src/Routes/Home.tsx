@@ -9,17 +9,18 @@ import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from "react-icons/fa";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { Container } from "../components/Container";
+import { Loader } from "../components/Loader";
+import { Title } from "../components/Title";
+import { Header } from "../components/Header";
+import { Btn, BtnBorder, HomeFavBtn, HomeMyPageBtn } from "../components/Button";
+import { getToday } from "../components/useSkill/getDay";
 
 const COINCOUNT = 10;
 
-const Title = styled.h1`
-  color: ${(props) => props.theme.accentColor};
-  font-size: 48px;
-  margin: 30px 0px 20px 0px;
-`;
-
 const Nav = styled.div`
   width: 100%;
+  margin-bottom: 20px;
   height: 30px;
   display: flex;
   justify-content: flex-end;
@@ -32,98 +33,15 @@ const ListDiv = styled.div`
   align-items: center;
 `;
 
-const FavBtn = styled.button`
-  position: relative;
-  top: -5px;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 10px;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  :hover {
-    background-color: #d8bf2e;
-    transform: scale(1.2);
-  }
-`;
-
 const SubTitle = styled.h2`
   color: ${(props) => props.theme.accentColor};
   font-size: 24px;
-`;
-
-const Container = styled.div`
-  padding: 0px 20px;
-  width: 600px;
-  height: 100%;
-  max-width: 600px;
-  margin: auto;
-  margin-bottom: 50px;
-`;
-const Loader = styled.div`
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 100px;
-  width: 600px;
-  height: 200px;
-  font-size: 30px;
-  border-radius: 10px;
-  font-weight: bolder;
-  background-color: whitesmoke;
-  color: ${(props) => props.theme.bgColor};
 `;
 
 const Img = styled.img`
   width: 25px;
   height: 25px;
   margin-right: 10px;
-`;
-
-const BtnDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Button = styled.button`
-  width: 120px;
-  height: 40px;
-  cursor: pointer;
-  border-radius: 10px;
-  border: none;
-  font-size: 15px;
-  font-weight: bolder;
-  :hover {
-    transform: scale(1.1);
-    transition: 0.4;
-    background-color: #d8bf2e;
-  }
-`;
-
-const MyPageButton = styled.button`
-  width: 60px;
-  height: 40px;
-  cursor: pointer;
-  border-radius: 10px;
-  border: none;
-  font-size: 15px;
-  font-weight: bolder;
-  :hover {
-    transform: scale(1.2);
-    transition: 0.5s;
-    background-color: #d8bf2e;
-  }
-`;
-
-const Header = styled.header`
-  height: 25vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 const CoinsList = styled(motion.div)`
@@ -179,7 +97,7 @@ const Search = styled.form`
 
 const Input = styled(motion.input)`
   transform-origin: center right center;
-  width: 400px;
+  width: 280px;
   height: 30px;
   font-size: 16px;
   text-align: center;
@@ -221,13 +139,6 @@ interface SerachInfo {
 }
 
 function Home() {
-  function getToday() {
-    let date = new Date();
-    let year = date.getFullYear();
-    let month = ("0" + (1 + date.getMonth())).slice(-2);
-    let day = ("0" + date.getDate()).slice(-2);
-    return `(${year}-${month}-${day}) 기준`;
-  }
   const { isLoading, data } = useQuery<CoinListData[]>(
     "CoinList",
     FetchCoinList,
@@ -239,7 +150,7 @@ function Home() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const { register, handleSubmit } = useForm<SerachInfo>();
+  const { register, handleSubmit,formState: { errors }, } = useForm<SerachInfo>();
   const inputAnimation = useAnimation();
   const increaseList = () => {
     setDirection(false);
@@ -267,7 +178,7 @@ function Home() {
       <Header>
         <HelmetProvider>
           <Helmet>
-            <title>JiCoin(시총순위)</title>
+            <title>시총순위 | JiCoin</title>
           </Helmet>
         </HelmetProvider>
         <Nav>
@@ -287,17 +198,19 @@ function Home() {
               />
             </motion.svg>
             <Input
-              {...register("keyword", { required: true })}
+              {...register("keyword", { required: true ,pattern: { value: /^[a-zA-Z]*$/, message: "검색은 영어만 가능합니다." }
+              })}
               transition={{ type: "linear" }}
               initial={{ scaleX: 0 }}
               animate={inputAnimation}
-              placeholder="Please enter the word you want to find in English"
+              placeholder="Enter the word you want to find!"
             />
+            <h1>{errors.keyword?.message}</h1>
           </Search>
           <Link to={{ pathname: "/mypage" }}>
-            <MyPageButton>
+            <HomeMyPageBtn>
               <FontAwesomeIcon icon={faUserAlt} size="lg" />
-            </MyPageButton>
+            </HomeMyPageBtn>
           </Link>
         </Nav>
         <Title>가상화폐 시총 순위</Title>
@@ -327,25 +240,25 @@ function Home() {
                     {coin.name} ({coin.symbol}){" "}
                   </Link>
                 </Coin>
-                <FavBtn>
+                <HomeFavBtn>
                   <FaStar size="1.5em" />
-                </FavBtn>
+                </HomeFavBtn>
               </ListDiv>
             ))}
           </CoinsList>
           )
-          <BtnDiv>
-            <Button onClick={decreaseList}>
+          <BtnBorder>
+            <Btn onClick={decreaseList}>
               {index === 0
                 ? "첫페이지"
                 : `${index - COINCOUNT + 1}위 ~ ${index}위`}
-            </Button>
-            <Button onClick={increaseList}>
+            </Btn>
+            <Btn onClick={increaseList}>
               {index > 180
                 ? "마지막페이지"
                 : `${index + COINCOUNT + 1}위 ~ ${index + COINCOUNT * 2}위`}
-            </Button>
-          </BtnDiv>
+            </Btn>
+          </BtnBorder>
         </AnimatePresence>
       )}
     </Container>

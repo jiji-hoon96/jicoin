@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { FetchCoinList, fetchTrend } from "../api";
+import { Container } from "../components/Container";
+import { Header } from "../components/Header";
+import { Loader } from "../components/Loader";
+import { Title } from "../components/Title";
+import { getToday } from "../components/useSkill/getDay";
 
 interface CoinListData {
   id: string;
@@ -14,45 +19,10 @@ interface CoinListData {
   is_active: boolean;
   type: string;
 }
-
-const Container = styled.div`
-  padding: 0px 20px;
-  width: 1000px;
-  height: 100%;
-  max-width: 600px;
-  margin: auto;
-  margin-bottom: 50px;
-`;
-
 const SmallContainer= styled.div`
   display: flex;
   width:1000px;
-
 `
-
-const Loader = styled.div`
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 100px;
-  width: 600px;
-  height: 200px;
-  font-size: 30px;
-  border-radius: 10px;
-  font-weight: bolder;
-  background-color: whitesmoke;
-  color: ${(props) => props.theme.bgColor};
-`;
-
-const Header = styled.header`
-  height: 15vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
 const CoinsList = styled.div`
   margin: 30px 30px 0px 0px;
   display: flex;
@@ -92,20 +62,6 @@ const Img = styled.img`
   height: 25px;
   margin-right: 10px;
 `;
-const Title = styled.h1`
-  color: ${(props) => props.theme.accentColor};
-  font-size: 48px;
-  margin: 30px 0px 30px 0px;
-  :hover {
-    a {
-      color: #d8bf2e;
-      font-weight: bolder;
-      border-radius: 10px;
-    }
-    transform: scale(1.03);
-  }
-`;
-
 const TrendBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -151,13 +107,6 @@ const SmallTitle = styled.h3`
 
 
 function Search() {
-  function getToday() {
-    let date = new Date();
-    let year = date.getFullYear();
-    let month = ("0" + (1 + date.getMonth())).slice(-2);
-    let day = ("0" + date.getDate()).slice(-2);
-    return `(${year}-${month}-${day}) 기준`;
-  }
   const [searchParams, _] = useSearchParams();
   const keyword: any = searchParams.get("keyword");
   const {isLoading:isTrendLoading, data: isTrendData} = useQuery(

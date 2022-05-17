@@ -4,49 +4,11 @@ import { Link, useMatch } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
-
-const Title = styled.h1`
-  font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
-  :hover {
-    a {
-      color: #d8bf2e;
-      font-weight: bolder;
-      border-radius: 10px;
-    }
-    transform: scale(1.03);
-  }
-`;
-
-const Loader = styled.span`
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 100px;
-  width: 600px;
-  height: 200px;
-  font-size: 30px;
-  border-radius: 10px;
-  font-weight: bolder;
-  background-color: whitesmoke;
-  color: ${(props) => props.theme.bgColor};
-`;
-
-const Container = styled.div`
-  padding: 0px 20px;
-  width: 600px;
-  max-width: 600px;
-  margin: 0 auto;
-  height: 100vh;
-`;
-
-const Header = styled.header`
-  height: 15vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import { BtnBorder, TabBtn } from "../components/Button";
+import { Container } from "../components/Container";
+import { Header } from "../components/Header";
+import { Loader } from "../components/Loader";
+import { Title } from "../components/Title";
 
 const Overview = styled.div`
   display: flex;
@@ -77,32 +39,7 @@ const Description = styled.p`
   color: ${(props) => props.theme.accentColor};
   border-radius: 10px;
 `;
-const Tabs = styled.div`
-  display: flex;
-  justify-content: space-between;
-  grid-template-columns: repeat(2, 1fr);
-  margin: 25px 0px;
-  gap: 10px;
-`;
 
-const Tab = styled.span<{ isActive: boolean }>`
-  text-align: center;
-  width: 200px;
-  text-transform: uppercase;
-  font-size: 15px;
-  font-weight: bolder;
-  background-color: ${(props) => props.theme.viewColor};
-  border-radius: 10px;
-  color: ${(props) => props.theme.accentColor};
-  a {
-    padding: 7px 0px;
-    display: block;
-    :hover {
-      color: #d8bf2e;
-      transform: scale(1.2);
-    }
-  }
-`;
 
 interface InfoData {
   id: string;
@@ -225,14 +162,14 @@ function Coin() {
               <span>{priceData?.max_supply}</span>
             </OverviewItem>
           </Overview>
-          <Tabs>
-            <Tab isActive={chartMatch !== null}>
+          <BtnBorder>
+            <TabBtn isActive={chartMatch !== null}>
               <Link to={`/${coinId}/chart`}>Chart</Link>
-            </Tab>
-            <Tab isActive={marketMatch !== null}>
+            </TabBtn>
+            <TabBtn isActive={marketMatch !== null}>
               <Link to={`/${coinId}/market`}>Market</Link>
-            </Tab>
-          </Tabs>
+            </TabBtn>
+          </BtnBorder>
         </>
       )}
     </Container>

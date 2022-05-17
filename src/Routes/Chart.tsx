@@ -6,6 +6,11 @@ import ApexChart from "react-apexcharts";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Container } from "../components/Container";
+import { Loader } from "../components/Loader";
+import { Title } from "../components/Title";
+import { Header } from "../components/Header";
+import { Btn, BtnBorder } from "../components/Button";
 
 interface IHistorical {
   time_open: string;
@@ -27,70 +32,6 @@ interface IYear {
   volume: number;
   market_cap: number;
 }
-
-const Container = styled.div`
-  width: 700px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin: 0 auto;
-`;
-const Loader = styled.span`
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 100px;
-  width: 700px;
-  height: 200px;
-  font-size: 30px;
-  border-radius: 10px;
-  font-weight: bolder;
-  background-color: whitesmoke;
-  color: ${(props) => props.theme.bgColor};
-`;
-
-const Header = styled.header`
-  height: 15vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Title = styled.h1`
-  font-size: 48px;
-  color: ${(props) => props.theme.accentColor};
-  :hover {
-    a {
-      color: #d8bf2e;
-      font-weight: bolder;
-      border-radius: 10px;
-    }
-    transform: scale(1.03);
-  }
-`;
-
-const ChartBtnDiv = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-`;
-
-const ChartBtn = styled.button`
-  width: 100px;
-  height: 40px;
-  border-radius: 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  margin-right: 10px;
-  &:hover {
-    transform: scale(1.04);
-    background-color: #d8bf2e;
-  }
-`;
 
 const ChartBox = styled.div`
   margin: 0 auto;
@@ -292,10 +233,10 @@ function Chart() {
           </div>
         )}
       </ChartBox>
-      <ChartBtnDiv>
-        <ChartBtn onClick={monthChart}>1달 차트</ChartBtn>
-        <ChartBtn onClick={yearChart}>1년 차트</ChartBtn>
-      </ChartBtnDiv>
+      <BtnBorder>
+        <Btn onClick={monthChart}>1달 차트</Btn>
+        <Btn onClick={yearChart}>1년 차트</Btn>
+      </BtnBorder>
     </Container>
   );
 }
