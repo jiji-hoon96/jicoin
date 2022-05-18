@@ -2,19 +2,20 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export const BtnBorder = styled.div`
-      display: flex;
+width:300px;
+  display: flex;
   justify-content: flex-start;
   align-items: flex-start;
 `
 
 export const Btn = styled.button`
-  width: 100px;
+  width: 150px;
   height: 40px;
   border-radius: 20px;
   font-size: 16px;
   cursor: pointer;
   border: none;
-  margin-right: 10px;
+  margin-right: 30px;
   &:hover {
     transform: scale(1.04);
     background-color: #d8bf2e;
@@ -78,8 +79,18 @@ export const LoginWelcomeBtn = styled(motion.button)`
   cursor: pointer;
 `;
 
-export const CoinBtn = styled(motion.button)`
-  font-size: 20px;
-  margin-bottom: 20px;
-  font-weight: bolder;
+export const CoinBtn = styled.button`
+font-size: 15px;
+width:100px;
+height: 50px;
+border: none;
+font-weight: bold;
+margin-right: 5px;
+border-radius: 10px;
+cursor: pointer;
+:hover {
+    background-color: #d8bf2e;
+    transform: scale(1.04);
+  }
 `
+

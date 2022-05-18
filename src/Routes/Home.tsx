@@ -20,7 +20,7 @@ const COINCOUNT = 10;
 
 const Nav = styled.div`
   width: 100%;
-  margin-bottom: 20px;
+  margin: 20px 0px;
   height: 30px;
   display: flex;
   justify-content: flex-end;
