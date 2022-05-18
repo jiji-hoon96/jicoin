@@ -1,3 +1,5 @@
+import { AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useQuery } from "react-query";
 import { Link, useMatch } from "react-router-dom";
@@ -8,8 +10,9 @@ import { BtnBorder, TabBtn } from "../components/Button";
 import { Container } from "../components/Container";
 import { Header } from "../components/Header";
 import { Loader } from "../components/Loader";
-import { MiniTitle, MiniTitleValue, SubTitle, Title } from "../components/Title";
+import {  MiniTitleValue, SubTitle, Title } from "../components/Title";
 import { getToday } from "../components/useSkill/getDay";
+import { CoinBtn } from "../components/Button";
 
 const Overview = styled.div`
   display: flex;
@@ -28,8 +31,8 @@ const OverviewItem = styled.div`
   align-items: center;
   background-color: ${(props) => props.theme.viewColor};
   color: ${(props) => props.theme.accentColor};
-  width:160px;
-  height: 160px;
+  width:50px;
+  height: 50px;
 
 `;
 
@@ -126,8 +129,16 @@ interface PriceData {
 function Coin() {
   const { pathname } = useLocation();
   const coinId = pathname.slice(1);
+  const [selected, setSelected] = useState(false);
   const marketMatch = useMatch("/:coinId/market");
   const chartMatch = useMatch("/:coinId/chart");
+  const transition = {
+    type: "spring",
+    duration: 1.5
+  };
+  const onClick = () =>{
+    setSelected((prev)=>!prev)
+  }
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ["info", coinId],
     () => fetchCoinInfo(coinId),
@@ -166,28 +177,30 @@ function Coin() {
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (
         <>
-          <Overview>
+        <AnimatePresence>
+        <Overview>
             <OverviewItem>
-              <MiniTitle>시총 순위</MiniTitle>
-              <MiniTitleValue>{infoData?.rank}</MiniTitleValue>
-            </OverviewItem>
-            <OverviewItem>
-              <MiniTitle>거래소 마크</MiniTitle>
-              <MiniTitleValue>${infoData?.symbol}</MiniTitleValue>
-            </OverviewItem>
-            <OverviewItem>
-              <MiniTitle>가격</MiniTitle>
-              <MiniTitleValue>${priceData?.quotes.USD.price.toFixed(3)}</MiniTitleValue>
-            </OverviewItem>
-            <OverviewItem>
-              <MiniTitle>현재까지 공급량</MiniTitle>
-              <MiniTitleValue>{priceData?.total_supply}</MiniTitleValue>
-            </OverviewItem>
-            <OverviewItem>
-              <MiniTitle>전체 공급량</MiniTitle>
-              <MiniTitleValue>{priceData?.max_supply}</MiniTitleValue>
-            </OverviewItem>
+              {selected ?  <MiniTitleValue onClick={onClick}>{infoData?.rank}</MiniTitleValue> :<CoinBtn onClick={onClick} transition={transition}>시총 순위</CoinBtn> }
+              </OverviewItem>
+              <OverviewItem>
+              {selected ?  <MiniTitleValue onClick={onClick}>{infoData?.symbol}</MiniTitleValue> :<CoinBtn onClick={onClick} transition={transition}>거래소 마크</CoinBtn> }  
+              </OverviewItem>
+              <OverviewItem>
+              {selected ?  <MiniTitleValue onClick={onClick}>{priceData?.quotes.USD.price.toFixed(3)}</MiniTitleValue> :<CoinBtn onClick={onClick} transition={transition}>가격</CoinBtn> }  
+              </OverviewItem>
+              <OverviewItem>
+              {selected ?  <MiniTitleValue onClick={onClick}>{priceData?.total_supply}</MiniTitleValue> :<CoinBtn onClick={onClick} transition={transition}>현재까지 공급량</CoinBtn> }  
+              </OverviewItem>
+              <OverviewItem>
+              {selected ?  <MiniTitleValue onClick={onClick}>{priceData?.max_supply}</MiniTitleValue> :<CoinBtn onClick={onClick} transition={transition}>전체 공급량</CoinBtn> }  
+              </OverviewItem>
+              
+              
+              
+              
+            
           </Overview>
+        </AnimatePresence>
           {infoData?.description === "" ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
           <BtnBorder>
             <TabBtn isActive={chartMatch !== null}>

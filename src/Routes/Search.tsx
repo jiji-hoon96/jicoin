@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { FetchCoinList, fetchTrend } from "../api";
-import { Container } from "../components/Container";
+import { Container, SmallContainer } from "../components/Container";
 import { Header } from "../components/Header";
 import { Loader } from "../components/Loader";
-import { Title } from "../components/Title";
+import { SearchTitle, SearchSubTitle,Title,SearchSmallTitle } from "../components/Title";
 import { getToday } from "../components/useSkill/getDay";
 
 interface CoinListData {
@@ -19,10 +19,7 @@ interface CoinListData {
   is_active: boolean;
   type: string;
 }
-const SmallContainer= styled.div`
-  display: flex;
-  width: 100%;
-`
+
 const CoinsList = styled.div`
 width: 100%;
 height: 600px;
@@ -81,11 +78,11 @@ border: 1px solid gainsboro;
 border-radius: 10px;
 display: flex;
 flex-direction: column;
-margin-top: 40px;
+margin-top: 60px;
 justify-content: center;
 align-items: center;
 width:250px;
-height:500px;
+height:430px;
 background-color: transparent;
 `
 
@@ -97,30 +94,12 @@ const TrendCoin = styled.div`
   height: 40px;
   color: black;
   border-radius: 15px;
-  margin : 0px 10px 20px 10px;
+  margin : 0px 10px 10px 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   font-size: 13px;
-`
-
-const TrendTitle = styled.div`
-display: flex;
-justify-content: center;
-align-items: center;
-flex-direction: column;
-color: white;
-margin-bottom: 10px;
-font-size: 15px;
-`
-const SubTitle = styled.h2`
-  color: ${(props) => props.theme.accentColor};
-  font-size: 12px;
-`;
-
-const SmallTitle = styled.h3`
-  font-size:12px;
 `
 
 
@@ -176,10 +155,10 @@ function Search() {
           )}
         </CoinsList>
         <TrendBox>
-          <TrendTitle>
+          <SearchTitle>
             검색량 순위
-            <SubTitle>{getToday()}</SubTitle>
-          </TrendTitle>
+            <SearchSubTitle>{getToday()}</SearchSubTitle>
+          </SearchTitle>
           {isTrendData?.coins?.map((coin:any)=>coin?.item).map((x:any)=>(
             <TrendCoin key={Math.random()}>
               {x.score+1}.  
@@ -187,9 +166,9 @@ function Search() {
               {x.name}
             </TrendCoin>
           ))}
-          <SmallTitle>
+          <SearchSmallTitle>
             출처(CoinGecko Web Site)
-          </SmallTitle>
+          </SearchSmallTitle>
         </TrendBox>
         </SmallContainer>
       )}

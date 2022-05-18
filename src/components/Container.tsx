@@ -13,3 +13,7 @@ export const Container = styled.div`
   height: 100vh;
 `;
 
+export const SmallContainer= styled.div`
+  display: flex;
+  width: 100%;
+`

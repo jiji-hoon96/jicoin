@@ -77,3 +77,9 @@ export const LoginWelcomeBtn = styled(motion.button)`
   font-size: 80px;
   cursor: pointer;
 `;
+
+export const CoinBtn = styled(motion.button)`
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: bolder;
+`
