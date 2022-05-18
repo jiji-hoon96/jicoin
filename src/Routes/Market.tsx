@@ -1,7 +1,7 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinMarket } from "../api";
 import { Container } from "../components/Container";

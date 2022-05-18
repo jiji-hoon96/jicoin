@@ -1,13 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-export const BtnBorder = styled.div`
-width:300px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-`
-
 export const Btn = styled.button`
   width: 150px;
   height: 40px;
@@ -22,15 +15,22 @@ export const Btn = styled.button`
   }
 `;
 
+export const BtnBorder = styled.div`
+  width:300px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+`
+
 export const TabBtn = styled.button<{ isActive: boolean }>`
   text-align: center;
-  width: 100px;
+  width: 100%;
   height: 40px;
   border-radius: 20px;
   font-size: 16px;
   cursor: pointer;
   border: none;
-  margin-right: 10px;
+  margin-right: 30px;
   text-transform: uppercase;
   &:hover {
     transform: scale(1.04);

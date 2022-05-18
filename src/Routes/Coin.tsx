@@ -33,7 +33,7 @@ const OverviewItem = styled.div`
   height: 100px;
 `;
 
-const MiniTitleValue = styled(motion.div)`
+const MiniTitleValue = styled.div`
 font-size: 15px;
 width:200px;
 height:50px;
@@ -191,7 +191,6 @@ function Coin() {
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (
         <>
-        <AnimatePresence>
         <Overview>
             <OverviewItem>
             {cointabArr.map((ele,index)=>{
@@ -206,7 +205,6 @@ function Coin() {
               {`${cointabArr[currentTab].value}`}
             </MiniTitleValue>
           </Overview>
-        </AnimatePresence>
           {infoData?.description === "" ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
           <BtnBorder>
             <TabBtn isActive={chartMatch !== null}>
