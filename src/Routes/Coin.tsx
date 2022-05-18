@@ -14,7 +14,6 @@ import { getToday } from "../components/useSkill/getDay";
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  
   color: ${(props) => props.theme.accentColor};
   padding: 10px 20px;
   margin:10px;
@@ -45,7 +44,7 @@ const Description = styled.div`
   color: ${(props) => props.theme.accentColor};
   border-radius: 10px;
   ::-webkit-scrollbar{
-    width: 10px;
+    width: 5px;
   };
   ::-webkit-scrollbar-thumb{
     background-color:  whitesmoke;
@@ -144,7 +143,6 @@ function Coin() {
     }
   );
   const loading = infoLoading || priceLoading;
-  console.log(infoData?.description)
   return (
     <Container>
       <HelmetProvider>

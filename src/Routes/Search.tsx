@@ -27,11 +27,14 @@ const CoinsList = styled.div`
 width: 100%;
 height: 600px;
   overflow: auto;
+  overflow-x: hidden;
   ::-webkit-scrollbar{
-    width: 10px;
+    width: 5px;
+    
   };
   ::-webkit-scrollbar-thumb{
     background-color:  whitesmoke;
+    
   }
   ::-webkit-scrollbar-track{
     background-color:  #343A2B;
@@ -138,13 +141,12 @@ function Search() {
     }
   );
   const isLoading = isTrendLoading || isListLoading
-  
   return (
     <Container>
       <Header>
         <HelmetProvider>
           <Helmet>
-            <title>JiCoin(Search)</title>
+            <title>{`Search : ${keyword} | JiCoin`}</title>
           </Helmet>
         </HelmetProvider>
         <Title>

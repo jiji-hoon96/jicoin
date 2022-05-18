@@ -14,7 +14,7 @@ const Overview = styled.div`
   grid-template-columns: repeat(2, 1fr);
   column-gap: 20px;
   background-color: ${(props) => props.theme.viewColor};
-  padding: 10px 20px;
+  padding: 20px 10px;
   border-radius: 10px;
 `;
 const OverviewItem = styled.div`
@@ -25,7 +25,7 @@ const OverviewItem = styled.div`
     font-size: 10px;
     font-weight: 400;
     text-transform: uppercase;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
   }
 `;
 
@@ -54,6 +54,7 @@ const MarketSolo = styled.li`
   }
   h2 {
     font-size: 14px;
+    font-weight: bold;
   }
   a {
     margin: 7px 0px;
