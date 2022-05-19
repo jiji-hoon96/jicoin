@@ -36,7 +36,7 @@ const ListDiv = styled.div`
 const Img = styled.img`
   width: 25px;
   position: relative;
-  top: 8px;
+  top: 2px;
   height: 25px;
   margin-right: 6px;
 `;
@@ -57,6 +57,7 @@ const Coin = styled.div`
   border-radius: 15px;
   display: flex;
   justify-content: center;
+  align-items: center;
   cursor: pointer;
   transition: color 0.2s ease-in;
   font-size: 13px;
@@ -222,15 +223,15 @@ function Home() {
           >
             {data?.slice(index, index + COINCOUNT).map((coin) => (
               <ListDiv key={coin.id}>
-                <Coin key={coin.id}>
-                  <Link to={{ pathname: `/${coin.id}` }}>
+                <Link to={{ pathname: `/${coin.id}` }}>
+                  <Coin key={coin.id}>
                     {coin.rank}. &nbsp;
                     <Img
                       src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
                     />
                     {coin.name} ({coin.symbol}){" "}
+                    </Coin>
                   </Link>
-                </Coin>
                 <HomeFavBtn>
                   <FaStar size="1.5em" />
                 </HomeFavBtn>

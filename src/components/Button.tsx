@@ -24,13 +24,13 @@ export const BtnBorder = styled.div`
 
 export const TabBtn = styled.button<{ isActive: boolean }>`
   text-align: center;
-  width: 100%;
+  width: 150px;
   height: 40px;
+  margin-right: 10px;
   border-radius: 20px;
   font-size: 16px;
   cursor: pointer;
   border: none;
-  margin-right: 30px;
   text-transform: uppercase;
   &:hover {
     transform: scale(1.04);

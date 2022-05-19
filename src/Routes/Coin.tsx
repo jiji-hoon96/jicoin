@@ -207,12 +207,16 @@ function Coin() {
           </Overview>
           {infoData?.description === "" ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
           <BtnBorder>
-            <TabBtn isActive={chartMatch !== null}>
-              <Link to={`/${coinId}/chart`}>Chart</Link>
-            </TabBtn>
-            <TabBtn isActive={marketMatch !== null}>
-              <Link to={`/${coinId}/market`}>Market</Link>
-            </TabBtn>
+            <Link to={`/${coinId}/chart`}>
+              <TabBtn isActive={chartMatch !== null}>
+                차트
+              </TabBtn>
+            </Link>
+            <Link to={`/${coinId}/market`}>
+              <TabBtn isActive={marketMatch !== null}>
+                상장 거래소
+              </TabBtn>
+            </Link>
           </BtnBorder>
         </>
       )}
