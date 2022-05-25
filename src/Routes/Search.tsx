@@ -21,12 +21,15 @@ interface CoinListData {
 }
 
 const CoinsList = styled.div`
-width: 100%;
+border: 1px solid whitesmoke;
+width:400px;
+display: flex;
+align-items: center;
 height: 600px;
   overflow: auto;
   overflow-x: hidden;
   ::-webkit-scrollbar{
-    width: 5px;
+    width: 20px;
     
   };
   ::-webkit-scrollbar-thumb{
@@ -36,16 +39,15 @@ height: 600px;
   ::-webkit-scrollbar-track{
     background-color:  #343A2B;
   }
-  margin: 30px 30px 0px 0px;
+  margin: 10px 10px;
   display: flex;
   flex-direction: column;
 `;
 
 const Coin = styled.div`
   background-color: ${(props) => props.theme.liColor};
-  
   text-align: center;
-  width: 400px;
+  width:90%;
   height: 60px;
   color: black;
   border-radius: 15px;
@@ -71,7 +73,7 @@ const Coin = styled.div`
 const Img = styled.img`
   width: 25px;
   height: 25px;
-  margin-right: 10px;
+  margin-right: 5px;
 `;
 const TrendBox = styled.div`
 border: 1px solid gainsboro;
@@ -90,7 +92,7 @@ const TrendCoin = styled.div`
   background-color: ${(props) => props.theme.liColor};
   color:black;
   text-align: center;
-  width: 200px;
+  width: 220px;
   height: 40px;
   color: black;
   border-radius: 15px;
@@ -98,6 +100,7 @@ const TrendCoin = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
   text-align: center;
   font-size: 13px;
 `
@@ -128,9 +131,13 @@ function Search() {
             <title>{`Search : ${keyword} | JiCoin`}</title>
           </Helmet>
         </HelmetProvider>
-        <Title>
-          <Link to={{ pathname: "/coinlist" }}>검색 단어 : {keyword}</Link>
-        </Title>
+        {isLoading ? "" : (
+          <>
+            <Title>
+              <Link to={{ pathname: "/coinlist" }}>검색 단어 : {keyword}</Link>
+            </Title>
+          </>
+        )}
       </Header>
       {isLoading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>
@@ -143,7 +150,7 @@ function Search() {
                 coin.symbol.toLowerCase().includes(keyword) ||
                 coin.id.toLowerCase().includes(keyword)) && (
                 <Coin key={coin.id}>
-                  <Link to={{ pathname: `/${coin.id}` }}>
+                  <Link to={{ pathname: `/coinlist/${coin.id}` }}>
                     {coin.rank}. &nbsp;
                     <Img
                       src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
@@ -162,7 +169,7 @@ function Search() {
           {isTrendData?.coins?.map((coin:any)=>coin?.item).map((x:any)=>(
             <TrendCoin key={Math.random()}>
               {x.score+1}.  
-              <Img src={x.thumb} style={{margin: "0px 10px"}}/>
+              <Img src={x.thumb} style={{marginLeft: "4px"}}/>
               {x.name}
             </TrendCoin>
           ))}

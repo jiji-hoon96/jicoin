@@ -174,7 +174,9 @@ function CoinList() {
             <title>시총순위 | JiCoin</title>
           </Helmet>
         </HelmetProvider>
-        <Nav>
+        {isLoading ? "" : (
+          <>
+          <Nav>
           <Search onSubmit={handleSubmit(onValid)}>
             <motion.svg
               onClick={toggleSearch}
@@ -207,6 +209,8 @@ function CoinList() {
         </Nav>
         <Title>가상화폐 시총 순위</Title>
         <SubTitle>{getToday()}</SubTitle>
+          </>
+        )}
       </Header>
       {isLoading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>

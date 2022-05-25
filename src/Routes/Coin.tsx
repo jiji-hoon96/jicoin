@@ -176,16 +176,20 @@ function Coin() {
         </Helmet>
       </HelmetProvider>
       <Header>
-        <Title>
-          <Link to={{ pathname: "/coinlist" }}>
-            {coinId
-              ? `${infoData?.name} (${infoData?.symbol})`
-              : loading
-              ? "Loading..."
-              : infoData?.name}
-          </Link>
-        </Title>
-        <SubTitle>{getToday()}</SubTitle>
+        {loading ? "" : (
+          <>
+            <Title>
+              <Link to={{ pathname: "/coinlist" }}>
+                {coinId
+                  ? `${infoData?.name} (${infoData?.symbol})`
+                  : loading
+                  ? "Loading..."
+                  : infoData?.name}
+              </Link>
+            </Title>
+            <SubTitle>{getToday()}</SubTitle>
+        </>
+        )}
       </Header>
       {loading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>

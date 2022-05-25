@@ -93,11 +93,15 @@ function Market() {
         </Helmet>
       </HelmetProvider>
       <Header>
-        <Title>
-          <Link to={{ pathname: `/coinlist/${coinId}` }}>
-            {`${coinId.split("-")[0].toUpperCase()} 코인 상장 거래소`}
-          </Link>
-        </Title>
+        {isLoading  ? "" : (
+          <>
+          <Title>
+            <Link to={{ pathname: `/coinlist/${coinId}` }}>
+              {`${coinId.split("-")[0].toUpperCase()} 코인 상장 거래소`}
+            </Link>
+          </Title>
+          </>
+        )}
       </Header>
       <div>
         {isLoading ? (

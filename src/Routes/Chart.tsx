@@ -86,19 +86,24 @@ function Chart() {
         </Helmet>
       </HelmetProvider>
       <Header>
-        <Title>
-          <Link to={{ pathname: `/coinlist/${coinId}` }}>
-            {index === 0
-              ? `${coinId.split("-")[0].toUpperCase()} Coin 1달 차트`
-              : `${coinId.split("-")[0].toUpperCase()} Coin 1년 차트`}
-          </Link>
-        </Title>
+        {loading ? "" :(
+          <>
+          <Title>
+            <Link to={{ pathname: `/coinlist/${coinId}` }}>
+              {index === 0
+                ? `${coinId.split("-")[0].toUpperCase()} Coin 1달 차트`
+                : `${coinId.split("-")[0].toUpperCase()} Coin 1년 차트`}
+            </Link>
+          </Title>
+          </>
+        )}
       </Header>
-      <ChartBox>
         {loading ? (
           <Loader>"차트를 로딩중입니다"</Loader>
         ) : (
-          <div>
+          <>     
+          <ChartBox>
+            <div>
             {index === 0 ? (
               <ApexChart
                 type="line"
@@ -240,13 +245,14 @@ function Chart() {
                 }}
               />
             )}
-          </div>
+            </div>
+          </ChartBox>
+          <BtnBorder>
+          <Btn onClick={monthChart}>1달 차트</Btn>
+          <Btn onClick={yearChart}>1년 차트</Btn>
+        </BtnBorder>
+        </>
         )}
-      </ChartBox>
-      <BtnBorder>
-        <Btn onClick={monthChart}>1달 차트</Btn>
-        <Btn onClick={yearChart}>1년 차트</Btn>
-      </BtnBorder>
     </Container>
   );
 }

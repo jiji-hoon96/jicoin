@@ -81,7 +81,7 @@ export const LoginWelcomeBtn = styled(motion.button)`
 
 export const CoinBtn = styled.button`
 font-size: 15px;
-width:100px;
+width:200px;
 height: 50px;
 border: none;
 font-weight: bold;
