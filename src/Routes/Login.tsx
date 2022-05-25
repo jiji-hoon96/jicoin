@@ -5,7 +5,7 @@ import { Container } from "../components/Container";
 import { Header } from "../components/Header";
 import { Btn } from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
-import {Box , LoginForm, ModalForm,SmallNav, Banner, BannerImg,Form} from '../components/HomeForm'
+import {Box , LoginForm, ModalForm,SmallNav, Banner, BannerImg,Form, SubmitBtn} from '../components/HomeForm'
 import { boxVariants } from "../components/variants/box";
 import { gql, useMutation,  } from "@apollo/client";
 import {  logUserIn } from "../apollo";
@@ -24,6 +24,7 @@ const LOGIN_MUTATION = gql`
     }
   }
 `;
+
 
 function Login() {
   const {
@@ -79,12 +80,12 @@ function Login() {
                     <SmallNav>
                         <Link to={{ pathname: "/sign" }}>
                           <Btn>
-                            Sign
+                            회원가입
                           </Btn>
                         </Link>   
                         <Link to={{ pathname: "/" }}>
                           <Btn>
-                            Exit
+                            나가기
                           </Btn>
                         </Link>             
                     </SmallNav>
@@ -109,7 +110,7 @@ function Login() {
                         placeholder="비밀번호를 입력해주세요"
                       />
                       <span>{errors.password?.message}</span>
-                      <input type="submit" style={{ fontWeight: "bolder" }}/>
+                      <SubmitBtn type="submit" style={{ fontWeight: "bolder" }}/>
                     </Form>
                   </ModalForm>
               </LoginForm>

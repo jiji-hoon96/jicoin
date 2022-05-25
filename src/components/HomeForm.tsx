@@ -67,10 +67,17 @@ export const Form = styled.form`
       color: white;
       font-weight: bolder;
       transform: scale(1.09);
-      background-color: #525252;
+      background-color: #d8bf2e;
     }
   }
   span {
     color: orangered;
   }
 `;
+
+export const SubmitBtn = styled.input`
+  :hover{
+    transform: scale(1.1);
+    background-color:#d8bf2e;
+  }
+`

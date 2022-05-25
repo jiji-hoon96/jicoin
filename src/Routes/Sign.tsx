@@ -2,7 +2,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Container } from "../components/Container";
 import { Header } from "../components/Header";
 import { AnimatePresence, motion } from "framer-motion";
-import {Box , LoginForm, ModalForm,SmallNav, Banner, BannerImg,Form} from '../components/HomeForm'
+import {Box , LoginForm, ModalForm,SmallNav, Banner, BannerImg,Form, SubmitBtn} from '../components/HomeForm'
 import { Btn } from "../components/Button";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -42,12 +42,12 @@ export default function Sign(){
         <SmallNav>
           <Link to={{ pathname: "/login" }}>
             <Btn>
-                Login
+                로그인
             </Btn>
           </Link>   
           <Link to={{ pathname: "/" }}>
               <Btn>
-                Exit
+                나가기
               </Btn>
             </Link>    
         </SmallNav>
@@ -81,7 +81,7 @@ export default function Sign(){
             placeholder="비밀번호를 다시 입력해주세요"
           />
           <span>{errors.passwordConfirm?.message}</span>
-          <input type="submit" style={{ fontWeight: "bolder" }} />
+          <SubmitBtn type="submit" style={{ fontWeight: "bolder" }} />
         </Form>
       </ModalForm>
               </LoginForm>

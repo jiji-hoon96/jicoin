@@ -137,7 +137,7 @@ function CoinList() {
     "CoinList",
     FetchCoinList,
     {
-      refetchInterval: 10000,
+      refetchInterval: 100000,
     }
   );
   const navigate = useNavigate();
