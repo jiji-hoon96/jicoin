@@ -2,7 +2,6 @@ import { Container } from "../components/Container";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Header } from "../components/Header";
 import { AnimatePresence, motion } from "framer-motion";
-import styled from "styled-components";
 import { useState } from "react";
 import { LoginWelcomeBtn } from "../components/Button";
 import { Link } from "react-router-dom";
@@ -18,7 +17,7 @@ function Home(){
         <Container>
           <HelmetProvider>
             <Helmet>
-              <title>JiCoin | Home</title>
+              <title>Home | JiCoin</title>
             </Helmet>
           </HelmetProvider>
           <Header>

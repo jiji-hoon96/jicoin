@@ -26,7 +26,7 @@ export default function Sign(){
         <Container>
       <HelmetProvider>
         <Helmet>
-          <title>JiCoin | SignUp</title>
+          <title>SignUp | JiCoin</title>
         </Helmet>
       </HelmetProvider>
       <Header>

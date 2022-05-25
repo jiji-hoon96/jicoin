@@ -139,7 +139,7 @@ interface PriceData {
 
 function Coin() {
   const { pathname } = useLocation();
-  const coinId = pathname.slice(1);
+  const coinId = pathname.split('/')[2];
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ["info", coinId],
     () => fetchCoinInfo(coinId),
@@ -165,8 +165,8 @@ function Coin() {
   const selectMenuHandler = (index:number) => {
     setCurrentTab(index);
   };
-  const marketMatch = useMatch("/:coinId/market");
-  const chartMatch = useMatch("/:coinId/chart");
+  const marketMatch = useMatch("/coinlist/:coinId/market");
+  const chartMatch = useMatch("/coinlist/:coinId/chart");
   const loading = infoLoading || priceLoading;
   return (
     <Container>
@@ -207,12 +207,12 @@ function Coin() {
           </Overview>
           {infoData?.description === "" ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
           <BtnBorder>
-            <Link to={`/${coinId}/chart`}>
+            <Link to={`/coinlist/${coinId}/chart`}>
               <TabBtn isActive={chartMatch !== null}>
                 차트
               </TabBtn>
             </Link>
-            <Link to={`/${coinId}/market`}>
+            <Link to={`/coinlist/${coinId}/market`}>
               <TabBtn isActive={marketMatch !== null}>
                 상장 거래소
               </TabBtn>

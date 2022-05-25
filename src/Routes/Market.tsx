@@ -77,7 +77,7 @@ interface IMarket {
 
 function Market() {
   const { pathname } = useLocation();
-  const coinId = pathname.split("/")[1];
+  const coinId = pathname.split("/")[2];
   const { isLoading, data } = useQuery<IMarket[]>(
     ["market", coinId],
     () => fetchCoinMarket(coinId),
@@ -94,7 +94,7 @@ function Market() {
       </HelmetProvider>
       <Header>
         <Title>
-          <Link to={{ pathname: `/${coinId}` }}>
+          <Link to={{ pathname: `/coinlist/${coinId}` }}>
             {`${coinId.split("-")[0].toUpperCase()} 코인 상장 거래소`}
           </Link>
         </Title>

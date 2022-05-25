@@ -43,7 +43,8 @@ const ChartBox = styled.div`
 
 function Chart() {
   const { pathname } = useLocation();
-  const coinId = pathname.split("/")[1];
+  const coinId = pathname.split("/")[2];
+
   const [index, setIndex] = useState(0);
   const yearChart = () => {
     setIndex(index > 1 ? 2 : index + 1);
@@ -86,7 +87,7 @@ function Chart() {
       </HelmetProvider>
       <Header>
         <Title>
-          <Link to={{ pathname: `/${coinId}` }}>
+          <Link to={{ pathname: `/coinlist/${coinId}` }}>
             {index === 0
               ? `${coinId.split("-")[0].toUpperCase()} Coin 1달 차트`
               : `${coinId.split("-")[0].toUpperCase()} Coin 1년 차트`}

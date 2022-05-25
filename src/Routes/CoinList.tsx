@@ -223,7 +223,7 @@ function CoinList() {
           >
             {data?.slice(index, index + COINCOUNT).map((coin) => (
               <ListDiv key={coin.id}>
-                <Link to={{ pathname: `/${coin.id}` }}>
+                <Link to={{ pathname: `/coinlist/${coin.id}` }}>
                   <Coin key={coin.id}>
                     {coin.rank}. &nbsp;
                     <Img

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Chart from "./Routes/Chart";
 import Coin from "./Routes/Coin";
 import CoinList from "./Routes/CoinList";
@@ -16,11 +16,11 @@ function Router() {
         <Route path="/" element={<Home/>}></Route>
         <Route path="/login" element={<Login/>}></Route>
         <Route path="/sign" element={<Sign/>}></Route>
-        <Route path="/:coinId" element={<Coin />}></Route>
-        <Route path="/:coinId/chart" element={<Chart />} />
-        <Route path="/:coinId/market" element={<Market />} />
+        <Route path="/:coinlist" element={<CoinList />}></Route>
+        <Route path="/:coinlist/:coinId" element={<Coin />}></Route>
+        <Route path="/:coinlist/:coinId/chart" element={<Chart />} />
+        <Route path="/:coinlist/:coinId/market" element={<Market />} />
         <Route path="/mypage" element={<Mypage />}></Route>
-        <Route path="/coinlist" element={<CoinList />}></Route>
         <Route path="/search" element={<Search />}></Route>
       </Routes>
     </BrowserRouter>

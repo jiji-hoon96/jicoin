@@ -28,7 +28,7 @@ function Login() {
     <Container>
       <HelmetProvider>
         <Helmet>
-          <title>JiCoin | Login</title>
+          <title>Login | JiCoin</title>
         </Helmet>
       </HelmetProvider>
       <Header>
