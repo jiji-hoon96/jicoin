@@ -8,13 +8,14 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from "react-icons/fa";
-import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { faSignOut, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { Container } from "../components/Container";
 import { Loader } from "../components/Loader";
 import { SubTitle, Title } from "../components/Title";
 import { Header } from "../components/Header";
 import { Btn, BtnBorder, HomeFavBtn, HomeMyPageBtn } from "../components/Button";
 import { getToday } from "../components/useSkill/getDay";
+import { logUserOut } from "../apollo";
 
 const COINCOUNT = 10;
 
@@ -166,6 +167,10 @@ function CoinList() {
   const onValid = (data: SerachInfo) => {
     navigate(`/search?keyword=${data.keyword}`);
   };
+  const onLogout= ()=>{
+    navigate('/')
+    logUserOut()
+  }
   return (
     <Container>
       <Header>
@@ -204,8 +209,11 @@ function CoinList() {
           <Link to={{ pathname: "/mypage" }}>
             <HomeMyPageBtn>
               <FontAwesomeIcon icon={faUserAlt} size="lg" />
-            </HomeMyPageBtn>
+            </HomeMyPageBtn>          
           </Link>
+          <HomeMyPageBtn onClick={onLogout}>
+              <FontAwesomeIcon icon={faSignOut} size="lg"/>
+          </HomeMyPageBtn>
         </Nav>
         <Title>가상화폐 시총 순위</Title>
         <SubTitle>{getToday()}</SubTitle>
