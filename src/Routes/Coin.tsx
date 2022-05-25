@@ -177,7 +177,7 @@ function Coin() {
       </HelmetProvider>
       <Header>
         <Title>
-          <Link to={{ pathname: "/home" }}>
+          <Link to={{ pathname: "/coinlist" }}>
             {coinId
               ? `${infoData?.name} (${infoData?.symbol})`
               : loading

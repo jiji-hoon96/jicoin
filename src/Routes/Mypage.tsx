@@ -14,7 +14,7 @@ function Mypage() {
           </Helmet>
         </HelmetProvider>
         <Title>
-          <Link to={{ pathname: "/home" }}> My Page</Link>
+          <Link to={{ pathname: "/coinlist" }}> My Page</Link>
         </Title>
         
       </Header>

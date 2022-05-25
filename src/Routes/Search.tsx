@@ -129,7 +129,7 @@ function Search() {
           </Helmet>
         </HelmetProvider>
         <Title>
-          <Link to={{ pathname: "/home" }}>검색 단어 : {keyword}</Link>
+          <Link to={{ pathname: "/coinlist" }}>검색 단어 : {keyword}</Link>
         </Title>
       </Header>
       {isLoading ? (
