@@ -158,7 +158,7 @@ function Coin() {
   const cointabArr = [
     {name : "시총순위", value : infoData?.rank},
     {name: "표준명", value : infoData?.symbol},
-    {name: "가격", value : `$${priceData?.quotes.USD.price.toFixed(3)}`},
+    {name: "가격", value : `$${priceData?.quotes?.USD.price.toFixed(3)}`},
     {name: "현재공급량", value: priceData?.total_supply},
     {name: "전체공급량", value: priceData?.max_supply}
   ]

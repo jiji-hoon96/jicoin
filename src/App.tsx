@@ -1,7 +1,9 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
+import {ApolloProvider} from "@apollo/client"
 import { darkTheme } from "./theme";
+import { client } from "./apollo";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -72,14 +74,14 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <>
+    <ApolloProvider client={client}>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={darkTheme}>
           <GlobalStyle />
           <Router />
         </ThemeProvider>
       </QueryClientProvider>
-    </>
+    </ApolloProvider>
   );
 }
 
