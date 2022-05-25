@@ -20,7 +20,7 @@ import { logUserOut } from "../apollo";
 const COINCOUNT = 10;
 
 const Nav = styled.div`
-  width: 100%;
+  width: 550px;
   margin: 20px 0px;
   height: 30px;
   display: flex;
@@ -211,9 +211,9 @@ function CoinList() {
               <FontAwesomeIcon icon={faUserAlt} size="lg" />
             </HomeMyPageBtn>          
           </Link>
-          <HomeMyPageBtn onClick={onLogout}>
+            <HomeMyPageBtn onClick={onLogout}>
               <FontAwesomeIcon icon={faSignOut} size="lg"/>
-          </HomeMyPageBtn>
+            </HomeMyPageBtn>
         </Nav>
         <Title>가상화폐 시총 순위</Title>
         <SubTitle>{getToday()}</SubTitle>

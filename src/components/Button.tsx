@@ -40,6 +40,7 @@ export const TabBtn = styled.button<{ isActive: boolean }>`
 
 export const HomeMyPageBtn = styled.button`
   width: 50px;
+  margin-right: 10px;
   height: 30px;
   cursor: pointer;
   border-radius: 10px;
