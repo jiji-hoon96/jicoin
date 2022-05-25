@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Container } from "../components/Container";
 import { Header } from "../components/Header";
 import { Btn } from "../components/Button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {Box , LoginForm, ModalForm,SmallNav, Banner, BannerImg,Form, SubmitBtn} from '../components/HomeForm'
 import { boxVariants } from "../components/variants/box";
 import { gql, useMutation,  } from "@apollo/client";
@@ -24,7 +24,6 @@ const LOGIN_MUTATION = gql`
     }
   }
 `;
-
 
 function Login() {
   const {

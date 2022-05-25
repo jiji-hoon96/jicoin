@@ -11,7 +11,7 @@ export const Box = styled(motion.div)`
 `;
 export const LoginForm = styled(motion.div)`
   width: 500px;
-  height: 650px;
+  height: 750px;
   background-color: whitesmoke;
   border-radius: 30px;
 `;
@@ -54,7 +54,7 @@ export const Form = styled.form`
   align-items: center;
   flex-direction: column;
   input {
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     width: 250px;
     height: 50px;
@@ -64,7 +64,7 @@ export const Form = styled.form`
     text-align: center;
     background-color: #f3f3f3;
     :focus {
-      color: white;
+      color: black;
       font-weight: bolder;
       transform: scale(1.09);
       background-color: #d8bf2e;
