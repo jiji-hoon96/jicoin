@@ -16,6 +16,11 @@ interface LoginForm {
     passwordConfirm: string;
 }
 
+interface DefaultLogin {
+  username:string;
+  password:string;
+}
+
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccount(
       $nickname: String!
@@ -42,11 +47,10 @@ export default function Sign(){
     const {
       createAccount: { ok, error },
     } = data;
-    console.log(data)
     if (!ok) {
       return setError("username", {message:error})
     }
-    navigate('/login')
+    navigate('/login', {state: {createSign: "계정이 생성되었습니다",username,password}})
   };
   const [createAccount, { loading }] = useMutation(CREATE_ACCOUNT_MUTATION, {
     onCompleted,
