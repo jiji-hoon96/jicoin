@@ -1,7 +1,7 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Container } from "../components/Container";
 import { Header } from "../components/Header";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import {Box , LoginForm, ModalForm,SmallNav, Banner, BannerImg,Form, SubmitBtn} from '../components/HomeForm'
 import { Btn } from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
@@ -42,6 +42,7 @@ export default function Sign(){
     const {
       createAccount: { ok, error },
     } = data;
+    console.log(data)
     if (!ok) {
       return setError("username", {message:error})
     }

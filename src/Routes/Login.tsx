@@ -1,10 +1,10 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { Container } from "../components/Container";
 import { Header } from "../components/Header";
 import { Btn } from "../components/Button";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {Box , LoginForm, ModalForm,SmallNav, Banner, BannerImg,Form, SubmitBtn} from '../components/HomeForm'
 import { boxVariants } from "../components/variants/box";
 import { gql, useMutation,  } from "@apollo/client";
@@ -37,6 +37,7 @@ function Login() {
     const {
       login: { ok, error, token },
     } = data;
+    console.log(data)
     if (!ok) {
       return setError("username", {
         message: error,
