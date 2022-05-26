@@ -42,8 +42,8 @@ body {
   line-height: 1;
   flex-direction: column;
   width:100%;
+  background-color: #343A2B;
   font-family: 'Source Sans Pro', sans-serif;
-  background-color: whitesmoke;
   color:${(props) => props.theme.accentColor};
 }
 menu, ol, ul {

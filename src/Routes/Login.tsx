@@ -18,7 +18,7 @@ interface LoginForm {
 }
 
 const Notification = styled.div`
-  color: #2ecc71;
+  color: #d8bf2e;
 `;
 
 const LOGIN_MUTATION = gql`
@@ -107,8 +107,7 @@ function Login() {
                       <Notification>{state?.createSign}</Notification>
                       <input
                         {...register("username", {
-                          required: "아이디는 필수입니다",
-                          maxLength: 20,
+                          required: "아이디를 입력해주세요",
                         })}
                         type="text"
                         placeholder="아이디를 입력해주세요"
@@ -116,8 +115,7 @@ function Login() {
                       <span>{errors.username?.message}</span>
                       <input
                         {...register("password", {
-                          required: "비밀번호는 필수입니다",
-                          maxLength: 20,
+                          required: "비밀번호를 입력해주세요",
                         })}
                         type="password"
                         placeholder="비밀번호를 입력해주세요"

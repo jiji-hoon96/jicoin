@@ -16,11 +16,6 @@ interface LoginForm {
     passwordConfirm: string;
 }
 
-interface DefaultLogin {
-  username:string;
-  password:string;
-}
-
 const CREATE_ACCOUNT_MUTATION = gql`
   mutation createAccount(
       $nickname: String!
@@ -103,7 +98,14 @@ export default function Sign(){
           <input
             {...register("username", {
               required: "아이디는 필수입니다",
-              maxLength: 20,
+              minLength: {
+                value: 3,
+                message: "아이디를 3글자 이상 입력해주세요"
+              },
+              maxLength: {
+                value: 15,
+                message: "아이디는 15글자 넘길 수 없습니다"
+              },
             })}
             type="text"
             placeholder="아이디를 입력해주세요"
@@ -111,8 +113,15 @@ export default function Sign(){
           <span>{errors.username?.message}</span>
           <input
             {...register("nickname", {
-              required: "닉네임은 필수입니다",
-              maxLength: 20,
+              required: "닉네임을 입력해주세요",
+              minLength: {
+                value: 3,
+                message: "닉네임을 3글자 이상 입력해주세요"
+              },
+              maxLength: {
+                value:10,
+                message: "닉네임은 10글자를 넘길 수 없습니다"
+              },
             })}
             type="text"
             placeholder="닉네임을 입력해주세요"
@@ -120,16 +129,20 @@ export default function Sign(){
           <span>{errors.nickname?.message}</span>
           <input
             {...register("email", {
-              required: "이메일은 필수입니다",
-              maxLength: 20,
+              required: "Email을 입력해주세요",
+              pattern: {
+                value: /[a-zA-Z0-9._+-]+@[a-zA-Z-9-]+\.[a-zA-Z0-9.]+/gm,
+                message: "***@***.com 형식으로 입력해주세요"
+              },
+              maxLength: 30,
             })}
             type="text"
-            placeholder="이메일을 입력해주세요"
+            placeholder="Email을 입력해주세요"
           />
           <span>{errors.email?.message}</span>
           <input
             {...register("password", {
-              required: "비밀번호는 필수입니다",
+              required: "비밀번호를 입력해주세요",
               maxLength: 20,
             })}
             type="password"
