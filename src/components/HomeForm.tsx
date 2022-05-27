@@ -59,7 +59,7 @@ export const Form = styled.form`
     width: 250px;
     height: 50px;
     margin: 5px;
-    border: 1px solid ${(props)=>props.theme.fontColor};;
+    border: 1px solid ${(props)=>props.theme.defaultBoxColor};;
     border-radius: 10px;
     text-align: center;
     background-color:${(props)=>props.theme.bgColor};

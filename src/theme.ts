@@ -12,7 +12,7 @@ export const lightTheme: DefaultTheme = {
 
   bgColor: "#dcdde1", //하얀색
   buttonColor: "#dcdde1", //하얀색
-  defaultBoxColor: "white",
+  defaultBoxColor: "black",
   fontColor: "#2f3640", // electromagnetic
   boxColor: "#718093", //Chain gang grey
 };
