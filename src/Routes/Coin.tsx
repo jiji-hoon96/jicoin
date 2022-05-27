@@ -63,10 +63,10 @@ const Description = styled.div`
     width: 5px;
   };
   ::-webkit-scrollbar-thumb{
-    background-color: ${(props) => props.theme.bgColor};
+    background-color: ${(props) => props.theme.fontColor};
   }
   ::-webkit-scrollbar-track{
-    background-color:  #343A2B;
+    background-color: ${(props) => props.theme.bgColor};
   }
 `;
 const EmptyDescription = styled.div`

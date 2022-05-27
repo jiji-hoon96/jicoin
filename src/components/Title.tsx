@@ -7,13 +7,11 @@ export const Title = styled.div`
   font-size: 36px;
   width:400px;
   height: 200px;
-  border: 3px groove ${(props) => props.theme.boxColor};
-  border-radius: 10px;
   margin-bottom: 10px;
+  background-color: ${(props) => props.theme.bgColor};;
   color: ${(props) => props.theme.fontColor};
   cursor: pointer;
   :hover {
-    background-color: ${(props) => props.theme.boxColor};
     color: ${(props) => props.theme.fontColor};
       font-weight: bolder;
       border-radius: 10px;

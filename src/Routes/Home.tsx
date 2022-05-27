@@ -34,8 +34,8 @@ function Home(){
             ) : (
               <LoginWelcomeBtn
                 whileHover={{
-                  scale: 1.2,
-                  rotateX: 15,
+                  scale: 1.3,
+                  rotateX: 10,
                   transitionDuration: "0.7s",
                   textShadow: "50px 50px 50px gray",
                 }}

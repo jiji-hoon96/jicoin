@@ -3,16 +3,15 @@ import { motion } from "framer-motion";
 
 export const Btn = styled.button`
   width: 150px;
-  height: 40px;
+  height: 50px;
   border-radius: 20px;
   font-size: 16px;
-  background-color: ${(props) => props.theme.boxColor};
   cursor: pointer;
   border: none;
   margin-right: 30px;
   &:hover {
     transform: scale(1.04);
-    background-color: ${(props)=>props.theme.hoverColor};;
+    background-color: ${(props)=>props.theme.boxColor};;
   }
 `;
 
@@ -26,16 +25,16 @@ export const BtnBorder = styled.div`
 export const TabBtn = styled.button<{ isActive: boolean }>`
   text-align: center;
   width: 150px;
-  height: 40px;
+  height: 50px;
   margin-right: 10px;
-  border-radius: 20px;
+  border-radius: 10px;
   font-size: 16px;
   cursor: pointer;
   border: none;
   text-transform: uppercase;
   &:hover {
     transform: scale(1.04);
-    background-color: ${(props)=>props.theme.hoverColor};;
+    background-color: ${(props)=>props.theme.boxColor};;
   }
 `;
 
@@ -75,7 +74,7 @@ export const HomeFavBtn = styled.button`
 
 
 export const LoginWelcomeBtn = styled(motion.button)`
-  color: ${(props) => props.theme.buttonColor};
+  color: ${(props) => props.theme.fontColor};
   letter-spacing: 5px;
   background-color: transparent;
   border: none;
@@ -93,7 +92,7 @@ margin-right: 5px;
 border-radius: 10px;
 cursor: pointer;
 :hover {
-    background-color: ${(props)=>props.theme.hoverColor};;
+    background-color: ${(props)=>props.theme.boxColor};;
     transform: scale(1.04);
   }
 `

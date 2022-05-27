@@ -136,7 +136,7 @@ function Chart() {
                     zoom: {
                       enabled: false,
                     },
-                    background: "#20231C",
+                    background: "#40739e",
                     dropShadow: {
                       enabled: true,
                       top: 0,
@@ -208,7 +208,7 @@ function Chart() {
                     toolbar: {
                       show: false,
                     },
-                    background: "#20231C",
+                    background: "#273c75",
                   },
                   grid: { show: false },
                   stroke: {

@@ -19,6 +19,7 @@ const Overview = styled.div`
 `;
 const OverviewItem = styled.div`
   width: 100%;
+  
   flex-direction: column;
   align-items: center;
   span:first-child {
@@ -110,7 +111,7 @@ function Market() {
           <Overview>
             <OverviewItem>
               <MarketList>
-                {data?.slice(0, 8).map((x) => (
+                {data?.slice(0, 20).map((x) => (
                   <MarketSolo key={Math.random()}>
                     <a
                       href={x.market_url}
@@ -134,7 +135,7 @@ function Market() {
             </OverviewItem>
             <OverviewItem>
               <MarketList>
-                {data?.slice(8, 16).map((x) => (
+                {data?.slice(20, 40).map((x) => (
                   <MarketSolo key={Math.random()}>
                     <a
                       href={x.market_url}
