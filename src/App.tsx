@@ -42,9 +42,9 @@ body {
   line-height: 1;
   flex-direction: column;
   width:100%;
-  background-color: #343A2B;
+  background-color: ${(props) => props.theme.bgColor};
   font-family: 'Source Sans Pro', sans-serif;
-  color:${(props) => props.theme.accentColor};
+  color:${(props) => props.theme.fontColor};
 }
 menu, ol, ul {
   list-style: none;

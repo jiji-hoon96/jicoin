@@ -21,35 +21,36 @@ interface CoinListData {
 }
 
 const CoinsList = styled.div`
-border: 1px solid whitesmoke;
 width:400px;
 display: flex;
 align-items: center;
 height: 600px;
-  overflow: auto;
-  overflow-x: hidden;
-  ::-webkit-scrollbar{
-    width: 20px;
+overflow: auto;
+overflow-x: hidden;
+cursor: pointer;
+::-webkit-scrollbar{
+  width: 20px;    
     
-  };
-  ::-webkit-scrollbar-thumb{
-    background-color:  whitesmoke;
+};
+::-webkit-scrollbar-thumb{
+  background-color: ${(props) => props.theme.boxColor};
     
-  }
-  ::-webkit-scrollbar-track{
-    background-color:  #343A2B;
-  }
-  margin: 10px 10px;
-  display: flex;
-  flex-direction: column;
+    
+}
+::-webkit-scrollbar-track{
+  background-color: ${(props) => props.theme.buttonColor};
+}
+margin: 10px 10px;
+display: flex;
+flex-direction: column;
 `;
 
 const Coin = styled.div`
-  background-color: ${(props) => props.theme.liColor};
+  background-color: ${(props) => props.theme.boxColor};
   text-align: center;
   width:90%;
   height: 60px;
-  color: black;
+  color:  ${(props) => props.theme.fontColor};
   border-radius: 15px;
   margin-bottom: 10px;
   a {
@@ -63,7 +64,7 @@ const Coin = styled.div`
   }
   &:hover {
     a {
-      background-color: #d8bf2e;
+      background-color: ${(props) => props.theme.hoverColor};
       border-radius: 10px;
       transform: scale(1.01);
     }
@@ -76,25 +77,24 @@ const Img = styled.img`
   margin-right: 5px;
 `;
 const TrendBox = styled.div`
-border: 1px solid gainsboro;
+border: 3px groove ${(props) => props.theme.boxColor};
 border-radius: 10px;
 display: flex;
 flex-direction: column;
 margin-top: 60px;
 justify-content: center;
 align-items: center;
-width:250px;
-height:430px;
+width:300px;
+height:500px;
 background-color: transparent;
 `
 
 const TrendCoin = styled.div`
-  background-color: ${(props) => props.theme.liColor};
-  color:black;
+  background-color: ${(props) => props.theme.boxColor};
   text-align: center;
-  width: 220px;
-  height: 40px;
-  color: black;
+  width: 230px;
+  height: 60px;
+  color: ${(props)=> props.theme.fontColor};
   border-radius: 15px;
   margin : 0px 10px 10px 10px;
   display: flex;

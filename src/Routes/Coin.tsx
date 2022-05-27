@@ -18,8 +18,8 @@ const Overview = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.viewColor};
-  color: ${(props) => props.theme.accentColor};
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.fontColor};
   padding: 10px 20px;
   margin:4px 0px;
   border-radius: 10px;
@@ -37,14 +37,14 @@ const MiniTitleValue = styled.div`
 font-size: 15px;
 width:200px;
 height:50px;
-color: black;
+color:${(props) => props.theme.fontColor};;
 display: flex;
 justify-content: center;
 text-align: center;
 align-items: center;
 border-radius: 10px;
 font-size: 28px;
-background-color: #ecebe8;
+background-color: ${(props) => props.theme.bgColor};
 margin-bottom: 10px;
 `
 
@@ -55,15 +55,15 @@ const Description = styled.div`
   line-height: 2em;
   overflow: auto;
   height:250px;
-  background-color: ${(props) => props.theme.viewColor};
+  background-color: ${(props) => props.theme.bgColor};
   padding: 10px 20px;
-  color: ${(props) => props.theme.accentColor};
+  color: ${(props) => props.theme.fontColor};
   border-radius: 10px;
   ::-webkit-scrollbar{
     width: 5px;
   };
   ::-webkit-scrollbar-thumb{
-    background-color:  whitesmoke;
+    background-color: ${(props) => props.theme.bgColor};
   }
   ::-webkit-scrollbar-track{
     background-color:  #343A2B;
@@ -76,10 +76,10 @@ display: flex;
 align-items: center;
 justify-content: center;
 height:100px;
+background-color: ${(props) => props.theme.bgColor};
 font-size: 20px;
-background-color: ${(props) => props.theme.viewColor};
 padding: 10px 20px;
-color: ${(props) => props.theme.accentColor};
+color: ${(props) => props.theme.fontColor};
 border-radius: 10px;
 `;
 

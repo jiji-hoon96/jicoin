@@ -12,7 +12,7 @@ export const Box = styled(motion.div)`
 export const LoginForm = styled(motion.div)`
   width: 500px;
   height: 750px;
-  background-color: whitesmoke;
+  background-color: ${(props)=>props.theme.bgColor};
   border-radius: 30px;
 `;
 
@@ -31,7 +31,7 @@ export const SmallNav = styled.div`
   margin: 10px;
 `;
 export const Banner = styled.h3`
-  color: black;
+  color: ${(props)=>props.theme.fontColor};
   font-size: 24px;
   font-weight: bolder;
   margin-bottom: 20px;
@@ -59,25 +59,25 @@ export const Form = styled.form`
     width: 250px;
     height: 50px;
     margin: 5px;
-    border: 1px solid #020d10;
+    border: 1px solid ${(props)=>props.theme.fontColor};;
     border-radius: 10px;
     text-align: center;
-    background-color: #f3f3f3;
+    background-color:${(props)=>props.theme.bgColor};
     :focus {
-      color: black;
+      color: ${(props)=>props.theme.fontColor};
       font-weight: bolder;
       transform: scale(1.09);
-      background-color: #d8bf2e;
+      background-color: #${(props)=>props.theme.hoverColor};
     }
   }
   span {
-    color: orangered;
+    color: ${(props)=>props.theme.hoverColor};;
   }
 `;
 
 export const SubmitBtn = styled.input`
   :hover{
     transform: scale(1.1);
-    background-color:#d8bf2e;
+    background-color:#${(props)=>props.theme.bgColor};;
   }
 `

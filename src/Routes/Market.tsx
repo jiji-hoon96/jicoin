@@ -13,7 +13,7 @@ const Overview = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 20px;
-  background-color: ${(props) => props.theme.viewColor};
+  background-color: ${(props) => props.theme.boxColor};
   padding: 20px 10px;
   border-radius: 10px;
 `;
@@ -39,18 +39,18 @@ const MarketSolo = styled.li`
   display: flex;
   flex-direction: column;
   font-size: 10px;
-  background-color: whitesmoke;
-  color: black;
+  background-color: ${(props) => props.theme.bgColor};;
+  color: ${(props) => props.theme.fontColor};
   border-radius: 5px;
   margin-top: 10px;
   :hover {
     transform: scale(1.03) translate(1s);
-    background-color: #d8bf2e;
+    background-color:${(props) => props.theme.hoverColor};
     cursor: pointer;
   }
   p {
     margin-top: 4px;
-    color: ${(props) => props.theme.nullColor};
+    color: ${(props) => props.theme.fontColor};
   }
   h2 {
     font-size: 14px;

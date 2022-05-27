@@ -6,12 +6,13 @@ export const Btn = styled.button`
   height: 40px;
   border-radius: 20px;
   font-size: 16px;
+  background-color: ${(props) => props.theme.boxColor};
   cursor: pointer;
   border: none;
   margin-right: 30px;
   &:hover {
     transform: scale(1.04);
-    background-color: #d8bf2e;
+    background-color: ${(props)=>props.theme.hoverColor};;
   }
 `;
 
@@ -34,7 +35,7 @@ export const TabBtn = styled.button<{ isActive: boolean }>`
   text-transform: uppercase;
   &:hover {
     transform: scale(1.04);
-    background-color: #d8bf2e;
+    background-color: ${(props)=>props.theme.hoverColor};;
   }
 `;
 
@@ -45,12 +46,13 @@ export const HomeMyPageBtn = styled.button`
   cursor: pointer;
   border-radius: 10px;
   border: none;
+  background-color: ${(props) => props.theme.boxColor};
   font-size: 15px;
   font-weight: bolder;
   :hover {
     transform: scale(1.2);
     transition: 0.5s;
-    background-color: #d8bf2e;
+    background-color: ${(props)=>props.theme.hoverColor};;
   }
 `;
 
@@ -61,18 +63,19 @@ export const HomeFavBtn = styled.button`
   border: none;
   border-radius: 10px;
   margin-left: 10px;
+  background-color: ${(props) => props.theme.boxColor};
   align-items: center;
   display: flex;
   justify-content: center;
   :hover {
-    background-color: #d8bf2e;
+    background-color: ${(props)=>props.theme.hoverColor};;
     transform: scale(1.1);
   }
 `;
 
 
 export const LoginWelcomeBtn = styled(motion.button)`
-  color: ${(props) => props.theme.accentColor};
+  color: ${(props) => props.theme.buttonColor};
   letter-spacing: 5px;
   background-color: transparent;
   border: none;
@@ -90,7 +93,7 @@ margin-right: 5px;
 border-radius: 10px;
 cursor: pointer;
 :hover {
-    background-color: #d8bf2e;
+    background-color: ${(props)=>props.theme.hoverColor};;
     transform: scale(1.04);
   }
 `
