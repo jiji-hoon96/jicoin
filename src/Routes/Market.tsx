@@ -10,16 +10,25 @@ import { Loader } from "../components/Loader";
 import { Title } from "../components/Title";
 
 const Overview = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 20px;
-  background-color: ${(props) => props.theme.boxColor};
+height:700px;
+  display: flex;
+  cursor: pointer;
+  overflow: auto;
   padding: 20px 10px;
   border-radius: 10px;
+  ::-webkit-scrollbar{
+    width: 10px;
+    
+  };
+  ::-webkit-scrollbar-thumb{
+    background-color: ${(props) => props.theme.fontColor};
+  }
+  ::-webkit-scrollbar-track{
+    background-color: ${(props) => props.theme.bgColor};
+  }
 `;
 const OverviewItem = styled.div`
   width: 100%;
-  
   flex-direction: column;
   align-items: center;
   span:first-child {
@@ -35,32 +44,54 @@ const MarketList = styled.ul`
 `;
 
 const MarketSolo = styled.li`
-  height: 75px;
+  height:80px;
+  width: 300px;
+  border-radius: 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
   font-size: 10px;
-  background-color: ${(props) => props.theme.bgColor};;
+  background-color: white;
   color: ${(props) => props.theme.fontColor};
   border-radius: 5px;
-  margin-top: 10px;
-  :hover {
-    transform: scale(1.03) translate(1s);
-    background-color:${(props) => props.theme.hoverColor};
-    cursor: pointer;
-  }
-  p {
-    margin-top: 4px;
-    color: ${(props) => props.theme.fontColor};
-  }
-  h2 {
-    font-size: 14px;
-    font-weight: bold;
-  }
+  margin-top: 5px;
   a {
-    margin: 7px 0px;
+    font-size: 13px;
+    
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 160px;
+    align-items:center;
+    height: 30px;
+    border-radius:10px;
+
+    :hover {
+    transform:scale(1.15);
+    cursor: pointer;
+    font-weight: bolder;
+    background-color: ${(props)=>props.theme.boxColor};
   }
+    }
+
 `;
+
+const MarketSoloSmallTitle = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+`
+
+const MarketSoloSmallInput = styled.div`
+text-align: center;
+align-items: center;
+  display: flex;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 5px;
+`
 interface IMarket {
   exchange_id: string;
   exchange_name: string;
@@ -111,48 +142,20 @@ function Market() {
           <Overview>
             <OverviewItem>
               <MarketList>
-                {data?.slice(0, 20).map((x) => (
+                {data?.slice(0, 50).map((x) => (
                   <MarketSolo key={Math.random()}>
-                    <a
+                    <MarketSoloSmallTitle>
+                      <MarketSoloSmallInput>
+                      {`${x.exchange_name} : $${x.quotes.USD.price.toFixed(3)}`}
+                      </MarketSoloSmallInput>
+                      
+                      <a
                       href={x.market_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                    >
-                      <h2>
-                        Market : {x.exchange_name} / Market Price : $
-                        {x.quotes.USD.price.toFixed(3)}
-                      </h2>
-                      <hr /> MarketURL :&nbsp;
-                      {x.market_url !== null ? (
-                        x.market_url
-                      ) : (
-                        <p>해당 거래소의 URL을 찾을 수 없습니다</p>
-                      )}
-                    </a>
-                  </MarketSolo>
-                ))}
-              </MarketList>
-            </OverviewItem>
-            <OverviewItem>
-              <MarketList>
-                {data?.slice(20, 40).map((x) => (
-                  <MarketSolo key={Math.random()}>
-                    <a
-                      href={x.market_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <h2>
-                        Market : {x.exchange_name} / Market Price : $
-                        {x.quotes.USD.price.toFixed(3)}
-                      </h2>
-                      <hr /> MarketURL :&nbsp;
-                      {x.market_url !== null ? (
-                        x.market_url
-                      ) : (
-                        <p>해당 거래소의 URL을 찾을 수 없습니다</p>
-                      )}
-                    </a>
+                    >Go {x.exchange_name}</a>
+                      
+                    </MarketSoloSmallTitle>
                   </MarketSolo>
                 ))}
               </MarketList>
