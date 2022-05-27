@@ -39,9 +39,12 @@ export const TabBtn = styled.button<{ isActive: boolean }>`
   }
 `;
 
-export const HomeMyPageBtn = styled.button`
-  width: 50px;
-  margin-right: 10px;
+export const NavBtn = styled.div`
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 5px;
   height: 30px;
   cursor: pointer;
   border-radius: 10px;
@@ -53,23 +56,6 @@ export const HomeMyPageBtn = styled.button`
     transform: scale(1.2);
     transition: 0.5s;
     background-color: ${(props)=>props.theme.boxColor};;
-  }
-`;
-
-export const HomeFavBtn = styled.button`
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  border: none;
-  border-radius: 10px;
-  margin-left: 10px;
-  background-color: white;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  :hover {
-    background-color: ${(props)=>props.theme.boxColor};
-    transform: scale(1.1);
   }
 `;
 

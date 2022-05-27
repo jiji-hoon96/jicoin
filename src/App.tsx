@@ -1,9 +1,9 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
-import {ApolloProvider} from "@apollo/client"
-import { darkTheme } from "./theme";
-import { client } from "./apollo";
+import {ApolloProvider, useReactiveVar} from "@apollo/client"
+import { darkTheme, lightTheme } from "./theme";
+import { client, darkModeVar, isLoggedInVar } from "./apollo";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -73,10 +73,12 @@ a {
 const queryClient = new QueryClient();
 
 function App() {
+  const isLoggedIn = useReactiveVar(isLoggedInVar);
+  const darkMode = useReactiveVar(darkModeVar);
   return (
     <ApolloProvider client={client}>
       <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={darkTheme}>
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
           <GlobalStyle />
           <Router />
         </ThemeProvider>

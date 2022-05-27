@@ -8,16 +8,17 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from "react-icons/fa";
-import { faSignOut, faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { faLightbulb, faMoon, faSignOut, faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { Container } from "../components/Container";
 import { Loader } from "../components/Loader";
 import { SubTitle, Title } from "../components/Title";
 import { Header } from "../components/Header";
-import { Btn, BtnBorder, HomeFavBtn, HomeMyPageBtn, SearchBtn } from "../components/Button";
+import { Btn, BtnBorder, NavBtn , SearchBtn } from "../components/Button";
 import { getToday } from "../components/useSkill/getDay";
-import { logUserOut } from "../apollo";
+import { darkModeVar, disableDarkMode, enableDarkMode, logUserOut } from "../apollo";
 import { CoinsListImg } from "../components/Image";
 import { coinVariants } from "../components/variants/coinVariants";
+import { useReactiveVar } from "@apollo/client";
 
 const COINCOUNT = 10;
 
@@ -79,6 +80,8 @@ const Input = styled(motion.input)`
   font-weight: bolder;
 `;
 
+
+
 interface CoinListData {
   id: string;
   name: string;
@@ -94,6 +97,7 @@ interface SerachInfo {
 }
 
 function CoinList() {
+  const darkMode = useReactiveVar(darkModeVar);
   const { isLoading, data } = useQuery<CoinListData[]>(
     "CoinList",
     FetchCoinList,
@@ -167,17 +171,23 @@ function CoinList() {
               placeholder="Enter the coin you want to find in English!"
             />
           </SearchBtn>
+          <NavBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
+            <FontAwesomeIcon icon={darkMode ? faLightbulb : faMoon} size="lg"/>
+          </NavBtn>
           <Link to={{ pathname: "/mypage" }}>
-            <HomeMyPageBtn>
+            <NavBtn>
               <FontAwesomeIcon icon={faUserAlt} size="lg" />
-            </HomeMyPageBtn>          
+            </NavBtn>          
           </Link>
-            <HomeMyPageBtn onClick={onLogout}>
+            <NavBtn onClick={onLogout}>
               <FontAwesomeIcon icon={faSignOut} size="lg"/>
-            </HomeMyPageBtn>
+            </NavBtn>
         </Nav>
-        <Title>가상화폐 시총 순위</Title>
-        <SubTitle>{getToday()}</SubTitle>
+        <Title>가상화폐 시총 순위
+        </Title>
+        <SubTitle>{getToday()}
+        </SubTitle>
+        
           </>
         )}
       </Header>
@@ -205,9 +215,9 @@ function CoinList() {
                     {coin.name} ({coin.symbol}){" "}
                     </Coin>
                   </Link>
-                <HomeFavBtn>
+                <NavBtn>
                   <FaStar size="1.5em" />
-                </HomeFavBtn>
+                </NavBtn>
               </ListDiv>
             ))}
           </CoinsList>
