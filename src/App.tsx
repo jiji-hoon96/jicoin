@@ -3,7 +3,7 @@ import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
 import {ApolloProvider, useReactiveVar} from "@apollo/client"
 import { darkTheme, lightTheme } from "./theme";
-import { client, darkModeVar, isLoggedInVar } from "./apollo";
+import { client, darkModeVar } from "./apollo";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -73,7 +73,6 @@ a {
 const queryClient = new QueryClient();
 
 function App() {
-  const isLoggedIn = useReactiveVar(isLoggedInVar);
   const darkMode = useReactiveVar(darkModeVar);
   return (
     <ApolloProvider client={client}>
