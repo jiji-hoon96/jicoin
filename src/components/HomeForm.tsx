@@ -67,11 +67,11 @@ export const Form = styled.form`
       color: ${(props)=>props.theme.fontColor};
       font-weight: bolder;
       transform: scale(1.09);
-      background-color: #${(props)=>props.theme.hoverColor};
+      background-color: #${(props)=>props.theme.boxColor};
     }
   }
   span {
-    color: ${(props)=>props.theme.hoverColor};;
+    color: ${(props)=>props.theme.boxColor};;
   }
 `;
 

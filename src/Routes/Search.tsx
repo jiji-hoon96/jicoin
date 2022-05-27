@@ -29,24 +29,21 @@ overflow: auto;
 overflow-x: hidden;
 cursor: pointer;
 ::-webkit-scrollbar{
-  width: 20px;    
-    
-};
-::-webkit-scrollbar-thumb{
-  background-color: ${(props) => props.theme.boxColor};
-    
-    
-}
-::-webkit-scrollbar-track{
-  background-color: ${(props) => props.theme.buttonColor};
-}
+    width: 5px;
+  };
+  ::-webkit-scrollbar-thumb{
+    background-color: ${(props) => props.theme.fontColor};
+  }
+  ::-webkit-scrollbar-track{
+    background-color: ${(props) => props.theme.bgColor};
+  }
 margin: 10px 10px;
 display: flex;
 flex-direction: column;
 `;
 
 const Coin = styled.div`
-  background-color: ${(props) => props.theme.boxColor};
+  background-color: white;
   text-align: center;
   width:90%;
   height: 60px;
@@ -64,7 +61,7 @@ const Coin = styled.div`
   }
   &:hover {
     a {
-      background-color: ${(props) => props.theme.hoverColor};
+      background-color: ${(props) => props.theme.boxColor};
       border-radius: 10px;
       transform: scale(1.01);
     }
@@ -74,10 +71,10 @@ const Coin = styled.div`
 const Img = styled.img`
   width: 25px;
   height: 25px;
-  margin-right: 5px;
+  margin-right: 10px;
 `;
 const TrendBox = styled.div`
-border: 3px groove ${(props) => props.theme.boxColor};
+border: 3px groove white;
 border-radius: 10px;
 display: flex;
 flex-direction: column;
@@ -90,9 +87,10 @@ background-color: transparent;
 `
 
 const TrendCoin = styled.div`
-  background-color: ${(props) => props.theme.boxColor};
+  padding: 0px 20px;
+  background-color: white;
   text-align: center;
-  width: 230px;
+  width: 250px;
   height: 60px;
   color: ${(props)=> props.theme.fontColor};
   border-radius: 15px;
@@ -168,7 +166,6 @@ function Search() {
           </SearchTitle>
           {isTrendData?.coins?.map((coin:any)=>coin?.item).map((x:any)=>(
             <TrendCoin key={Math.random()}>
-              {x.score+1}.  
               <Img src={x.thumb} style={{marginLeft: "4px"}}/>
               {x.name}
             </TrendCoin>

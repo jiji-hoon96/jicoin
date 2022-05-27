@@ -13,9 +13,11 @@ import { Container } from "../components/Container";
 import { Loader } from "../components/Loader";
 import { SubTitle, Title } from "../components/Title";
 import { Header } from "../components/Header";
-import { Btn, BtnBorder, HomeFavBtn, HomeMyPageBtn } from "../components/Button";
+import { Btn, BtnBorder, HomeFavBtn, HomeMyPageBtn, SearchBtn } from "../components/Button";
 import { getToday } from "../components/useSkill/getDay";
 import { logUserOut } from "../apollo";
+import { CoinsListImg } from "../components/Image";
+import { coinVariants } from "../components/variants/coinVariants";
 
 const COINCOUNT = 10;
 
@@ -33,15 +35,6 @@ const ListDiv = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-const Img = styled.img`
-  width: 25px;
-  position: relative;
-  top: 2px;
-  height: 25px;
-  margin-right: 6px;
-`;
-
 const CoinsList = styled(motion.div)`
   margin: 10px 0px;
   display: flex;
@@ -72,21 +65,6 @@ const Coin = styled.div`
   }
 `;
 
-const Search = styled.form`
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 20px;
-  position: relative;
-  cursor: pointer;
-  svg {
-    height: 25px;
-    :hover {
-      color: ${(props) => props.theme.boxColor};
-    }
-  }
-`;
 
 const Input = styled(motion.input)`
   transform-origin: center right center;
@@ -100,23 +78,6 @@ const Input = styled(motion.input)`
   border: none;
   font-weight: bolder;
 `;
-
-const coinVariants = {
-  start: (direction: boolean) => ({
-    x: direction ? -300 : 300,
-    opacity: 0,
-  }),
-  center: {
-    x: 0,
-    y: 0,
-    opacity: 1,
-  },
-  exit: (direction: boolean) => ({
-    x: direction ? 300 : -300,
-
-    opacity: 0,
-  }),
-};
 
 interface CoinListData {
   id: string;
@@ -182,7 +143,7 @@ function CoinList() {
         {isLoading ? "" : (
           <>
           <Nav>
-          <Search onSubmit={handleSubmit(onValid)}>
+          <SearchBtn onSubmit={handleSubmit(onValid)}>
             <motion.svg
               onClick={toggleSearch}
               whileHover={{ scale: 1.3 }}
@@ -205,7 +166,7 @@ function CoinList() {
               animate={inputAnimation}
               placeholder="Enter the coin you want to find in English!"
             />
-          </Search>
+          </SearchBtn>
           <Link to={{ pathname: "/mypage" }}>
             <HomeMyPageBtn>
               <FontAwesomeIcon icon={faUserAlt} size="lg" />
@@ -238,7 +199,7 @@ function CoinList() {
                 <Link to={{ pathname: `/coinlist/${coin.id}` }}>
                   <Coin key={coin.id}>
                     {coin.rank}. &nbsp;
-                    <Img
+                    <CoinsListImg
                       src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
                     />
                     {coin.name} ({coin.symbol}){" "}

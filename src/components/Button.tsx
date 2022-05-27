@@ -98,3 +98,18 @@ cursor: pointer;
   }
 `
 
+export const SearchBtn = styled.form`
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  position: relative;
+  cursor: pointer;
+  svg {
+    height: 25px;
+    :hover {
+      color: ${(props) => props.theme.boxColor};
+    }
+  }
+`;
