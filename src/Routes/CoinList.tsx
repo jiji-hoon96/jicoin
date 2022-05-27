@@ -51,7 +51,7 @@ const CoinsList = styled(motion.div)`
 `;
 
 const Coin = styled.div`
-  background-color: ${(props) => props.theme.boxColor};
+  background-color: white;
   width: 300px;
   height: 50px;
   color: ${(props) => props.theme.fontColor};
@@ -65,7 +65,7 @@ const Coin = styled.div`
   font-weight: bolder;
   margin: 5px;
   &:hover {
-      background-color:  ${(props) => props.theme.hoverColor};
+      background-color:  ${(props) => props.theme.boxColor};
       border-radius: 10px;
       transition: 0.3;
       transform: scale(1.01);
@@ -78,13 +78,12 @@ const Search = styled.form`
   align-items: center;
   justify-content: center;
   margin: 20px;
-  color: ${(props) => props.theme.boxColor};
   position: relative;
   cursor: pointer;
   svg {
     height: 25px;
     :hover {
-      color: ${(props) => props.theme.hoverColor};
+      color: ${(props) => props.theme.boxColor};
     }
   }
 `;

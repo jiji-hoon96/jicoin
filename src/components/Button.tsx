@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 export const Btn = styled.button`
   width: 150px;
   height: 50px;
+  background-color: white;
   border-radius: 20px;
   font-size: 16px;
   cursor: pointer;
@@ -45,13 +46,13 @@ export const HomeMyPageBtn = styled.button`
   cursor: pointer;
   border-radius: 10px;
   border: none;
-  background-color: ${(props) => props.theme.boxColor};
+  background-color: white;
   font-size: 15px;
   font-weight: bolder;
   :hover {
     transform: scale(1.2);
     transition: 0.5s;
-    background-color: ${(props)=>props.theme.hoverColor};;
+    background-color: ${(props)=>props.theme.boxColor};;
   }
 `;
 
@@ -62,12 +63,12 @@ export const HomeFavBtn = styled.button`
   border: none;
   border-radius: 10px;
   margin-left: 10px;
-  background-color: ${(props) => props.theme.boxColor};
+  background-color: white;
   align-items: center;
   display: flex;
   justify-content: center;
   :hover {
-    background-color: ${(props)=>props.theme.hoverColor};;
+    background-color: ${(props)=>props.theme.boxColor};
     transform: scale(1.1);
   }
 `;
