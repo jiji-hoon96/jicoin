@@ -209,7 +209,7 @@ function Coin() {
               {`${cointabArr[currentTab].value}`}
             </MiniTitleValue>
           </Overview>
-          {infoData?.description === "" ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
+          {infoData?.description === "" || infoData?.description === undefined  || infoData?.description === null ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
           <BtnBorder>
             <Link to={`/coinlist/${coinId}/chart`}>
               <TabBtn isActive={chartMatch !== null}>

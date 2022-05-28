@@ -57,7 +57,6 @@ const MarketSolo = styled.li`
   margin-top: 5px;
   a {
     font-size: 13px;
-    
     display: flex;
     justify-content: center;
     text-align: center;
@@ -70,7 +69,7 @@ const MarketSolo = styled.li`
     transform:scale(1.15);
     cursor: pointer;
     font-weight: bolder;
-    background-color: ${(props)=>props.theme.boxColor};
+    background-color: ${(props)=>props.theme.buttonColor};
   }
     }
 
@@ -148,13 +147,11 @@ function Market() {
                       <MarketSoloSmallInput>
                       {`${x.exchange_name} : $${x.quotes.USD.price.toFixed(3)}`}
                       </MarketSoloSmallInput>
-                      
                       <a
                       href={x.market_url}
                       target="_blank"
                       rel="noopener noreferrer"
                     >Go {x.exchange_name}</a>
-                      
                     </MarketSoloSmallTitle>
                   </MarketSolo>
                 ))}

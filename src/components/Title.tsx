@@ -4,18 +4,17 @@ export const Title = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 36px;
-  width:400px;
+  font-size: 34px;
+  width:450px;
   height: 200px;
   margin-bottom: 10px;
   background-color: ${(props) => props.theme.bgColor};;
   color: ${(props) => props.theme.fontColor};
   cursor: pointer;
   :hover {
-    color: ${(props) => props.theme.fontColor};
       font-weight: bolder;
       border-radius: 10px;
-    transform: scale(1.03);
+    transform: scale(1.01);
   }
 `;
 
