@@ -7,7 +7,7 @@ export const darkModeVar = makeVar(Boolean(localStorage.getItem(DARK_MODE)));
 export const isLoggedInVar = makeVar(Boolean(localStorage.getItem(TOKEN)));
 
 const httpLink = createHttpLink({
-  uri: "http://localhost:4000/",
+  uri: "http://localhost:4000",
 });
 
 const authLink = setContext((_, { headers }) => {

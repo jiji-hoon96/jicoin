@@ -20,6 +20,7 @@ import { CoinsListImg } from "../components/Image";
 import { coinVariants } from "../components/variants/coinVariants";
 import { useReactiveVar } from "@apollo/client";
 import useUser from "../hooks/useUser";
+import Avatar from "../components/Avatar";
 
 const COINCOUNT = 10;
 
@@ -103,9 +104,6 @@ function CoinList() {
   const { isLoading, data:coinData} = useQuery<CoinListData[]>(
     "CoinList",
     FetchCoinList,
-    {
-      refetchInterval: 100000,
-    }
   );
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
@@ -178,7 +176,7 @@ function CoinList() {
           </NavBtn>
           <Link to={{ pathname: "/mypage" }}>
             <NavBtn>
-              <FontAwesomeIcon icon={faUserAlt} size="lg" />
+              <Avatar url={data?.me?.avatar} />
             </NavBtn>          
           </Link>
             <NavBtn onClick={onLogout}>
@@ -189,14 +187,13 @@ function CoinList() {
         </Title>
         <SubTitle>{getToday()}
         </SubTitle>
-        
           </>
         )}
       </Header>
       {isLoading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (
-        <AnimatePresence initial={false} exitBeforeEnter>
+        <AnimatePresence initial={false} exitBeforeEnter key={Math.random()}>
           <CoinsList
             custom={direction}
             variants={coinVariants}
@@ -207,11 +204,11 @@ function CoinList() {
             key={index}
           >
             {coinData?.slice(index, index + COINCOUNT).map((coin) => (
-              <ListDiv key={coin.id}>
-                <Link to={{ pathname: `/coinlist/${coin.id}` }}>
+              <ListDiv key={coin.id} >
+                <Link to={{ pathname: `/coinlist/${coin.id}` }} >
                   <Coin key={coin.id}>
                     {coin.rank}. &nbsp;
-                    <CoinsListImg
+                    <CoinsListImg 
                       src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
                     />
                     {coin.name} ({coin.symbol}){" "}
