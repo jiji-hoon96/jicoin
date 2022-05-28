@@ -19,6 +19,7 @@ import { darkModeVar, disableDarkMode, enableDarkMode, logUserOut } from "../apo
 import { CoinsListImg } from "../components/Image";
 import { coinVariants } from "../components/variants/coinVariants";
 import { useReactiveVar } from "@apollo/client";
+import useUser from "../hooks/useUser";
 
 const COINCOUNT = 10;
 
@@ -97,8 +98,9 @@ interface SerachInfo {
 }
 
 function CoinList() {
+  const {data} = useUser();
   const darkMode = useReactiveVar(darkModeVar);
-  const { isLoading, data } = useQuery<CoinListData[]>(
+  const { isLoading, data:coinData} = useQuery<CoinListData[]>(
     "CoinList",
     FetchCoinList,
     {
@@ -129,8 +131,8 @@ function CoinList() {
     }
     setSearchOpen((prev) => !prev);
   };
-  const onValid = (data: SerachInfo) => {
-    navigate(`/search?keyword=${data.keyword}`);
+  const onValid = (coinData: SerachInfo) => {
+    navigate(`/search?keyword=${coinData.keyword}`);
   };
   const onLogout= ()=>{
     navigate('/')
@@ -204,7 +206,7 @@ function CoinList() {
             transition={{ type: "tween", duration: 0.5 }}
             key={index}
           >
-            {data?.slice(index, index + COINCOUNT).map((coin) => (
+            {coinData?.slice(index, index + COINCOUNT).map((coin) => (
               <ListDiv key={coin.id}>
                 <Link to={{ pathname: `/coinlist/${coin.id}` }}>
                   <Coin key={coin.id}>
