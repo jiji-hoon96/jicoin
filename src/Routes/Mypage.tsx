@@ -8,8 +8,8 @@ import { Header } from "../components/Header";
 import { Title } from "../components/Title";
 import useUser from "../hooks/useUser";
 import { useForm } from "react-hook-form";
-import { Form, SubmitBtn } from "../components/HomeForm";
-import { useEffect, useState } from "react";
+
+import {  useState } from "react";
 
 const WelcomeDiv = styled.div`
   margin-top: 10px;
@@ -50,7 +50,15 @@ const CalDivideForm = styled.div`
 
 const CalTitle = styled.h1`
   font-size: 18px;
+  margin-bottom: 5px;
   padding:5px 7px;
+  font-weight: bolder;
+`
+
+const CalSmallTitle = styled.h2`
+  font-size: 15px;
+  padding:5px 7px;
+  margin: 5px 10px;
 `
 
 const CalBtnDiv= styled.div`
@@ -61,10 +69,11 @@ const CalBtnDiv= styled.div`
 
 const CalBtn = styled.button`
 text-align: center;
-width:200px;
+width:100px;
 height:50px;
 border: none;
 cursor: pointer;
+margin-right: 6px;
 font-size: 16px;
 border-radius: 10px;
  color:black;
@@ -92,7 +101,7 @@ const ResultPrice = styled.div`
   font-size: 24px;
   font-weight: bolder;
   div{
-    width:200px;
+    width:160px;
     height:5px;
     background-color: orange; 
   }
@@ -106,17 +115,11 @@ const GridDiv = styled.div`
 `
 
 const NowDiv =styled.div`
-  background-color: orangered;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
 `
-
-const AddDiv = styled.div`
-  background-color: violet;
-`
-
-const TotalDiv= styled.div`
-    background-color: aqua;
-  `
-
 
 interface CalculateBuy{
   oldprice:number,
@@ -127,6 +130,12 @@ interface CalculateBuy{
 
 function Mypage() {
   const {data} = useUser();
+  const [isOpen , setIsOpen] = useState(false)
+  const [isReset , setIsReset] = useState(false);
+  const [oldcount, setOldCount] = useState("")
+  const [oldprice, setOldPrice] = useState("")
+  const [newcount, setNewCount] = useState("")
+  const [newprice, setNewPrice] = useState("")
   const [toatlcount, setTotalCount] = useState('')
   const [toatlresult, setTotalResult] = useState('')
   const {register, handleSubmit,formState:{errors},reset} = useForm<CalculateBuy>();
@@ -135,11 +144,18 @@ function Mypage() {
     const newObject = data.newcount * data.newprice
     const totalCount = String(Number(data.oldcount) + Number(data.newcount))
     const totalResult = String((oldObject+ newObject) / Number(totalCount))
+    setOldCount(String(data.oldcount));
+    setOldPrice(String(data.oldprice));
+    setNewCount(String(data.newcount));
+    setNewPrice(String(data.newprice));
     setTotalCount(totalCount);
-    setTotalResult(totalResult)
-    reset()
+    setTotalResult(totalResult);
+    setIsOpen((prev)=>!prev)
   };
-  
+  const clickReset = ()=>{
+    reset()
+    setIsOpen((prev)=>!prev)
+  }
   return (
     <Container>
      <Header>
@@ -165,26 +181,33 @@ function Mypage() {
             <input {...register("newcount", {required:"추가 매수 수량을 입력해주세요"})} type="number" placeholder="추가 매수 수량을 입력해주세요"/>
           </CalDivideForm>
           <CalBtnDiv>
-            <CalBtn type="submit">평균 매입가 계산하기</CalBtn>
+            {isOpen ? <CalBtn onClick={clickReset}>초기화</CalBtn>:<CalBtn type="submit">계산하기</CalBtn>  }
           </CalBtnDiv>
         </CalculateForm>
-        <ResultDiv>
+        {isOpen ? <ResultDiv>
           <ResultPrice>{`평단가 : ${Math.ceil(+toatlresult)} 원`}<div/></ResultPrice>
-          <div style={{width:600, height:5, backgroundColor:"#DCDDE1",margin:20}}/>
+          <div style={{width:500, height:5, backgroundColor:"#DCDDE1",margin:20}}/>
           <GridDiv>
             <NowDiv>
-
+              <CalTitle>현재 보유</CalTitle>
+              <CalSmallTitle>{`보유 단가 : ${oldprice} 원`}</CalSmallTitle>
+              <CalSmallTitle>{`보유 수량 : ${oldcount} 개`}</CalSmallTitle>
+              <CalSmallTitle>{`총 금액 : ${+oldcount*+oldprice} 원`}</CalSmallTitle>
             </NowDiv>
-            <AddDiv>
-
-            </AddDiv>
-            <TotalDiv>
-
-            </TotalDiv>
+            <NowDiv>
+              <CalTitle>추가 매수</CalTitle>
+              <CalSmallTitle>{`보유 단가 : ${newprice} 원`}</CalSmallTitle>
+              <CalSmallTitle>{`보유 수량 : ${newcount} 개`}</CalSmallTitle>
+              <CalSmallTitle>{`총 금액 : ${+newcount*+newprice} 원`}</CalSmallTitle>
+            </NowDiv>
+            <NowDiv>
+              <CalTitle>총 결과 값</CalTitle>
+              <CalSmallTitle>{`보유 단가 : ${Math.ceil(+toatlresult)} 원`}</CalSmallTitle>
+              <CalSmallTitle>{`보유 수량 : ${Number(oldcount)+Number(newcount)} 개`}</CalSmallTitle>
+              <CalSmallTitle>{`총 금액 : ${(+oldcount*+oldprice)+(+newcount*+newprice)} 원`}</CalSmallTitle>
+            </NowDiv>
           </GridDiv>
-          <h1>{`총 보유 수량 : ${toatlcount} 개`}</h1>
-
-        </ResultDiv>
+        </ResultDiv> : null}
       </Header>
     </Container>
   );
