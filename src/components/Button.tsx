@@ -52,10 +52,11 @@ export const NavBtn = styled.div`
   background-color: white;
   font-size: 15px;
   font-weight: bolder;
+  color: ${(props)=>props.theme.bgColor};;
   :hover {
     transform: scale(1.2);
     transition: 0.5s;
-    background-color: ${(props)=>props.theme.boxColor};;
+    
   }
 `;
 

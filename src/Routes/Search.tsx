@@ -43,7 +43,7 @@ flex-direction: column;
 `;
 
 const Coin = styled.div`
-  background-color: white;
+  background-color: ${(props) => props.theme.defaultBoxColor};
   text-align: center;
   width:90%;
   height: 60px;
@@ -88,7 +88,7 @@ background-color: transparent;
 
 const TrendCoin = styled.div`
   padding: 0px 20px;
-  background-color: white;
+  background-color: ${(props) => props.theme.defaultBoxColor};
   text-align: center;
   width: 250px;
   height: 60px;

@@ -60,6 +60,7 @@ export const Form = styled.form`
     height: 50px;
     margin: 5px;
     border: 1px solid ${(props)=>props.theme.defaultBoxColor};;
+    color: ${(props)=>props.theme.fontColor};
     border-radius: 10px;
     text-align: center;
     background-color:${(props)=>props.theme.bgColor};
@@ -76,6 +77,7 @@ export const Form = styled.form`
 `;
 
 export const SubmitBtn = styled.input`
+  color: ${(props)=>props.theme.fontColor};
   :hover{
     transform: scale(1.1);
     background-color:#${(props)=>props.theme.bgColor};;

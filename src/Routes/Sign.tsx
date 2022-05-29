@@ -149,7 +149,7 @@ export default function Sign(){
             placeholder="비밀번호를 입력해주세요"
           />
           <span>{errors.password?.message}</span>
-          <SubmitBtn type="submit" style={{ fontWeight: "bolder" }} />
+          <SubmitBtn type="submit" value="회원가입" style={{ fontWeight: "bolder" }} />
         </Form>
       </ModalForm>
               </LoginForm>

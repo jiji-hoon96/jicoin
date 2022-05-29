@@ -47,7 +47,7 @@ const CoinsList = styled(motion.div)`
 `;
 
 const Coin = styled.div`
-  background-color: white;
+  background-color:  ${(props) => props.theme.boxColor};
   width: 300px;
   height: 50px;
   color: ${(props) => props.theme.fontColor};

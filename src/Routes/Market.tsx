@@ -51,7 +51,7 @@ const MarketSolo = styled.li`
   display: flex;
   flex-direction: column;
   font-size: 10px;
-  background-color: white;
+  background-color: ${(props) => props.theme.defaultBoxColor};;
   color: ${(props) => props.theme.fontColor};
   border-radius: 5px;
   margin-top: 5px;
@@ -69,7 +69,7 @@ const MarketSolo = styled.li`
     transform:scale(1.15);
     cursor: pointer;
     font-weight: bolder;
-    background-color: ${(props)=>props.theme.buttonColor};
+    background-color: ${(props)=>props.theme.bgColor};
   }
     }
 

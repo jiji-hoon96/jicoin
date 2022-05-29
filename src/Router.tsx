@@ -29,7 +29,6 @@ function Router() {
         <Route path="/search" element={<Search />}/>
         </>
         }
-        
       </Routes>
     </BrowserRouter>
   );
