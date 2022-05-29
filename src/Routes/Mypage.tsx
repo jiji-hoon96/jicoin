@@ -56,6 +56,7 @@ const CalTitle = styled.h1`
 const CalBtnDiv= styled.div`
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 `
 
 const CalBtn = styled.button`
@@ -73,6 +74,48 @@ border-radius: 10px;
     transform: scale(1.04);
   }
 `
+
+const ResultDiv = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+padding:20px 30px;
+  width:650px;
+  height:300px;
+  background-color: whitesmoke;
+`
+
+const ResultPrice = styled.div`
+  width:200px;
+  height:40px;
+  font-size: 24px;
+  font-weight: bolder;
+  div{
+    width:200px;
+    height:5px;
+    background-color: orange; 
+  }
+`
+
+const GridDiv = styled.div`
+  display: grid;
+  width:600px;
+  height:300px;
+  grid-template-columns: 1fr 1fr 1fr;
+`
+
+const NowDiv =styled.div`
+  background-color: orangered;
+`
+
+const AddDiv = styled.div`
+  background-color: violet;
+`
+
+const TotalDiv= styled.div`
+    background-color: aqua;
+  `
 
 
 interface CalculateBuy{
@@ -125,8 +168,23 @@ function Mypage() {
             <CalBtn type="submit">평균 매입가 계산하기</CalBtn>
           </CalBtnDiv>
         </CalculateForm>
-        <h1>{`총 보유 수량 : ${toatlcount} 개`}</h1>
-        <h1>{`평단가 : ${(+toatlresult).toFixed(2)} 원`}</h1>
+        <ResultDiv>
+          <ResultPrice>{`평단가 : ${Math.ceil(+toatlresult)} 원`}<div/></ResultPrice>
+          <div style={{width:600, height:5, backgroundColor:"#DCDDE1",margin:20}}/>
+          <GridDiv>
+            <NowDiv>
+
+            </NowDiv>
+            <AddDiv>
+
+            </AddDiv>
+            <TotalDiv>
+
+            </TotalDiv>
+          </GridDiv>
+          <h1>{`총 보유 수량 : ${toatlcount} 개`}</h1>
+
+        </ResultDiv>
       </Header>
     </Container>
   );
