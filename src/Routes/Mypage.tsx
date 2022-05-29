@@ -167,7 +167,7 @@ function Mypage() {
         <Title>
           <Link to={{ pathname: "/coinlist" }}> My Page</Link>
         </Title>
-        <MyAvatarDiv>{data?.me?.avatar === "" || null || undefined  ? <FontAwesomeIcon icon={faUserAlt} size="5x" /> : <MyAvatarImg src={data?.me?.avatar} />}</MyAvatarDiv>
+        <MyAvatarDiv>{data?.me?.avatar === "" || data?.me?.avatar ===null || data?.me?.avatar ===undefined  ? <FontAwesomeIcon icon={faUserAlt} size="5x" /> : <MyAvatarImg src={data?.me?.avatar} />}</MyAvatarDiv>
         <WelcomeDiv>{`${data?.me?.nickname}님의 개인 화면입니다`}</WelcomeDiv>
         <CalculateForm onSubmit={handleSubmit(onSubmitValid)}>
           <CalDivideForm>
