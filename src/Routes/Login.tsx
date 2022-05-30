@@ -19,7 +19,7 @@ interface LoginForm {
 
 const Notification = styled.div`
   color: ${(props)=>props.theme.boxColor}
-`;
+`
 
 const LOGIN_MUTATION = gql`
   mutation login($username: String!, $password: String!) {

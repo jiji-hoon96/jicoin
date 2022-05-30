@@ -18,9 +18,13 @@ function Router() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/sign" element={<Sign/>}/>
+        {isLoggedIn ? < Route path="*" element={< Navigate to="/coinlist" />} /> : 
+        <>
+         <Route path="/" element={<Home/>}/>
+         <Route path="/login" element={<Login/>}/>
+         <Route path="/sign" element={<Sign/>}/>
+        </>
+        }
         {!isLoggedIn ? < Route path="*" element={< Navigate to="/" />} /> : 
         <>
           <Route path="/coinlist" element={<CoinList />}/>
