@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { fetchCoinHistory, fetchCoinYear } from "../api";
+import { fetchCoinHistory } from "../api";
 import ApexChart from "react-apexcharts";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -11,6 +11,7 @@ import { Loader } from "../components/Loader";
 import { Title } from "../components/Title";
 import { Header } from "../components/Header";
 import { Btn, BtnBorder } from "../components/Button";
+import { getTodays } from "../components/useSkill/getDay";
 
 interface IHistorical {
   time_open: string;
@@ -18,17 +19,7 @@ interface IHistorical {
   open: number;
   high: number;
   low: number;
-  close: any;
-  volume: number;
-  market_cap: number;
-}
-interface IYear {
-  time_open: string;
-  time_close: string;
-  open: number;
-  high: number;
-  low: number;
-  close: any;
+  close: number;
   volume: number;
   market_cap: number;
 }
@@ -42,42 +33,19 @@ const ChartBox = styled.div`
 `;
 
 function Chart() {
-  const { pathname } = useLocation();
+  const { pathname,state } = useLocation();
   const coinId = pathname.split("/")[2];
-
-  const [index, setIndex] = useState(0);
-  const yearChart = () => {
-    setIndex(index > 1 ? 2 : index + 1);
-  };
-  const monthChart = () => {
-    setIndex(index < 1 ? 0 : index - 1);
-  };
-  const { isLoading: MonthLoading, data: MonthData } = useQuery<IHistorical[]>(
+  const { isLoading, data } = useQuery<IHistorical[]>(
     ["month", coinId],
     () => fetchCoinHistory(coinId),
     {
       refetchInterval: 30000,
     }
   );
-  const { isLoading: YearLoading, data: YearData } = useQuery<IYear[]>(
-    ["year", coinId],
-    () => fetchCoinYear(coinId),
-    {
-      refetchInterval: 30000,
-    }
-  );
-
-  const chartStart = MonthData?.map((x) => x.time_open.split(","))[0][0].slice(
-    0,
-    10
-  );
-  const chartStartYear = YearData?.map((x) =>
-    x.time_open.split(",")
-  )[0][0].slice(0, 10);
-  const chartEnd = MonthData?.map((x) => x.time_close.split(","))
-    .slice(-1)[0][0]
-    .slice(0, 10);
-  const loading = MonthLoading || YearLoading;
+  
+  const chartStart =Number(data?.map((x) => x.time_open)[0] )*1000;
+  const chartEnd =  Number(data?.map((x) => x.time_open)[data?.length-1] )*1000;
+  const loading = isLoading;
   return (
     <Container>
       <HelmetProvider>
@@ -90,9 +58,7 @@ function Chart() {
           <>
           <Title>
             <Link to={{ pathname: `/coinlist/${coinId}` }}>
-              {index === 0
-                ? `${coinId.split("-")[0].toUpperCase()} Coin 1달 차트`
-                : `${coinId.split("-")[0].toUpperCase()} Coin 1년 차트`}
+                 {`${coinId.split("-")[0].toUpperCase()} Coin 차트`}
             </Link>
           </Title>
           </>
@@ -104,14 +70,13 @@ function Chart() {
           <>     
           <ChartBox>
             <div>
-            {index === 0 ? (
               <ApexChart
                 type="line"
                 series={[
                   {
                     name: "Price",
                     data:
-                      MonthData?.map((price) => price.close.toFixed(3)) ?? [],
+                      data?.map((price) => price.close) ?? [],
                   },
                 ]}
                 options={{
@@ -121,8 +86,9 @@ function Chart() {
                   title: {
                     text: `${coinId
                       .split("-")[0]
-                      .toUpperCase()} Coin  (${chartStart} ~ ${chartEnd})`,
+                      .toUpperCase()} Coin  ${getTodays(chartStart)} ~ ${getTodays(chartEnd)}`,
                     align: "center",
+                    style: {fontSize:"24px"}
                   },
                   chart: {
                     animations: {
@@ -131,7 +97,7 @@ function Chart() {
                     height: 600,
                     width: 600,
                     toolbar: {
-                      show: false,
+                      show: true,
                     },
                     zoom: {
                       enabled: false,
@@ -155,12 +121,13 @@ function Chart() {
                     show: true,
                   },
                   xaxis: {
-                    axisBorder: { show: false },
-                    axisTicks: { show: false },
-                    labels: { show: false },
+
+                    axisBorder: { show: true },
+                    axisTicks: { show: true},
+                    labels: { show: true , rotate: 0, style:{fontSize:"16px",}},
                     type: "category",
-                    categories: MonthData?.map((price) =>
-                      price.time_open.slice(5, 10)
+                    categories: data?.map((price) =>
+                      getTodays(Number(price.time_open)*1000)
                     ),
                   },
                   fill: {
@@ -179,77 +146,9 @@ function Chart() {
                   },
                 }}
               />
-            ) : (
-              <ApexChart
-                type="line"
-                series={[
-                  {
-                    name: "Price",
-                    data:
-                      YearData?.map((price) => price.close.toFixed(3)) ?? [],
-                  },
-                ]}
-                options={{
-                  theme: {
-                    mode: "dark",
-                  },
-                  title: {
-                    text: `${coinId
-                      .split("-")[0]
-                      .toUpperCase()} Coin (${chartStartYear} ~ ${chartEnd})`,
-                    align: "center",
-                  },
-                  chart: {
-                    animations: {
-                      easing: 'linear',
-                    },
-                    height: 600,
-                    width: 600,
-                    toolbar: {
-                      show: false,
-                    },
-                    background: "#718093",
-                  },
-                  grid: { show: false },
-                  stroke: {
-                    curve: "smooth",
-                    width: 3,
-                  },
-                  yaxis: {
-                    show: true,
-               
-                  },
-                  xaxis: {
-                    axisBorder: { show: false },
-                    axisTicks: { show: false },
-                    labels: { show: false },
-                    type: "category",
-                    categories: YearData?.map((price) =>
-                      price.time_open.slice(0, 10)
-                    ),
-                  },
-                  fill: {
-                    type: "gradient",
-                    gradient: {
-                      gradientToColors: ["#0be881"],
-                      stops: [0, 100],
-                    },
-                  },
-                  colors: ["#0fbcf9"],
-                  tooltip: {
-                    y: {
-                      formatter: (value: any) => `$${value.toFixed(2)}`,
-                    },
-                  },
-                  
-                }}
-              />
-            )}
-            </div>
+              </div>
           </ChartBox>
           <BtnBorder>
-          <Btn onClick={monthChart}>1달 차트</Btn>
-          <Btn onClick={yearChart}>1년 차트</Btn>
         </BtnBorder>
         </>
         )}

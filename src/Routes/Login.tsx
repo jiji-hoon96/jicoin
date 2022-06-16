@@ -18,7 +18,7 @@ interface LoginForm {
 }
 
 const Notification = styled.div`
-  color: ${(props)=>props.theme.boxColor}
+  color: ${(props)=>props.theme.boxColor};
 `
 
 const LOGIN_MUTATION = gql`

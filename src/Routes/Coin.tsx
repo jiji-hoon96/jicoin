@@ -210,7 +210,7 @@ function Coin() {
           </Overview>
           {infoData?.description === "" || infoData?.description === undefined  || infoData?.description === null ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
           <BtnBorder>
-            <Link to={`/coinlist/${coinId}/chart`}>
+            <Link to={`/coinlist/${coinId}/chart`} state={infoData?.symbol}>
               <TabBtn isActive={chartMatch !== null}>
                 차트
               </TabBtn>

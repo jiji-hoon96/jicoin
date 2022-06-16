@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: #${(props)=>props.theme.bgColor};;
-  max-width: 700px;
-  width:700px;
+  max-width: 1000px;
+  width:1000px;
   display: flex;
   align-items: center;
   justify-content: center;
