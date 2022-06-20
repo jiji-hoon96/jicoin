@@ -53,25 +53,59 @@ export const Btn = styled.button`
 `;
 
 export const BtnBorder = styled.div`
-  width:300px;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+
 `
 
 export const TabBtn = styled.button<{ isActive: boolean }>`
-  text-align: center;
-  width: 150px;
-  height: 50px;
-  margin-right: 10px;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  text-transform: uppercase;
-  &:hover {
-    transform: scale(1.04);
-    background-color: ${(props)=>props.theme.boxColor};;
+ display: inline-block;
+    padding: 1em 0;
+    border-radius: 0;
+    color:${(props)=>props.theme.loginColor};
+    background-color: transparent;
+    margin:20px;
+    border: none;
+    margin-top:2rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+  position: relative;
+  &:before,
+  &:after{
+    content: '';
+      display: block;
+      position: absolute;
+      height: 1px;
+      width: 0;
+
+  }
+  &:before{
+    transition: width 0s ease,background .4s ease;
+    left: 0;
+    right: 0;
+      bottom: 6px;
+  }
+  &:after{
+    right: 2.2%;
+      bottom: 6px;
+      background:${(props)=>props.theme.loginColor};
+    transition: width .4s ease;
+  }
+  
+  &:hover{
+    &:before{
+      width: 97.8%;
+      background:${(props)=>props.theme.loginColor};
+        transition: width .4s ease;
+    }
+    &:after{
+      width: 97.8%;
+        background: 0 0;
+      transition: all 0s ease;
+    }
   }
 `;
 
@@ -85,10 +119,10 @@ export const NavBtn = styled.div`
   cursor: pointer;
   border-radius: 10px;
   border: none;
-  background-color: white;
+  background-color: transparent;
   font-size: 15px;
   font-weight: bolder;
-  color: ${(props)=>props.theme.bgColor};;
+  color: ${(props)=>props.theme.loginColor};;
   :hover {
     transform: scale(1.2);
     transition: 0.5s;
@@ -107,22 +141,58 @@ export const LoginWelcomeBtn = styled(motion.button)`
 `;
 
 export const CoinBtn = styled.button`
-font-size: 15px;
-width:200px;
-height: 50px;
-border: none;
-font-weight: bold;
-margin-right: 5px;
-border-radius: 10px;
-cursor: pointer;
-:hover {
-    background-color: ${(props)=>props.theme.boxColor};;
-    transform: scale(1.04);
+  display: inline-block;
+    padding: 1em 0;
+    border-radius: 0;
+    color:${(props)=>props.theme.loginColor};
+    background-color: transparent;
+    margin:20px;
+    border: none;
+    margin-top:2rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+  position: relative;
+  &:before,
+  &:after{
+    content: '';
+      display: block;
+      position: absolute;
+      height: 1px;
+      width: 0;
+
+  }
+  &:before{
+    transition: width 0s ease,background .4s ease;
+    left: 0;
+    right: 0;
+      bottom: 6px;
+  }
+  &:after{
+    right: 2.2%;
+      bottom: 6px;
+      background:${(props)=>props.theme.loginColor};
+    transition: width .4s ease;
+  }
+  
+  &:hover{
+    &:before{
+      width: 97.8%;
+      background:${(props)=>props.theme.loginColor};
+        transition: width .4s ease;
+    }
+    &:after{
+      width: 97.8%;
+        background: 0 0;
+      transition: all 0s ease;
+    }
   }
 `
 
 export const SearchBtn = styled.form`
-  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,7 +202,7 @@ export const SearchBtn = styled.form`
   svg {
     height: 25px;
     :hover {
-      color: ${(props) => props.theme.boxColor};
+      color: ${(props) => props.theme.fontColor};
     }
   }
 `;

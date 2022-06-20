@@ -11,6 +11,6 @@ export const Loader = styled.div`
   font-size: 30px;
   border-radius: 10px;
   font-weight: bolder;
-  background-color:${(props) => props.theme.bgColor};
+  background-color: transparent;
   color: ${(props) => props.theme.fontColor};
 `;

@@ -47,24 +47,55 @@ const CoinsList = styled(motion.div)`
 `;
 
 const Coin = styled.div`
-  background-color:  ${(props) => props.theme.boxColor};
-  width: 300px;
-  height: 50px;
-  color: ${(props) => props.theme.fontColor};
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: color 0.2s ease-in;
-  font-size: 13px;
-  font-weight: bolder;
-  margin: 5px;
-  &:hover {
-      background-color:  ${(props) => props.theme.boxColor};
-      border-radius: 10px;
-      transition: 0.3;
-      transform: scale(1.01);
+    display: inline-block;
+    border-radius: 0;
+    color:${(props)=>props.theme.loginColor};
+    background-color: transparent;
+    border: none;
+    padding:15px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+  :hover{
+    transform: scale(1.05);
+  }
+  &:before,
+  &:after{
+    content: '';
+      display: block;
+      position: absolute;
+      height: 1px;
+      width: 0;
+
+  }
+  &:before{
+    transition: width 0s ease,background .4s ease;
+    left: 0;
+    right: 0;
+      bottom: 6px;
+  }
+  &:after{
+    right: 2.2%;
+      bottom: 6px;
+      background:${(props)=>props.theme.loginColor};
+    transition: width .4s ease;
+  }
+  
+  &:hover{
+    &:before{
+      width: 97.8%;
+      background:${(props)=>props.theme.loginColor};
+        transition: width .4s ease;
+    }
+    &:after{
+      width: 97.8%;
+        background: 0 0;
+      transition: all 0s ease;
+    }
   }
 `;
 
@@ -73,13 +104,17 @@ const Input = styled(motion.input)`
   transform-origin: center right center;
   width: 300px;
   height: 30px;
+  border:none;
   font-size: 14px;
   text-align: center;
   position: absolute;
   right: 40px;
+  color:${(props)=>props.theme.loginColor};
   border-radius: 10px;
   border: none;
   font-weight: bolder;
+  outline: none;
+  background-color: transparent;
 `;
 
 
@@ -214,7 +249,7 @@ function CoinList() {
                     {coin.name} ({coin.symbol}){" "}
                     </Coin>
                   </Link>
-                <NavBtn>
+                <NavBtn style={{paddingTop:"10px"}}>
                   <FaStar size="1.5em" />
                 </NavBtn>
               </ListDiv>
@@ -222,12 +257,12 @@ function CoinList() {
           </CoinsList>
           )
           <BtnBorder>
-            <Btn onClick={decreaseList}>
+            <Btn onClick={decreaseList} style={{margin:0}}>
               {index === 0
                 ? "첫페이지"
                 : `${index - COINCOUNT + 1}위 ~ ${index}위`}
             </Btn>
-            <Btn onClick={increaseList}>
+            <Btn onClick={increaseList}  style={{margin:0}}> 
               {index > 180
                 ? "마지막페이지"
                 : `${index + COINCOUNT + 1}위 ~ ${index + COINCOUNT * 2}위`}

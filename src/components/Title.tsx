@@ -8,7 +8,7 @@ export const Title = styled.div`
   width:450px;
   height: 200px;
   margin-bottom: 10px;
-  background-color: ${(props) => props.theme.bgColor};;
+  background-color: transparent;
   color: ${(props) => props.theme.fontColor};
   cursor: pointer;
   :hover {

@@ -17,7 +17,7 @@ const Overview = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.bgColor};
+  background-color: transparent;
   color: ${(props) => props.theme.fontColor};
   padding: 10px 20px;
   margin:4px 0px;
@@ -37,13 +37,13 @@ font-size: 15px;
 width:200px;
 height:50px;
 color:${(props) => props.theme.fontColor};;
+background-color: transparent;
 display: flex;
 justify-content: center;
 text-align: center;
 align-items: center;
 border-radius: 10px;
 font-size: 28px;
-background-color: ${(props) => props.theme.bgColor};
 margin-bottom: 10px;
 `
 
@@ -54,7 +54,7 @@ const Description = styled.div`
   line-height: 2em;
   overflow: auto;
   height:250px;
-  background-color: ${(props) => props.theme.bgColor};
+  background-color: transparent;
   padding: 10px 20px;
   color: ${(props) => props.theme.fontColor};
   border-radius: 10px;

@@ -54,6 +54,7 @@ export const Form = styled.form`
   justify-content: center;
   height: 100%;
   align-items: center;
+  color: ${(props)=>props.theme.fontColor};
   flex-direction: column;
   input {
     font-size: 24px;
