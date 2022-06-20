@@ -5,13 +5,19 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { LoginWelcomeBtn } from "../components/Button";
 import { Link } from "react-router-dom";
-import {Box , LoginForm} from '../components/HomeForm'
+import {LoginForm} from '../components/HomeForm'
 import { boxVariants } from "../components/variants/box";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useReactiveVar } from "@apollo/client";
 import { darkModeVar, disableDarkMode, enableDarkMode } from "../apollo";
 import { faLightbulb, faMoon } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+
+export const HomeBox = styled(motion.div)`
+  display: flex;
+  background-color: transparent;
+  `;
 
 function Home(){
     const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +54,7 @@ function Home(){
             <HomeBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
               <FontAwesomeIcon icon={darkMode ? faLightbulb : faMoon} size="3x"/>
             </HomeBtn>
-            <Box>
+            <HomeBox>
               <AnimatePresence>
               {isOpen ? (
               <LoginForm
@@ -78,7 +84,7 @@ function Home(){
               </LoginWelcomeBtn>
             )}
               </AnimatePresence>
-            </Box>
+            </HomeBox>
             
           </Header>
         </Container>

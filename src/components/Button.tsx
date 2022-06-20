@@ -2,17 +2,53 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export const Btn = styled.button`
-  width: 150px;
-  height: 50px;
-  background-color: white;
-  border-radius: 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border: none;
-  margin-right: 30px;
-  &:hover {
-    transform: scale(1.04);
-    background-color: ${(props)=>props.theme.boxColor};;
+    display: inline-block;
+    width:150px;
+    padding: 1em 0;
+    border-radius: 0;
+    color: ${(props)=>props.theme.loginColor};
+    background-color: transparent;
+    margin-top:2rem;
+    font-weight: bold;
+    font-size: 24px;
+    letter-spacing: 2px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-decoration: none;
+  position: relative;
+  &:before,
+  &:after{
+    content: '';
+      display: block;
+      position: absolute;
+      height: 1px;
+      width: 0;
+  }
+  &:before{
+    transition: width 0s ease,background .4s ease;
+    left: 0;
+    right: 0;
+      bottom: 6px;
+  }
+  &:after{
+    right: 2.2%;
+      bottom: 6px;
+      background:  ${(props)=>props.theme.loginColor};
+    transition: width .4s ease;
+  }
+  
+  &:hover{
+    &:before{
+      width: 97.8%;
+      background:  ${(props)=>props.theme.loginColor};
+        transition: width .4s ease;
+    }
+    &:after{
+      width: 97.8%;
+        background: 0 0;
+      transition: all 0s ease;
+    }
   }
 `;
 

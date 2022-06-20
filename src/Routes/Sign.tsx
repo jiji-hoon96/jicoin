@@ -93,7 +93,6 @@ export default function Sign(){
             </Link>    
         </SmallNav>
         <Form onSubmit={handleSubmit(onSubmitValid)}>
-          <BannerImg />
           <Banner>JiCoin (회원가입)</Banner>
           <input
             {...register("username", {

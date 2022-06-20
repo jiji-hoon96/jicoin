@@ -6,6 +6,9 @@ export const darkTheme: DefaultTheme = {
   defaultBoxColor: "black",
   fontColor: "#dcdde1",
   boxColor: "#718093",
+  darkbgGradient : "linear-gradient(to right, #0f0c29, #302b63, #24243e)",
+  loginColor: "white",
+  errorColor : "orangered",
 };
 
 export const lightTheme: DefaultTheme = {
@@ -14,4 +17,7 @@ export const lightTheme: DefaultTheme = {
   defaultBoxColor: "white",
   fontColor: "#2f3640", // electromagnetic
   boxColor: "white", //Chain gang grey
+  darkbgGradient:"linear-gradient(to top, #c9d6ff, #e2e2e2)",
+  loginColor: "black",
+  errorColor : "orangered",
 };

@@ -42,7 +42,7 @@ body {
   line-height: 1;
   flex-direction: column;
   width:100%;
-  background-color: ${(props) => props.theme.bgColor};
+  background: ${(props) => props.theme.darkbgGradient};
   font-family: 'Source Sans Pro', sans-serif;
   color:${(props) => props.theme.fontColor};
 }

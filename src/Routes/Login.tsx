@@ -102,7 +102,6 @@ function Login() {
                         </Link>             
                     </SmallNav>
                     <Form onSubmit={handleSubmit(onSubmitValid)}>
-                      <BannerImg />
                       <Banner>JiCoin (로그인)</Banner>
                       <Notification>{state?.createSign}</Notification>
                       <input
