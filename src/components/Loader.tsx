@@ -5,10 +5,9 @@ export const Loader = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 100px;
-  width: 500px;
-  height: 500px;
   font-size: 30px;
+  width:600px;
+  height:600px;
   border-radius: 10px;
   font-weight: bolder;
   background-color: transparent;

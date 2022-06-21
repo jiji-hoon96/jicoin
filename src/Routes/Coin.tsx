@@ -32,8 +32,8 @@ const OverviewItem = styled.div`
 `;
 
 const MiniTitleValue = styled.div`
-font-size: 15px;
-width:200px;
+font-size: 32px;
+width:400px;
 height:50px;
 color:${(props) => props.theme.fontColor};;
 background-color: transparent;
@@ -42,7 +42,6 @@ justify-content: center;
 text-align: center;
 align-items: center;
 border-radius: 10px;
-font-size: 28px;
 margin-bottom: 10px;
 `
 
@@ -52,7 +51,7 @@ const Description = styled.div`
   text-align: center;
   line-height: 2em;
   overflow: auto;
-  width:100%;
+  width:70%;
   height:250px;
   background-color: transparent;
   padding: 10px 20px;
@@ -74,6 +73,7 @@ text-align: center;
 display: flex;
 align-items: center;
 justify-content: center;
+width:50%;
 height:100px;
 background-color: ${(props) => props.theme.bgColor};
 font-size: 20px;
@@ -86,7 +86,7 @@ const OverDiv = styled.div`
   box-sizing: border-box;
   height:100%;
   display: flex;
-  width: 60%;
+  width: 40%;
   float: right;
   justify-content: center;
   align-items: center;
@@ -166,11 +166,11 @@ function Coin() {
   );
   const [currentTab, setCurrentTab] = useState(0);
   const cointabArr = [
-    {name : "시총순위", value : infoData?.rank},
-    {name: "표준명", value : infoData?.symbol},
-    {name: "가격", value : `$${priceData?.quotes?.USD.price.toFixed(3)}`},
-    {name: "현재공급량", value: priceData?.total_supply},
-    {name: "전체공급량", value: priceData?.max_supply}
+    {name : "시총순위", value : `${infoData?.rank} 위`},
+    {name: "표준명", value : `SYMBOL : ${infoData?.symbol}`},
+    {name: "가격", value : ` $ ${priceData?.quotes?.USD.price.toFixed(3)}`},
+    {name: "현재공급량", value: `${priceData?.total_supply} 개`},
+    {name: "전체공급량", value: `${priceData?.max_supply} 개`}
   ]
   const selectMenuHandler = (index:number) => {
     setCurrentTab(index);
@@ -186,7 +186,7 @@ function Coin() {
         </Helmet>
       </HelmetProvider>
       <Header>
-        {loading ? "" : (
+        {loading ?<Loader>코인 정보를 불러오는 중입니다</Loader>: (
           <>
             <Title>
               <Link to={{ pathname: "/coinlist" }}>
@@ -199,13 +199,6 @@ function Coin() {
             </Title>
             <SubTitle>{getToday()}</SubTitle>
             {infoData?.description === "" || infoData?.description === undefined  || infoData?.description === null ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
-        </>
-        )}
-      </Header>
-      {loading ? (
-        <Loader>코인 정보를 불러오는 중입니다</Loader>
-      ) : (
-        <OverDiv>
             <OverviewItem>
             {cointabArr.map((ele,index)=>{
                 return (
@@ -214,12 +207,8 @@ function Coin() {
                   </CoinBtn>
                 )
               })}
-            </OverviewItem>         
-            <MiniTitleValue>
-              {`${cointabArr[currentTab].value}`}
-            </MiniTitleValue>
-          
-          <BtnBorder>
+            </OverviewItem>  
+            <BtnBorder>
             <Link to={`/coinlist/${coinId}/chart`} state={infoData?.symbol}>
               <TabBtn isActive={chartMatch !== null}>
                 차트
@@ -231,7 +220,15 @@ function Coin() {
               </TabBtn>
             </Link>
           </BtnBorder>
-        </OverDiv>
+        </>
+        )}
+      </Header>
+      {loading ?<Loader>코인 정보를 불러오는 중입니다</Loader>: (
+        <OverDiv>
+          <MiniTitleValue>
+            {`${cointabArr[currentTab].value}`}
+          </MiniTitleValue>
+        </OverDiv>            
       )}
     </CoinContainer>
   );

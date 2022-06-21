@@ -6,6 +6,6 @@ export const Header = styled.header`
   box-sizing: border-box;
   align-items: center;
   flex-direction: column;
-  width: 40%;
+  width: 60%;
   float: left;
 `;
