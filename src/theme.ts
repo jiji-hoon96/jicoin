@@ -9,6 +9,7 @@ export const darkTheme: DefaultTheme = {
   darkbgGradient : "linear-gradient(to right, #606c88, #3f4c6b)",
   loginColor: "white",
   errorColor : "orangered",
+  marketColor: "#05133a",
 };
 
 export const lightTheme: DefaultTheme = {
@@ -20,4 +21,5 @@ export const lightTheme: DefaultTheme = {
   darkbgGradient:"linear-gradient(to top, #c9d6ff, #e2e2e2)",
   loginColor: "black",
   errorColor : "orangered",
+  marketColor: "#0044ff",
 };

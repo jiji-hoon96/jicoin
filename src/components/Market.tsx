@@ -7,8 +7,9 @@ import { Loader } from "./Loader";
 
 
 const Overview = styled.div`
-height:700px;
+  height:700px;
   display: flex;
+  align-items: center;
   cursor: pointer;
   overflow: auto;
   padding: 10px 5px;
@@ -57,7 +58,7 @@ const MarketSolo = styled.li`
     padding-bottom : 1em;
     margin-top: 0.3em;
     border-radius: 0;
-    color: #0044ff;
+    color: ${(props)=>props.theme.marketColor};
     background-color: transparent;
     border: none;
     cursor: pointer;

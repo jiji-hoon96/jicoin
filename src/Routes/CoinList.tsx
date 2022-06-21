@@ -53,7 +53,6 @@ const Coin = styled.div`
     background-color: transparent;
     border: none;
     padding:20px 0px;
-    
     cursor: pointer;
     font-size: 16px;
     letter-spacing: 2px;

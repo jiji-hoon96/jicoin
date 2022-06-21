@@ -14,5 +14,6 @@ export const Container = styled.div`
 
 export const SmallContainer= styled.div`
   display: flex;
+  justify-content: center;
   width: 100%;
 `

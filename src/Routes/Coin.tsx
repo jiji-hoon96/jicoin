@@ -172,8 +172,8 @@ function Coin() {
     {name : "시총순위", value : `${infoData?.rank} 위`},
     {name: "표준명", value : `SYMBOL : ${infoData?.symbol}`},
     {name: "가격", value : ` $ ${priceData?.quotes?.USD.price.toFixed(3)}`},
-    {name: "현재공급량", value: `${priceData?.total_supply} 개`},
-    {name: "전체공급량", value: `${priceData?.max_supply} 개`}
+    {name: "현재공급량", value: `${priceData?.total_supply.toLocaleString()} 개`},
+    {name: "전체공급량", value: `${priceData?.max_supply.toLocaleString()} 개`}
   ]
   const selectMenuHandler = (index:number) => {
     setCurrentTab(index);
@@ -188,7 +188,6 @@ function Coin() {
   const marketMatch = useMatch("/coinlist/:coinId/market");
   const chartMatch = useMatch("/coinlist/:coinId/chart");
   const loading = infoLoading || priceLoading;
-  console.log(bigTab);
   return (
     <CoinContainer>
       <HelmetProvider>
@@ -234,7 +233,6 @@ function Coin() {
         <OverDiv>
           <MiniTitleValue>
             {bigTab === 1 ? `${cointabArr[currentTab].value}` : bigTab ===2 ? <Chart/> : <Market/>}
-            
           </MiniTitleValue>
         </OverDiv>            
       )}

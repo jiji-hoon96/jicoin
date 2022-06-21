@@ -29,10 +29,12 @@ export const SearchTitle = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
+line-height:2 ;
 flex-direction: column;
 color:  ${(props) => props.theme.fontColor};
 margin: 10px 0px;
-font-size: 15px;
+font-size: 20px;
+font-weight: 600;
 `
 export const SearchSubTitle = styled.h2`
   color: ${(props) => props.theme.fontColor};

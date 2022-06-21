@@ -38,43 +38,70 @@ cursor: pointer;
     background-color: ${(props) => props.theme.bgColor};
   }
 margin: 10px 10px;
-display: flex;
 flex-direction: column;
 `;
 
 const Coin = styled.div`
-  background-color: ${(props) => props.theme.defaultBoxColor};
-  text-align: center;
-  width:90%;
-  height: 60px;
-  color:  ${(props) => props.theme.fontColor};
-  border-radius: 15px;
-  margin-bottom: 10px;
-  a {
-    display: flex;
-    align-items: center;
-    padding: 18px;
-    transition: color 0.2s ease-in;
-    justify-content: center;
-    font-size: 15px;
-    font-weight: bolder;
+ display: inline-block;
+    border-radius: 0;
+    color:${(props)=>props.theme.loginColor};
+    background-color: transparent;
+    border: none;
+    padding:20px 0px;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+  :hover{
+    transform: scale(1.05);
   }
-  &:hover {
-    a {
-      background-color: ${(props) => props.theme.boxColor};
-      border-radius: 10px;
-      transform: scale(1.01);
+  &:before,
+  &:after{
+    content: '';
+      display: block;
+      position: absolute;
+      height: 1px;
+      width: 0;
+
+  }
+  &:before{
+    transition: width 0s ease,background .4s ease;
+    left: 0;
+    right: 0;
+      bottom: 6px;
+  }
+  &:after{
+    right: 2.2%;
+      bottom: 6px;
+      background:${(props)=>props.theme.loginColor};
+    transition: width .4s ease;
+  }
+  
+  &:hover{
+    &:before{
+      width: 97.8%;
+      background:${(props)=>props.theme.loginColor};
+        transition: width .4s ease;
+    }
+    &:after{
+      width: 97.8%;
+        background: 0 0;
+      transition: all 0s ease;
     }
   }
 `;
 
 const Img = styled.img`
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  top:6px;
   margin-right: 10px;
 `;
 const TrendBox = styled.div`
-border: 3px groove white;
+border: 1px groove white;
 border-radius: 10px;
 display: flex;
 flex-direction: column;
@@ -88,7 +115,7 @@ background-color: transparent;
 
 const TrendCoin = styled.div`
   padding: 0px 20px;
-  background-color: ${(props) => props.theme.defaultBoxColor};
+  background-color:transparent;
   text-align: center;
   width: 250px;
   height: 60px;
@@ -98,7 +125,6 @@ const TrendCoin = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
   text-align: center;
   font-size: 13px;
 `
@@ -109,18 +135,18 @@ function Search() {
   const keyword: any = searchParams.get("keyword");
   const {isLoading:isTrendLoading, data: isTrendData} = useQuery(
     "TrendList",
-    fetchTrend,{
-      refetchInterval: 10000,
-    }
+    fetchTrend
   )
   const { isLoading:isListLoading, data: isListData } = useQuery<CoinListData[]>(
     "CoinList",
     FetchCoinList,
-    {
-      refetchInterval: 10000,
-    }
   );
-  const isLoading = isTrendLoading || isListLoading
+  const isLoading = isTrendLoading || isListLoading; 
+  const exist = isListData?.slice(0, 500).map(
+    (coin) =>
+      (coin.name.toLowerCase().includes(keyword) ||
+        coin.symbol.toLowerCase().includes(keyword) ||
+        coin.id.toLowerCase().includes(keyword))).includes(true);
   return (
     <Container>
       <Header>
@@ -141,12 +167,12 @@ function Search() {
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (
         <SmallContainer>
-          <CoinsList>
+          {exist ? <CoinsList>
           {isListData?.slice(0, 500).map(
             (coin) =>
               (coin.name.toLowerCase().includes(keyword) ||
                 coin.symbol.toLowerCase().includes(keyword) ||
-                coin.id.toLowerCase().includes(keyword)) && (
+                coin.id.toLowerCase().includes(keyword)) ? (
                 <Coin key={coin.id}>
                   <Link to={{ pathname: `/coinlist/${coin.id}` }}>
                     {coin.rank}. &nbsp;
@@ -156,9 +182,9 @@ function Search() {
                     {coin.name}({coin.symbol})
                   </Link>
                 </Coin>
-              )
+              ) : ""
           )}
-        </CoinsList>
+        </CoinsList> : ""}
         <TrendBox>
           <SearchTitle>
             검색량 순위
@@ -166,7 +192,7 @@ function Search() {
           </SearchTitle>
           {isTrendData?.coins?.map((coin:any)=>coin?.item).map((x:any)=>(
             <TrendCoin key={Math.random()}>
-              <Img src={x.thumb} style={{marginLeft: "4px"}}/>
+              <Img  src={x.thumb} style={{marginLeft: "4px" , position:"relative" ,top:"1px"}}/>
               {x.name}
             </TrendCoin>
           ))}

@@ -63,9 +63,7 @@ function Chart() {
                     mode: "dark",
                   },
                   title: {
-                    text: `${coinId
-                      .split("-")[0]
-                      .toUpperCase()} Coin  ${getTodays(chartStart)} ~ ${getTodays(chartEnd)}`,
+                    text: `${getTodays(chartStart)} ~ ${getTodays(chartEnd)}`,
                     align: "center",
                     style: {fontSize:"24px"}
                   },
@@ -100,10 +98,9 @@ function Chart() {
                     show: true,
                   },
                   xaxis: {
-
-                    axisBorder: { show: true },
+                    axisBorder: { show: true , offsetY:10},
                     axisTicks: { show: true},
-                    labels: { show: true , rotate: 0, style:{fontSize:"16px",}},
+                    labels: { show: true , rotate: 0, style:{fontSize:"14px",}},
                     type: "category",
                     categories: data?.map((price) =>
                       getTodays(Number(price.time_open)*1000)

@@ -10,5 +10,6 @@ declare module "styled-components" {
     boxColor: string;
     darkbgGradient : string;
     errorColor: string;
+    marketColor:string;
   }
 }
