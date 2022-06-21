@@ -6,10 +6,12 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
 import { BtnBorder, CoinBtn, TabBtn } from "../components/Button";
+import Chart from "../components/Chart";
 import { Header } from "../components/Header";
 import { Loader } from "../components/Loader";
 import {  SubTitle, Title } from "../components/Title";
 import { getToday } from "../components/useSkill/getDay";
+import Market from "../components/Market";
 
 const CoinContainer = styled.div`
   background-color: transparent;
@@ -33,7 +35,7 @@ const OverviewItem = styled.div`
 
 const MiniTitleValue = styled.div`
 font-size: 32px;
-width:400px;
+width:600px;
 height:50px;
 color:${(props) => props.theme.fontColor};;
 background-color: transparent;
@@ -86,7 +88,7 @@ const OverDiv = styled.div`
   box-sizing: border-box;
   height:100%;
   display: flex;
-  width: 40%;
+  width: 50%;
   float: right;
   justify-content: center;
   align-items: center;
@@ -165,6 +167,7 @@ function Coin() {
     }
   );
   const [currentTab, setCurrentTab] = useState(0);
+  const [bigTab, setBigTab] = useState(0);
   const cointabArr = [
     {name : "시총순위", value : `${infoData?.rank} 위`},
     {name: "표준명", value : `SYMBOL : ${infoData?.symbol}`},
@@ -174,10 +177,18 @@ function Coin() {
   ]
   const selectMenuHandler = (index:number) => {
     setCurrentTab(index);
+    setBigTab(1);
   };
+  const onChangeBigChart = () =>{
+    setBigTab(2);
+  }
+  const onChangeBigMarket = ()=>{
+    setBigTab(3);
+  }
   const marketMatch = useMatch("/coinlist/:coinId/market");
   const chartMatch = useMatch("/coinlist/:coinId/chart");
   const loading = infoLoading || priceLoading;
+  console.log(bigTab);
   return (
     <CoinContainer>
       <HelmetProvider>
@@ -209,16 +220,12 @@ function Coin() {
               })}
             </OverviewItem>  
             <BtnBorder>
-            <Link to={`/coinlist/${coinId}/chart`} state={infoData?.symbol}>
-              <TabBtn isActive={chartMatch !== null}>
+              <TabBtn isActive={chartMatch !== null} onClick={onChangeBigChart}>
                 차트
               </TabBtn>
-            </Link>
-            <Link to={`/coinlist/${coinId}/market`}>
-              <TabBtn isActive={marketMatch !== null}>
+              <TabBtn isActive={marketMatch !== null} onClick={onChangeBigMarket}>
                 상장 거래소
               </TabBtn>
-            </Link>
           </BtnBorder>
         </>
         )}
@@ -226,7 +233,8 @@ function Coin() {
       {loading ?<Loader>코인 정보를 불러오는 중입니다</Loader>: (
         <OverDiv>
           <MiniTitleValue>
-            {`${cointabArr[currentTab].value}`}
+            {bigTab === 1 ? `${cointabArr[currentTab].value}` : bigTab ===2 ? <Chart/> : <Market/>}
+            
           </MiniTitleValue>
         </OverDiv>            
       )}

@@ -3,15 +3,10 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinHistory } from "../api";
 import ApexChart from "react-apexcharts";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import { Container } from "../components/Container";
-import { Loader } from "../components/Loader";
-import { Title } from "../components/Title";
-import { Header } from "../components/Header";
-import { Btn, BtnBorder } from "../components/Button";
-import { getTodays } from "../components/useSkill/getDay";
+import { Container } from "./Container";
+import { Loader } from "./Loader";
+import { BtnBorder } from "./Button";
+import { getTodays } from "./useSkill/getDay";
 
 interface IHistorical {
   time_open: string;
@@ -28,12 +23,12 @@ const ChartBox = styled.div`
   margin: 0 auto;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 500px;
+  width:600px;
+  height:600px;
 `;
 
 function Chart() {
-  const { pathname,state } = useLocation();
+  const { pathname } = useLocation();
   const coinId = pathname.split("/")[2];
   const { isLoading, data } = useQuery<IHistorical[]>(
     ["month", coinId],
@@ -48,22 +43,6 @@ function Chart() {
   const loading = isLoading;
   return (
     <Container>
-      <HelmetProvider>
-        <Helmet>
-          <title>{coinId.split("-")[0].toUpperCase()} Chart | JiCoin</title>
-        </Helmet>
-      </HelmetProvider>
-      <Header>
-        {loading ? "" :(
-          <>
-          <Title>
-            <Link to={{ pathname: `/coinlist/${coinId}` }}>
-                 {`${coinId.split("-")[0].toUpperCase()} Coin 차트`}
-            </Link>
-          </Title>
-          </>
-        )}
-      </Header>
         {loading ? (
           <Loader>"차트를 로딩중입니다"</Loader>
         ) : (

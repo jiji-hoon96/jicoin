@@ -1,20 +1,17 @@
-import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinMarket } from "../api";
-import { Container } from "../components/Container";
-import { Header } from "../components/Header";
-import { Loader } from "../components/Loader";
-import { Title } from "../components/Title";
+import { Container } from "./Container";
+import { Loader } from "./Loader";
+
 
 const Overview = styled.div`
 height:700px;
   display: flex;
   cursor: pointer;
   overflow: auto;
-  padding: 20px 10px;
+  padding: 10px 5px;
   border-radius: 10px;
   ::-webkit-scrollbar{
     width: 10px;
@@ -44,35 +41,68 @@ const MarketList = styled.ul`
 `;
 
 const MarketSolo = styled.li`
-  height:80px;
+  height:70px;
   width: 300px;
   border-radius: 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
   font-size: 10px;
-  background-color: ${(props) => props.theme.defaultBoxColor};;
+  background-color: transparent;
   color: ${(props) => props.theme.fontColor};
   border-radius: 5px;
   margin-top: 5px;
   a {
-    font-size: 13px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    width: 160px;
-    align-items:center;
-    height: 30px;
-    border-radius:10px;
-
-    :hover {
-    transform:scale(1.15);
+    display: inline-block;
+    padding-bottom : 1em;
+    margin-top: 0.3em;
+    border-radius: 0;
+    color: #0044ff;
+    background-color: transparent;
+    border: none;
     cursor: pointer;
-    font-weight: bolder;
-    background-color: ${(props)=>props.theme.bgColor};
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+  position: relative;
+  :hover{
+    background-color: #bec9e7;
   }
+  &:before,
+  &:after{
+    content: '';
+      display: block;
+      position: absolute;
+      height: 1px;
+      width: 0;
+  }
+  &:before{
+    transition: width 0s ease,background .4s ease;
+    left: 0;
+    right: 0;
+      bottom: 6px;
+  }
+  &:after{
+    right: 2.2%;
+      bottom: 6px;
+      background:${(props)=>props.theme.loginColor};
+    transition: width .4s ease;
+  }
+  
+  &:hover{
+    &:before{
+      width: 97.8%;
+      background:${(props)=>props.theme.loginColor};
+        transition: width .4s ease;
     }
-
+    &:after{
+      width: 97.8%;
+        background: 0 0;
+      transition: all 0s ease;
+    }
+  }
+  }
 `;
 
 const MarketSoloSmallTitle = styled.div`
@@ -84,8 +114,8 @@ const MarketSoloSmallTitle = styled.div`
 `
 
 const MarketSoloSmallInput = styled.div`
-text-align: center;
-align-items: center;
+  text-align: center;
+  align-items: center;
   display: flex;
   font-weight: bold;
   font-size: 16px;
@@ -118,22 +148,6 @@ function Market() {
   );
   return (
     <Container>
-      <HelmetProvider>
-        <Helmet>
-          <title>{coinId.split("-")[0].toUpperCase()} Markets | JiCoin</title>
-        </Helmet>
-      </HelmetProvider>
-      <Header>
-        {isLoading  ? "" : (
-          <>
-          <Title>
-            <Link to={{ pathname: `/coinlist/${coinId}` }}>
-              {`${coinId.split("-")[0].toUpperCase()} 코인 상장 거래소`}
-            </Link>
-          </Title>
-          </>
-        )}
-      </Header>
       <div>
         {isLoading ? (
           <Loader>마켓 정보를 불러오는 중입니다</Loader>
