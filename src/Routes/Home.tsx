@@ -16,7 +16,10 @@ import { motion } from "framer-motion";
 
 export const HomeBox = styled(motion.div)`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: transparent;
+  align-items: center;
   `;
 
 function Home(){
@@ -26,12 +29,12 @@ function Home(){
         setIsOpen((prev) => !prev);
       };
     const HomeBtn = styled.div`
-    width: 60px;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
-    height: 60px;
+    height: 100%;
     cursor: pointer;
     border-radius: 10px;
     border: none;
@@ -51,10 +54,10 @@ function Home(){
             </Helmet>
           </HelmetProvider>
           <Header>
-            <HomeBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
-              <FontAwesomeIcon icon={darkMode ? faLightbulb : faMoon} size="3x"/>
-            </HomeBtn>
             <HomeBox>
+              <HomeBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
+                <FontAwesomeIcon icon={darkMode ? faLightbulb : faMoon} size="10x"/>
+              </HomeBtn>
               <AnimatePresence>
               {isOpen ? (
               <LoginForm

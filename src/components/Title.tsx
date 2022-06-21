@@ -6,7 +6,7 @@ export const Title = styled.div`
   justify-content: center;
   font-size: 34px;
   width:450px;
-  height: 200px;
+  height: 100px;
   margin-bottom: 10px;
   background-color: transparent;
   color: ${(props) => props.theme.fontColor};

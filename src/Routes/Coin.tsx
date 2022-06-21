@@ -6,23 +6,22 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
 import { BtnBorder, CoinBtn, TabBtn } from "../components/Button";
-import { Container } from "../components/Container";
 import { Header } from "../components/Header";
 import { Loader } from "../components/Loader";
 import {  SubTitle, Title } from "../components/Title";
 import { getToday } from "../components/useSkill/getDay";
 
-const Overview = styled.div`
+const CoinContainer = styled.div`
+  background-color: transparent;
+  margin:50px 0px;
+  width:100%;
+  height:100%;
+  padding: 0px 20px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: transparent;
-  color: ${(props) => props.theme.fontColor};
-  padding: 10px 20px;
-  margin:4px 0px;
-  border-radius: 10px;
-`;
+`
+
 const OverviewItem = styled.div`
   display: flex;
   justify-content: center;
@@ -53,6 +52,7 @@ const Description = styled.div`
   text-align: center;
   line-height: 2em;
   overflow: auto;
+  width:100%;
   height:250px;
   background-color: transparent;
   padding: 10px 20px;
@@ -81,6 +81,17 @@ padding: 10px 20px;
 color: ${(props) => props.theme.fontColor};
 border-radius: 10px;
 `;
+
+const OverDiv = styled.div`
+  box-sizing: border-box;
+  height:100%;
+  display: flex;
+  width: 60%;
+  float: right;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
 
 interface InfoData {
   id: string;
@@ -168,7 +179,7 @@ function Coin() {
   const chartMatch = useMatch("/coinlist/:coinId/chart");
   const loading = infoLoading || priceLoading;
   return (
-    <Container>
+    <CoinContainer>
       <HelmetProvider>
         <Helmet>
           <title>{coinId.split("-")[0].toUpperCase()} Coin | JiCoin</title>
@@ -187,14 +198,14 @@ function Coin() {
               </Link>
             </Title>
             <SubTitle>{getToday()}</SubTitle>
+            {infoData?.description === "" || infoData?.description === undefined  || infoData?.description === null ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
         </>
         )}
       </Header>
       {loading ? (
         <Loader>코인 정보를 불러오는 중입니다</Loader>
       ) : (
-        <>
-        <Overview>
+        <OverDiv>
             <OverviewItem>
             {cointabArr.map((ele,index)=>{
                 return (
@@ -207,8 +218,7 @@ function Coin() {
             <MiniTitleValue>
               {`${cointabArr[currentTab].value}`}
             </MiniTitleValue>
-          </Overview>
-          {infoData?.description === "" || infoData?.description === undefined  || infoData?.description === null ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}
+          
           <BtnBorder>
             <Link to={`/coinlist/${coinId}/chart`} state={infoData?.symbol}>
               <TabBtn isActive={chartMatch !== null}>
@@ -221,9 +231,9 @@ function Coin() {
               </TabBtn>
             </Link>
           </BtnBorder>
-        </>
+        </OverDiv>
       )}
-    </Container>
+    </CoinContainer>
   );
 }
 

@@ -52,10 +52,10 @@ const Coin = styled.div`
     color:${(props)=>props.theme.loginColor};
     background-color: transparent;
     border: none;
-    padding:15px;
-    font-weight: bold;
+    padding:20px 0px;
+    
     cursor: pointer;
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 2px;
     text-transform: uppercase;
     text-decoration: none;

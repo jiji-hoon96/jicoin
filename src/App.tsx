@@ -36,12 +36,12 @@ footer, header, hgroup, main, menu, nav, section {
     display: none;
 }
 body {
+  line-height: 1;
+  min-height: 100vh;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  line-height: 1;
-  flex-direction: column;
-  width:100%;
   background: ${(props) => props.theme.darkbgGradient};
   font-family: 'Source Sans Pro', sans-serif;
   color:${(props) => props.theme.fontColor};
@@ -62,7 +62,7 @@ table {
   border-spacing: 0;
 }
 * {
-  box-sizing: border-box;
+  margin:auto;
 }
 a {
   text-decoration:none;

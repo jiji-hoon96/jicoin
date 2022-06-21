@@ -6,7 +6,7 @@ export const darkTheme: DefaultTheme = {
   defaultBoxColor: "black",
   fontColor: "#dcdde1",
   boxColor: "transparent",
-  darkbgGradient : "linear-gradient(to right, #0f0c29, #302b63, #24243e)",
+  darkbgGradient : "linear-gradient(to right, #606c88, #3f4c6b)",
   loginColor: "white",
   errorColor : "orangered",
 };

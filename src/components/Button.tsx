@@ -54,7 +54,6 @@ export const Btn = styled.button`
 
 export const BtnBorder = styled.div`
   display: flex;
-
 `
 
 export const TabBtn = styled.button<{ isActive: boolean }>`
