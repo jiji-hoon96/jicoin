@@ -70,8 +70,11 @@ export const Form = styled.form`
     font-weight: bolder;
     :focus {
       outline: none;
-      
     }
+    ::placeholder{
+    color:${(props)=>props.theme.loginColor};
+    font-weight: 200;
+  }
   }
   input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus,input:-webkit-autofill:active {transition: background-color 5000s; -webkit-text-fill-color: black !important;}
 

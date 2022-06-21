@@ -111,9 +111,11 @@ const Input = styled(motion.input)`
   color:${(props)=>props.theme.loginColor};
   border-radius: 10px;
   border: none;
-  font-weight: bolder;
   outline: none;
   background-color: transparent;
+  ::placeholder{
+    color:${(props)=>props.theme.loginColor};
+  }
 `;
 
 

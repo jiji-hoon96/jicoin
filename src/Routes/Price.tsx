@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
-import useUser from "../hooks/useUser";
 import { Container } from "../components/Container";
-import { Header } from "../components/Header";
 import { Title } from "../components/Title";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
@@ -12,10 +10,10 @@ import { faUserAlt, faWonSign } from "@fortawesome/free-solid-svg-icons";
 
 
 const CalculateForm = styled.form`
-margin-top: 20px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
-  width:550px;
+  
 `
 
 const CalDivideForm = styled.div`
@@ -64,7 +62,7 @@ font-size: 16px;
 border-radius: 10px;
  color:black;
   :hover{
-    background-color: #7fe094;
+    background-color: #bec9e7;
     color: black;
     transform: scale(1.04);
   }
@@ -106,6 +104,13 @@ const NowDiv =styled.div`
   align-items: center;
   display: flex;
 `
+const PriceHeader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`
+
 
 interface CalculateBuy{
     oldprice:number,
@@ -142,7 +147,7 @@ function Price(){
     }
     return (
     <Container>
-     <Header>
+     <PriceHeader>
         <HelmetProvider>
           <Helmet>
             <title>Get Average | JiCoin</title>
@@ -190,7 +195,7 @@ function Price(){
             </NowDiv>
           </GridDiv>
         </ResultDiv> : null}
-      </Header>
+      </PriceHeader>
     </Container>
     )
 }

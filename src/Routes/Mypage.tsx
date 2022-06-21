@@ -4,7 +4,6 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Container } from "../components/Container";
-import { Header } from "../components/Header";
 import useUser from "../hooks/useUser";
 
 const WelcomeDiv = styled.div`
@@ -49,8 +48,16 @@ const SelectBtn = styled.div`
   cursor: pointer;
   :hover{
     transform: scale(1.03);
-    background-color: #7fe094;
+    background-color: #bec9e7;
   }
+`
+
+const MypageHeader= styled.div`
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  align-items: center;
+  flex-direction: column;
 `
 
 
@@ -58,7 +65,7 @@ function Mypage() {
   const {data} = useUser();
   return (
     <Container>
-     <Header>
+     <MypageHeader>
         <HelmetProvider>
           <Helmet>
             <title>My Page | JiCoin</title>
@@ -69,14 +76,20 @@ function Mypage() {
         </WelcomeDiv>
         <MyAvatarDiv>{data?.me?.avatar === "" || data?.me?.avatar ===null || data?.me?.avatar ===undefined  ? <FontAwesomeIcon icon={faUserAlt} size="5x" /> : <MyAvatarImg src={data?.me?.avatar} />}</MyAvatarDiv>
         <SelectDiv>
-          <SelectBtn>
-            <Link to={{pathname:'/mypage/price'}}>평단가 계산</Link>
-          </SelectBtn>
-          <SelectBtn>
-            <Link to={{pathname:'/mypage/edit'}}>프로필 수정</Link>
-          </SelectBtn>
+            <Link to={{pathname:'/mypage/price'}}>
+              <SelectBtn>
+                평단가 계산
+              </SelectBtn>
+            </Link>
+            <Link to={{pathname:'/mypage/edit'}}>
+              <SelectBtn>
+                프로필 수정
+              </SelectBtn>
+            </Link>
+            
+          
         </SelectDiv>
-      </Header>
+      </MypageHeader>
     </Container>
   );
 }

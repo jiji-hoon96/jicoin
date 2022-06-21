@@ -21,7 +21,7 @@ interface CoinListData {
 }
 
 const CoinsList = styled.div`
-width:400px;
+width:500px;
 display: flex;
 align-items: center;
 height: 600px;
@@ -42,7 +42,7 @@ flex-direction: column;
 `;
 
 const Coin = styled.div`
- display: inline-block;
+    display: inline-block;
     border-radius: 0;
     color:${(props)=>props.theme.loginColor};
     background-color: transparent;
@@ -160,6 +160,7 @@ function Search() {
             <Title>
               <Link to={{ pathname: "/coinlist" }}>검색 단어 : {keyword}</Link>
             </Title>
+            {exist ? "" : <h1>(검색결과 없음)</h1>}
           </>
         )}
       </Header>
