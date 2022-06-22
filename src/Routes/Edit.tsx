@@ -1,3 +1,4 @@
+import { gql, useMutation } from "@apollo/client"
 import { Helmet } from "react-helmet-async"
 import { HelmetProvider } from "react-helmet-async"
 import { useForm } from "react-hook-form"
@@ -6,6 +7,7 @@ import styled from "styled-components"
 import { Container } from "../components/Container"
 import { Header } from "../components/Header"
 import { Box, Form, SubmitBtn } from "../components/HomeForm"
+import useUser from "../hooks/useUser"
 
 export const EditBanner = styled.h3`
   color: ${(props)=>props.theme.loginColor};
@@ -18,7 +20,18 @@ export const EditBanner = styled.h3`
   }
 `;
 
+const EDIT_MUTATION = gql`
+  mutation editProfile($nickname: String!) {
+    editProfile(nickname: $nickname) {
+      ok
+      error
+    }
+  }
+`;
+
+
 function Edit(){
+    const {data:userData} = useUser();
     const { register, handleSubmit, formState:{errors}, getValues,setError } = useForm({
         mode: "onChange",
       });
@@ -54,7 +67,7 @@ function Edit(){
             placeholder="변경하실 닉네임을 입력해주세요"
           />
           <span>{errors.nickname?.message}</span>
-          <SubmitBtn type="submit" value="회원가입" style={{ fontWeight: "bolder" }} />
+          <SubmitBtn type="submit" value="변경하기" style={{ fontWeight: "bolder" }} />
         </Form>
         </Box>
       </Header>
