@@ -18,7 +18,7 @@ import { getToday } from "../components/useSkill/getDay";
 import { darkModeVar, disableDarkMode, enableDarkMode, logUserOut } from "../apollo";
 import { CoinsListImg } from "../components/Image";
 import { coinVariants } from "../components/variants/coinVariants";
-import { useReactiveVar } from "@apollo/client";
+import { gql, useReactiveVar } from "@apollo/client";
 import useUser from "../hooks/useUser";
 import Avatar from "../components/Avatar";
 
@@ -135,7 +135,7 @@ interface SerachInfo {
 }
 
 function CoinList() {
-  const {data} = useUser();
+  const {data:userData} = useUser();
   const darkMode = useReactiveVar(darkModeVar);
   const { isLoading, data:coinData} = useQuery<CoinListData[]>(
     "CoinList",
@@ -212,7 +212,7 @@ function CoinList() {
           </NavBtn>
           <Link to={{ pathname: "/mypage" }}>
             <NavBtn>
-              <Avatar url={data?.me?.avatar} />
+              <Avatar url={userData?.me?.avatar} />
             </NavBtn>          
           </Link>
             <NavBtn onClick={onLogout}>

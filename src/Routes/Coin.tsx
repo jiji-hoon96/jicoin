@@ -5,7 +5,7 @@ import { Link, useMatch } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinPrice } from "../api";
-import { BtnBorder, CoinBtn, TabBtn } from "../components/Button";
+import { BtnBorder, CoinBtn, NavBtn, TabBtn } from "../components/Button";
 import Chart from "../components/Chart";
 import { Header } from "../components/Header";
 import { Loader } from "../components/Loader";
@@ -206,6 +206,7 @@ function Coin() {
                   ? "Loading..."
                   : infoData?.name}
               </Link>
+              
             </Title>
             <SubTitle>{getToday()}</SubTitle>
             {infoData?.description === "" || infoData?.description === undefined  || infoData?.description === null ? <EmptyDescription>{`${infoData?.name}의 정보는 존재하지 않습니다`}</EmptyDescription> : <Description>{infoData?.description}</Description>}

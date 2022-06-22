@@ -24,7 +24,9 @@ export function fetchCoinPrice(coinId: string) {
 export function fetchCoinHistory(coinId: string) {
   return fetch(
     `https://ohlcv-api.nomadcoders.workers.dev/?coinId=${coinId}`
-  ).then((response) => response.json());
+  ).then((response) => response.json()).catch((err)=>
+    console.log(`에러가 발생했습니다 ${err}`)
+  );
 }
 
 
