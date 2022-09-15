@@ -1,8 +1,9 @@
-
 const BASE_URL = `https://api.coinpaprika.com/v1`;
 
-export function fetchTrend(){
-  return fetch("https://api.coingecko.com/api/v3/search/trending").then((response)=>response.json());
+export function fetchTrend() {
+  return fetch("https://api.coingecko.com/api/v3/search/trending").then(
+    (response) => response.json()
+  );
 }
 
 export function FetchCoinList() {
@@ -24,11 +25,10 @@ export function fetchCoinPrice(coinId: string) {
 export function fetchCoinHistory(coinId: string) {
   return fetch(
     `https://ohlcv-api.nomadcoders.workers.dev/?coinId=${coinId}`
-  ).then((response) => response.json()).catch((err)=>
-    console.log(`에러가 발생했습니다 ${err}`)
+  ).then((response) =>
+    response.status === 200 ? response.json() : console.log("차트없음")
   );
 }
-
 
 export function fetchCoinMarket(coinId: string) {
   return fetch(`${BASE_URL}/coins/${coinId}/markets`).then((response) =>

@@ -58,55 +58,24 @@ const Coin = styled.div`
   border: none;
   padding: 20px 0px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 24px;
+  font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-decoration: none;
   position: relative;
   :hover {
     transform: scale(1.05);
-  }
-  &:before,
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    height: 1px;
-    width: 0;
-  }
-  &:before {
-    transition: width 0s ease, background 0.4s ease;
-    left: 0;
-    right: 0;
-    bottom: 6px;
-  }
-  &:after {
-    right: 2.2%;
-    bottom: 6px;
-    background: ${(props) => props.theme.loginColor};
-    transition: width 0.4s ease;
-  }
-
-  &:hover {
-    &:before {
-      width: 97.8%;
-      background: ${(props) => props.theme.loginColor};
-      transition: width 0.4s ease;
-    }
-    &:after {
-      width: 97.8%;
-      background: 0 0;
-      transition: all 0s ease;
-    }
+    height: 600;
   }
 `;
 
 const Input = styled(motion.input)`
   transform-origin: center right center;
-  width: 300px;
+  width: 400px;
   height: 30px;
   border: none;
-  font-size: 14px;
+  font-size: 24px;
   text-align: center;
   position: absolute;
   right: 40px;
@@ -209,7 +178,7 @@ function CoinList() {
                   transition={{ type: "linear" }}
                   initial={{ scaleX: 0 }}
                   animate={inputAnimation}
-                  placeholder="Enter the coin you want to find in English!"
+                  placeholder="검색어는 영어로 입력해주세요!"
                 />
               </SearchBtn>
               <NavBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
@@ -218,9 +187,6 @@ function CoinList() {
                   size="lg"
                 />
               </NavBtn>
-              <Link to={{ pathname: "/mypage" }}>
-                <NavBtn>마이페이지</NavBtn>
-              </Link>
               <NavBtn onClick={onLogout}>
                 <FontAwesomeIcon icon={faSignOut} size="lg" />
               </NavBtn>
@@ -254,9 +220,6 @@ function CoinList() {
                     {coin.name} ({coin.symbol}){" "}
                   </Coin>
                 </Link>
-                <NavBtn style={{ paddingTop: "10px" }}>
-                  <FaStar size="1.5em" />
-                </NavBtn>
               </ListDiv>
             ))}
           </CoinsList>
