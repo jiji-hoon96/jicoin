@@ -12,6 +12,7 @@ import { Loader } from "../components/Loader";
 import { SubTitle, Title } from "../components/Title";
 import { getToday } from "../components/useSkill/getDay";
 import Market from "../components/Market";
+import Price from "./Price";
 
 const CoinContainer = styled.div`
   background-color: transparent;
@@ -190,8 +191,12 @@ function Coin() {
   const onChangeBigMarket = () => {
     setBigTab(3);
   };
+  const onChangePrice = () => {
+    setBigTab(4);
+  };
   const marketMatch = useMatch("/coinlist/:coinId/market");
   const chartMatch = useMatch("/coinlist/:coinId/chart");
+  const priceMatch = useMatch("/coinlist/:coinId/price");
   const loading = infoLoading || priceLoading;
   return (
     <CoinContainer>
@@ -241,6 +246,9 @@ function Coin() {
               >
                 상장 거래소
               </TabBtn>
+              <TabBtn onClick={onChangePrice} isActive={priceMatch !== null}>
+                평단 계산기
+              </TabBtn>
             </BtnBorder>
           </>
         )}
@@ -254,8 +262,10 @@ function Coin() {
               `${cointabArr[currentTab].value}`
             ) : bigTab === 2 ? (
               <Chart />
-            ) : (
+            ) : bigTab === 3 ? (
               <Market />
+            ) : (
+              <Price />
             )}
           </MiniTitleValue>
         </OverDiv>
