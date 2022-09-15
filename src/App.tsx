@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
-import {ApolloProvider, useReactiveVar} from "@apollo/client"
+import { ApolloProvider, useReactiveVar } from "@apollo/client";
 import { darkTheme, lightTheme } from "./theme";
 import { client, darkModeVar } from "./apollo";
 
@@ -75,14 +75,12 @@ const queryClient = new QueryClient();
 function App() {
   const darkMode = useReactiveVar(darkModeVar);
   return (
-    <ApolloProvider client={client}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-          <GlobalStyle />
-          <Router />
-        </ThemeProvider>
-      </QueryClientProvider>
-    </ApolloProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+        <GlobalStyle />
+        <Router />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 

@@ -8,18 +8,22 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from "react-icons/fa";
-import { faLightbulb, faMoon, faSignOut, faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faLightbulb,
+  faMoon,
+  faSignOut,
+  faUserAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import { Container } from "../components/Container";
 import { Loader } from "../components/Loader";
 import { SubTitle, Title } from "../components/Title";
 import { Header } from "../components/Header";
-import { Btn, BtnBorder, NavBtn , SearchBtn } from "../components/Button";
+import { Btn, BtnBorder, NavBtn, SearchBtn } from "../components/Button";
 import { getToday } from "../components/useSkill/getDay";
-import { darkModeVar, disableDarkMode, enableDarkMode, logUserOut } from "../apollo";
+import { darkModeVar, disableDarkMode, enableDarkMode } from "../apollo";
 import { CoinsListImg } from "../components/Image";
 import { coinVariants } from "../components/variants/coinVariants";
 import { gql, useReactiveVar } from "@apollo/client";
-import useUser from "../hooks/useUser";
 import Avatar from "../components/Avatar";
 
 const COINCOUNT = 10;
@@ -47,78 +51,74 @@ const CoinsList = styled(motion.div)`
 `;
 
 const Coin = styled.div`
-    display: inline-block;
-    border-radius: 0;
-    color:${(props)=>props.theme.loginColor};
-    background-color: transparent;
-    border: none;
-    padding:20px 0px;
-    cursor: pointer;
-    font-size: 16px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    position: relative;
-  :hover{
+  display: inline-block;
+  border-radius: 0;
+  color: ${(props) => props.theme.loginColor};
+  background-color: transparent;
+  border: none;
+  padding: 20px 0px;
+  cursor: pointer;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  :hover {
     transform: scale(1.05);
   }
   &:before,
-  &:after{
-    content: '';
-      display: block;
-      position: absolute;
-      height: 1px;
-      width: 0;
-
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    height: 1px;
+    width: 0;
   }
-  &:before{
-    transition: width 0s ease,background .4s ease;
+  &:before {
+    transition: width 0s ease, background 0.4s ease;
     left: 0;
     right: 0;
-      bottom: 6px;
+    bottom: 6px;
   }
-  &:after{
+  &:after {
     right: 2.2%;
-      bottom: 6px;
-      background:${(props)=>props.theme.loginColor};
-    transition: width .4s ease;
+    bottom: 6px;
+    background: ${(props) => props.theme.loginColor};
+    transition: width 0.4s ease;
   }
-  
-  &:hover{
-    &:before{
+
+  &:hover {
+    &:before {
       width: 97.8%;
-      background:${(props)=>props.theme.loginColor};
-        transition: width .4s ease;
+      background: ${(props) => props.theme.loginColor};
+      transition: width 0.4s ease;
     }
-    &:after{
+    &:after {
       width: 97.8%;
-        background: 0 0;
+      background: 0 0;
       transition: all 0s ease;
     }
   }
 `;
 
-
 const Input = styled(motion.input)`
   transform-origin: center right center;
   width: 300px;
   height: 30px;
-  border:none;
+  border: none;
   font-size: 14px;
   text-align: center;
   position: absolute;
   right: 40px;
-  color:${(props)=>props.theme.loginColor};
+  color: ${(props) => props.theme.loginColor};
   border-radius: 10px;
   border: none;
   outline: none;
   background-color: transparent;
-  ::placeholder{
-    color:${(props)=>props.theme.loginColor};
+  ::placeholder {
+    color: ${(props) => props.theme.loginColor};
   }
 `;
-
-
 
 interface CoinListData {
   id: string;
@@ -135,17 +135,16 @@ interface SerachInfo {
 }
 
 function CoinList() {
-  const {data:userData} = useUser();
   const darkMode = useReactiveVar(darkModeVar);
-  const { isLoading, data:coinData} = useQuery<CoinListData[]>(
+  const { isLoading, data: coinData } = useQuery<CoinListData[]>(
     "CoinList",
-    FetchCoinList,
+    FetchCoinList
   );
   const navigate = useNavigate();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const { register, handleSubmit} = useForm<SerachInfo>();
+  const { register, handleSubmit } = useForm<SerachInfo>();
   const inputAnimation = useAnimation();
   const increaseList = () => {
     setDirection(false);
@@ -168,10 +167,9 @@ function CoinList() {
   const onValid = (coinData: SerachInfo) => {
     navigate(`/search?keyword=${coinData.keyword}`);
   };
-  const onLogout= ()=>{
-    navigate('/')
-    logUserOut()
-  }
+  const onLogout = () => {
+    navigate("/");
+  };
   return (
     <Container>
       <Header>
@@ -180,49 +178,55 @@ function CoinList() {
             <title>시총순위 | JiCoin</title>
           </Helmet>
         </HelmetProvider>
-        {isLoading ? "" : (
+        {isLoading ? (
+          ""
+        ) : (
           <>
-          <Nav>
-          <SearchBtn onSubmit={handleSubmit(onValid)}>
-            <motion.svg
-              onClick={toggleSearch}
-              whileHover={{ scale: 1.3 }}
-              transition={{ type: "tween" }}
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                clipRule="evenodd"
-              />
-            </motion.svg>
-            <Input
-              {...register("keyword", { required: true ,pattern: { value: /^[a-zA-Z]*$/, message: "검색은 영어만 가능합니다." }
-              })}
-              transition={{ type: "linear" }}
-              initial={{ scaleX: 0 }}
-              animate={inputAnimation}
-              placeholder="Enter the coin you want to find in English!"
-            />
-          </SearchBtn>
-          <NavBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
-            <FontAwesomeIcon icon={darkMode ? faLightbulb : faMoon} size="lg"/>
-          </NavBtn>
-          <Link to={{ pathname: "/mypage" }}>
-            <NavBtn>
-              <Avatar url={userData?.me?.avatar} />
-            </NavBtn>          
-          </Link>
-            <NavBtn onClick={onLogout}>
-              <FontAwesomeIcon icon={faSignOut} size="lg"/>
-            </NavBtn>
-        </Nav>
-        <Title>가상화폐 시총 순위
-        </Title>
-        <SubTitle>{getToday()}
-        </SubTitle>
+            <Nav>
+              <SearchBtn onSubmit={handleSubmit(onValid)}>
+                <motion.svg
+                  onClick={toggleSearch}
+                  whileHover={{ scale: 1.3 }}
+                  transition={{ type: "tween" }}
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clipRule="evenodd"
+                  />
+                </motion.svg>
+                <Input
+                  {...register("keyword", {
+                    required: true,
+                    pattern: {
+                      value: /^[a-zA-Z]*$/,
+                      message: "검색은 영어만 가능합니다.",
+                    },
+                  })}
+                  transition={{ type: "linear" }}
+                  initial={{ scaleX: 0 }}
+                  animate={inputAnimation}
+                  placeholder="Enter the coin you want to find in English!"
+                />
+              </SearchBtn>
+              <NavBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
+                <FontAwesomeIcon
+                  icon={darkMode ? faLightbulb : faMoon}
+                  size="lg"
+                />
+              </NavBtn>
+              <Link to={{ pathname: "/mypage" }}>
+                <NavBtn>마이페이지</NavBtn>
+              </Link>
+              <NavBtn onClick={onLogout}>
+                <FontAwesomeIcon icon={faSignOut} size="lg" />
+              </NavBtn>
+            </Nav>
+            <Title>가상화폐 시총 순위</Title>
+            <SubTitle>{getToday()}</SubTitle>
           </>
         )}
       </Header>
@@ -240,17 +244,17 @@ function CoinList() {
             key={index}
           >
             {coinData?.slice(index, index + COINCOUNT).map((coin) => (
-              <ListDiv key={coin.id} >
-                <Link to={{ pathname: `/coinlist/${coin.id}` }} >
+              <ListDiv key={coin.id}>
+                <Link to={{ pathname: `/coinlist/${coin.id}` }}>
                   <Coin key={coin.id}>
                     {coin.rank}. &nbsp;
-                    <CoinsListImg 
+                    <CoinsListImg
                       src={`https://cryptocurrencyliveprices.com/img/${coin.id}.png`}
                     />
                     {coin.name} ({coin.symbol}){" "}
-                    </Coin>
-                  </Link>
-                <NavBtn style={{paddingTop:"10px"}}>
+                  </Coin>
+                </Link>
+                <NavBtn style={{ paddingTop: "10px" }}>
                   <FaStar size="1.5em" />
                 </NavBtn>
               </ListDiv>
@@ -258,12 +262,12 @@ function CoinList() {
           </CoinsList>
           )
           <BtnBorder>
-            <Btn onClick={decreaseList} style={{margin:0}}>
+            <Btn onClick={decreaseList} style={{ margin: 0 }}>
               {index === 0
                 ? "첫페이지"
                 : `${index - COINCOUNT + 1}위 ~ ${index}위`}
             </Btn>
-            <Btn onClick={increaseList}  style={{margin:0}}> 
+            <Btn onClick={increaseList} style={{ margin: 0 }}>
               {index > 180
                 ? "마지막페이지"
                 : `${index + COINCOUNT + 1}위 ~ ${index + COINCOUNT * 2}위`}
