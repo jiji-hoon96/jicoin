@@ -1,9 +1,9 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import Router from "./Router";
-import { ApolloProvider, useReactiveVar } from "@apollo/client";
+import { useReactiveVar } from "@apollo/client";
 import { darkTheme, lightTheme } from "./theme";
-import { client, darkModeVar } from "./apollo";
+import { darkModeVar } from "./apollo";
 
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
