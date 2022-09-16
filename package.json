@@ -89,6 +89,7 @@
     "@types/morgan": "^1.9.3",
     "@types/react-helmet": "^6.1.5",
     "@types/react-modal": "^3.13.1",
+    "gh-pages": "^4.0.0",
     "nodemon": "^2.0.16",
     "prisma": "^3.14.0",
     "ts-node": "^10.7.0"
