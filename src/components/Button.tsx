@@ -21,6 +21,12 @@ export const Btn = styled.button`
     transform: scale(1.05);
     height: 600;
   }
+  @media screen and (max-width: 650px) {
+    font-size: 16px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 150px;
+  }
 `;
 
 export const BtnBorder = styled.div`
@@ -43,6 +49,14 @@ export const TabBtn = styled.button<{ isActive: boolean }>`
   text-transform: uppercase;
   text-decoration: none;
   position: relative;
+  width: 100px;
+  @media screen and (max-width: 1100px) {
+    margin: 0px 10px;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+    margin: 3px;
+  }
   &:before,
   &:after {
     content: "";
@@ -96,6 +110,10 @@ export const NavBtn = styled.div`
     transform: scale(1.2);
     transition: 0.5s;
   }
+  @media screen and (max-width: 650px) {
+    font-size: 18px;
+    width: 30px;
+  }
 `;
 
 export const LoginWelcomeBtn = styled(motion.button)`
@@ -123,6 +141,13 @@ export const CoinBtn = styled.button`
   text-transform: uppercase;
   text-decoration: none;
   position: relative;
+  @media screen and (max-width: 1100px) {
+    margin: 10px;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+    margin: 3px;
+  }
   &:before,
   &:after {
     content: "";
@@ -170,6 +195,9 @@ export const SearchBtn = styled.form`
     height: 40px;
     :hover {
       color: ${(props) => props.theme.fontColor};
+    }
+    @media screen and (max-width: 650px) {
+      height: 35px;
     }
   }
 `;

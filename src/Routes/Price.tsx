@@ -5,8 +5,6 @@ import { Container } from "../components/Container";
 import { Title } from "../components/Title";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDollarSign } from "@fortawesome/free-solid-svg-icons";
 
 const CalculateForm = styled.form`
   margin: 30px 0px;
@@ -21,7 +19,7 @@ const CalDivideForm = styled.div`
   height: 100px;
   input {
     width: 250px;
-    margin-left: 15px;
+    margin: 0px 20px;
     padding: 15px 10px;
     border: 1px solid grey;
     border-radius: 10px;
@@ -155,7 +153,10 @@ function Price() {
             <title>Get Average | JiCoin</title>
           </Helmet>
         </HelmetProvider>
-        <Title>평균매입가 구하기 ($)</Title>
+        <Link to="/coinlist">
+          <Title>평균매입가 구하기 ($)</Title>
+        </Link>
+
         <CalculateForm onSubmit={handleSubmit(onSubmitValid)}>
           <CalDivideForm>
             <CalTitle>현재 보유</CalTitle>

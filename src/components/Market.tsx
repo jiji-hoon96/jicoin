@@ -14,6 +14,13 @@ const Overview = styled.div`
   overflow-y: auto;
   padding: 10px 5px;
   border-radius: 10px;
+
+  @media screen and (max-width: 1100px) {
+    height: 400px;
+  }
+  @media screen and (max-width: 600px) {
+    width: 300px;
+  }
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -52,6 +59,9 @@ const MarketSolo = styled.li`
   color: ${(props) => props.theme.fontColor};
   border-radius: 5px;
   margin-top: 5px;
+  @media screen and (max-width: 600px) {
+    width: 200px;
+  }
   a {
     display: inline-block;
     border-radius: 0;
@@ -87,6 +97,9 @@ const MarketSoloSmallInput = styled.div`
   font-size: 16px;
   color: ${(props) => props.theme.fontColor};
   margin-bottom: 5px;
+  @media screen and (max-width: 600px) {
+    font-size: 12px;
+  }
 `;
 interface IMarket {
   exchange_id: string;

@@ -23,6 +23,16 @@ const CoinContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 1440px) {
+    width: 80%;
+    margin: 0 auto;
+  }
+  @media screen and (max-width: 1100px) {
+    width: 100%;
+    flex-direction: column;
+    margin: 0 auto;
+    height: 1000px;
+  }
 `;
 
 const OverviewItem = styled.div`
@@ -32,6 +42,12 @@ const OverviewItem = styled.div`
   align-items: center;
   width: 600px;
   height: 100px;
+  @media screen and (max-width: 1100px) {
+    height: 50px;
+  }
+  @media screen and (max-width: 600px) {
+    width: 300px;
+  }
 `;
 
 const MiniTitleValue = styled.div`
@@ -191,12 +207,10 @@ function Coin() {
   const onChangeBigMarket = () => {
     setBigTab(3);
   };
-  const onChangePrice = () => {
-    setBigTab(4);
-  };
+
   const marketMatch = useMatch("/coinlist/:coinId/market");
   const chartMatch = useMatch("/coinlist/:coinId/chart");
-  const priceMatch = useMatch("/coinlist/:coinId/price");
+
   const loading = infoLoading || priceLoading;
   return (
     <CoinContainer>
@@ -246,9 +260,6 @@ function Coin() {
               >
                 상장 거래소
               </TabBtn>
-              <TabBtn onClick={onChangePrice} isActive={priceMatch !== null}>
-                평단 계산기
-              </TabBtn>
             </BtnBorder>
           </>
         )}
@@ -265,7 +276,7 @@ function Coin() {
             ) : bigTab === 3 ? (
               <Market />
             ) : (
-              <Price />
+              ""
             )}
           </MiniTitleValue>
         </OverDiv>

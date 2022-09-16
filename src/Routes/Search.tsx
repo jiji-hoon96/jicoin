@@ -33,6 +33,9 @@ const CoinsList = styled.div`
   overflow: auto;
   overflow-x: hidden;
   cursor: pointer;
+  @media screen and (max-width: 1100px) {
+    width: 50%;
+  }
   ::-webkit-scrollbar {
     width: 5px;
   }
@@ -60,6 +63,9 @@ const Coin = styled.div`
   text-transform: uppercase;
   text-decoration: none;
   position: relative;
+  @media screen and (max-width: 1100px) {
+    font-size: 14px;
+  }
   :hover {
     transform: scale(1.05);
   }
@@ -71,6 +77,10 @@ const Img = styled.img`
   position: relative;
   top: 6px;
   margin-right: 10px;
+  @media screen and (max-width: 1100px) {
+    width: 30px;
+    height: 30px;
+  }
 `;
 const TrendBox = styled.div`
   border-radius: 10px;
@@ -82,6 +92,14 @@ const TrendBox = styled.div`
   width: 400px;
   height: 500px;
   background-color: transparent;
+  @media screen and (max-width: 1100px) {
+    width: 50%;
+    margin: 0 auto;
+  }
+  @media screen and (max-width: 600px) {
+    width: 200px;
+    margin: 0 auto;
+  }
 `;
 
 const TrendCoin = styled.div`

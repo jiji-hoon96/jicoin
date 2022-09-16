@@ -5,7 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { LoginWelcomeBtn } from "../components/Button";
 import { Link } from "react-router-dom";
-import {LoginForm} from '../components/HomeForm'
+import { LoginForm } from "../components/HomeForm";
 import { boxVariants } from "../components/variants/box";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useReactiveVar } from "@apollo/client";
@@ -20,15 +20,15 @@ export const HomeBox = styled(motion.div)`
   justify-content: center;
   background-color: transparent;
   align-items: center;
-  `;
+`;
 
-function Home(){
-    const [isOpen, setIsOpen] = useState(false);
-    const darkMode = useReactiveVar(darkModeVar);
-    const onOpenForm = () => {
-        setIsOpen((prev) => !prev);
-      };
-    const HomeBtn = styled.div`
+function Home() {
+  const [isOpen, setIsOpen] = useState(false);
+  const darkMode = useReactiveVar(darkModeVar);
+  const onOpenForm = () => {
+    setIsOpen((prev) => !prev);
+  };
+  const HomeBtn = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
@@ -44,29 +44,31 @@ function Home(){
     :hover {
       transform: scale(1.2);
       transition: 0.5s;
-  }
-    `
-    return (
-        <Container>
-          <HelmetProvider>
-            <Helmet>
-              <title>Home | JiCoin</title>
-            </Helmet>
-          </HelmetProvider>
-          <Header>
-            <HomeBox>
-              <HomeBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
-                <FontAwesomeIcon icon={darkMode ? faLightbulb : faMoon} size="10x"/>
-              </HomeBtn>
-              <AnimatePresence>
-              {isOpen ? (
+    }
+  `;
+  return (
+    <Container>
+      <HelmetProvider>
+        <Helmet>
+          <title>Home | JiCoin</title>
+        </Helmet>
+      </HelmetProvider>
+      <Header>
+        <HomeBox>
+          <HomeBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
+            <FontAwesomeIcon
+              icon={darkMode ? faLightbulb : faMoon}
+              size="10x"
+            />
+          </HomeBtn>
+          <AnimatePresence>
+            {isOpen ? (
               <LoginForm
                 variants={boxVariants}
                 initial="initial"
                 animate="visible"
                 exit="leaving"
-              >
-                  </LoginForm>
+              ></LoginForm>
             ) : (
               <LoginWelcomeBtn
                 whileHover={{
@@ -82,16 +84,15 @@ function Home(){
                 exit="leaving"
               >
                 <Link to={{ pathname: "/login" }}>
-                    WelCome <br /> JiCoin
-                </Link> 
+                  WelCome <br /> JiCoin
+                </Link>
               </LoginWelcomeBtn>
             )}
-              </AnimatePresence>
-            </HomeBox>
-            
-          </Header>
-        </Container>
-      );
+          </AnimatePresence>
+        </HomeBox>
+      </Header>
+    </Container>
+  );
 }
 
 export default Home;

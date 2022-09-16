@@ -17,6 +17,10 @@ export const Title = styled.div`
     border-radius: 10px;
     transform: scale(1.01);
   }
+  @media screen and (max-width: 650px) {
+    width: 300px;
+    font-size: 28px;
+  }
 `;
 
 export const SubTitle = styled.h2`

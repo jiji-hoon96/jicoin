@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FaStar } from "react-icons/fa";
 import {
+  faCalculator,
   faLightbulb,
   faMoon,
   faSignOut,
@@ -35,6 +36,12 @@ const Nav = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  @media screen and (max-width: 650px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 250px;
+  }
 `;
 
 const ListDiv = styled.div`
@@ -68,6 +75,9 @@ const Coin = styled.div`
     transform: scale(1.05);
     height: 600;
   }
+  @media screen and (max-width: 650px) {
+    font-size: 16px;
+  }
 `;
 
 const Input = styled(motion.input)`
@@ -86,6 +96,14 @@ const Input = styled(motion.input)`
   background-color: transparent;
   ::placeholder {
     color: ${(props) => props.theme.loginColor};
+  }
+  @media screen and (max-width: 650px) {
+    font-size: 18px;
+    width: 300px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 170px;
+    font-size: 14px;
   }
 `;
 
@@ -139,6 +157,9 @@ function CoinList() {
   const onLogout = () => {
     navigate("/");
   };
+  const onPrice = () => {
+    navigate("/price");
+  };
   return (
     <Container>
       <Header>
@@ -155,7 +176,7 @@ function CoinList() {
               <SearchBtn onSubmit={handleSubmit(onValid)}>
                 <motion.svg
                   onClick={toggleSearch}
-                  whileHover={{ scale: 1.3 }}
+                  whileHover={{ scale: 1.1 }}
                   transition={{ type: "tween" }}
                   fill="currentColor"
                   viewBox="0 0 20 20"
@@ -178,7 +199,7 @@ function CoinList() {
                   transition={{ type: "linear" }}
                   initial={{ scaleX: 0 }}
                   animate={inputAnimation}
-                  placeholder="검색어는 영어로 입력해주세요!"
+                  placeholder="검색은 영어만 가능합니다"
                 />
               </SearchBtn>
               <NavBtn onClick={darkMode ? disableDarkMode : enableDarkMode}>
@@ -189,6 +210,9 @@ function CoinList() {
               </NavBtn>
               <NavBtn onClick={onLogout}>
                 <FontAwesomeIcon icon={faSignOut} size="lg" />
+              </NavBtn>
+              <NavBtn onClick={onPrice}>
+                <FontAwesomeIcon icon={faCalculator} size="lg" />
               </NavBtn>
             </Nav>
             <Title>가상화폐 시총 순위</Title>

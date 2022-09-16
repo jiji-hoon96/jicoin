@@ -9,12 +9,29 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 0px 20px;
+  @media screen and (max-width: 1100px) {
+    width: 70%;
+    margin: 0 auto;
+  }
+  @media screen and (max-width: 650px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 350px;
+  }
 `;
 
 export const SmallContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 1000px;
+  width: 100%;
   height: 800px;
+  @media screen and (max-width: 1100px) {
+    width: 100%;
+    margin: 0 auto;
+  }
+  @media screen and (max-width: 600px) {
+    width: 500px;
+    margin: 0 auto;
+  }
 `;

@@ -14,6 +14,19 @@ const ChartBox = styled.div`
   align-items: center;
   width: 900px;
   height: 500px;
+  @media screen and (max-width: 1540px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 1100px) {
+    width: 500px;
+    margin-top: 100px;
+  }
+  @media screen and (max-width: 600px) {
+    width: 400px;
+  }
+  @media screen and (max-width: 400px) {
+    width: 300px;
+  }
 `;
 
 function Chart() {
@@ -52,7 +65,7 @@ function Chart() {
                     title: {
                       text: `${getTodays(chartStart)} ~ ${getTodays(chartEnd)}`,
                       align: "center",
-                      style: { fontSize: "24px" },
+                      style: { fontSize: "16px" },
                     },
                     chart: {
                       animations: {
