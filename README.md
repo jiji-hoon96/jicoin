@@ -2,8 +2,6 @@
 
 <p align="center">
   <br>
-  <video src="./public/img/jicoinvideo.mp4">
-  <br>
   <img src="./public/img/main.png">
   <img src="./public/img/coinlist.png">
   <img src="./public/img/coin.png">
