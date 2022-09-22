@@ -1,4 +1,17 @@
-# **코인사이트 만들기** 8-)
+# # **가상화폐사이트 만들기**
+
+<p align="center">
+  <br>
+  <video src="./public/img/jicoinvideo.mp4">
+  <br>
+  <img src="./public/img/main.png">
+  <img src="./public/img/coinlist.png">
+  <img src="./public/img/coin.png">
+  <img src="./public/img/average.png">
+  <img src="./public/img/search.png">
+  <img src="./public/img/black.png">
+  <br>
+</p>
 
 ### 구현기능
 
