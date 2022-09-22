@@ -92,9 +92,9 @@ MIT &copy; [NoHack](mailto:lbjp114@gmail.com)
 
 <!-- Stack Icon Refernces -->
 
-[react]: ./public/img/react.png
-[ts]: ./public/img/typescript.png
-[styled]: ./public/img/styled.png
+[react]: ./react.png
+[ts]: ./typescript.png
+[styled]: ./styled.png
 
 
 
